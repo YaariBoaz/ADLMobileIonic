@@ -1,0 +1,47 @@
+<section class="results">
+    <div class="gray">
+        <header>
+            <h1>Shooting Session</h1>
+        </header>
+
+        <div class="results">
+            <p>Bullseye Drill</p>
+            <div class="info">
+                <p><b>8</b>Bullets</p>
+                <p><b>100</b>M</p>
+            </div>
+        </div>
+
+        <div class="main-image">
+            <img src="../../../assets/images/bullseye_red.png" alt="bullsEye" *ngIf="!sessionIsOver">
+            <img src="../../../assets/images/bullseye_black.png" alt="bullsEye" *ngIf="sessionIsOver">
+        </div>
+
+        <div class="details">
+            <div class="box">
+                <p class="title">Hits</p>
+                <p>5/8</p>
+            </div>
+
+            <div class="box">
+                <p class="title">AVG-DIS</p>
+                <p>2.5</p>
+            </div>
+
+            <div class="box">
+                <p class="title">Tot. Time</p>
+                <p>01:15</p>
+            </div>
+
+            <div class="box">
+                <p class="title">AVG. Split</p>
+                <p>00:02</p>
+            </div>
+
+            <div class="box">
+                <p class="title">Points</p>
+                <p>30/48</p>
+            </div>
+        </div>
+    </div>
+</section>

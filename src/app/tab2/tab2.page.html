@@ -1,9 +1,101 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<section class="target-selection">
+    <div class="gray">
+        <header>
+            <h1>Edit Session</h1>
+        </header>
+        <div class="chooseTargetWrapper">
+            <img src="../../assets/images/brown_icon_target.png" alt="gun-shooting-targer">
+            <p>CHOOSE TARGET TYPE:
+            <p>
+        </div>
+        <ion-slides class="sliders" pager="true">
 
-<ion-content></ion-content>
+            <ion-slide>
+                <div class="imgWrapper">
+                    <img src="../../assets/icons/Zero.png" alt="No image">
+                    <p>Zero</p>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="imgWrapper">
+                    <img src="../../assets/icons/bullseye_red.png" alt="No image">
+                    <p>Bullseye</p>
+                </div>
+            </ion-slide>
+            <ion-slide>
+                <div class="imgWrapper">
+                    <img src="../../assets/icons/Hostage.png" alt="No image">
+                    <p>Hostage</p>
+                </div>
+            </ion-slide>
+        </ion-slides>
+
+        <div class="form">
+            <div class="container">
+                <div style="width: 80%" class="title-and-icon">
+                    <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
+                    <p>NUMBER OF BULLETS:</p>
+                </div>
+                <div style="width: 20%" class="inputs">
+                    <input type="number">
+                </div>
+            </div>
+            <div class="container range">
+                <div class="title-and-icon">
+                    <img src="../../assets/images/ic_illust_half_fullrange.png" alt="gun-shooting-targer">
+                    <p>RANGE:</p>
+                </div>
+
+                <div class="inputs">
+                    <input type="number">
+                    <select>
+                        <option value="none">meters</option>
+                        <option value="none">centemeters</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container">
+                <div class="title-and-icon">
+                    <img src="../../assets/icons/rifle.png" alt="gun-shooting-targer" class="border">
+                    <p>WEAPON:</p>
+                </div>
+                <div class="inputs">
+                    <select>
+                        <option value="none">AR-15</option>
+                        <option value="none">M4</option>
+                        <option value="none">MP5</option>
+                        <option value="none">DOUBLE BARREL SHOTGUN</option>
+                        <option value="none">P40</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container">
+                <div class="title-and-icon">
+                    <img src="../../assets/icons/gun-shooting-target.png" alt="gun-shooting-targer" class="border">
+                    <p>SIGHT:</p>
+                </div>
+                <div class="inputs">
+                    <select>
+                        <option value="none">Trijicon</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container">
+                <div class="title-and-icon">
+                    <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
+                    <p>AMMO:</p>
+                </div>
+                <div class="inputs">
+                    <select>
+                        <option value="none">Plain (M193)</option>
+                        <option value="none">5.56</option>
+                        <option value="none">6.56</option>
+                        <option value="none">12 Guage</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button (click)="startSesstion()"> Start Session!</button>
+
+    </div>
+</section>

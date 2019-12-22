@@ -1,0 +1,113 @@
+.my-custom-menu {
+  --width: 500px;
+}
+
+div.gray {
+  background-color: rgba(231, 231, 231, 0.8);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  color: white;
+}
+
+section.results {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url("../../../assets/images/tabsBG.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100% 100%;
+}
+
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(59, 56, 56, 1);
+  box-sizing: border-box;
+  padding: 0.5em;
+  height: 10%;
+
+  h1 {
+    color: rgba(147, 111, 0, 1);
+    text-align: center;
+    margin: 0;
+  }
+}
+
+div.results {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0.5em;
+
+  p {
+    margin: 0;
+    color: rgba(59, 56, 56, 1);
+    font-size: 1.3em;
+  }
+
+  div.info {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0;
+      padding-right: 0.5em;
+      color: rgba(59, 56, 56, 1);
+      font-size: 1.1em;
+    }
+
+    b {
+      color: rgba(147, 111, 0, 1);
+      padding-right: 0.2em;
+      font-size: 1.2em;
+    }
+  }
+}
+
+
+div.main-image {
+  box-sizing: border-box;
+  padding: 0.5em;
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  img {
+    border-radius: 52%;
+  }
+}
+
+div.details {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-evenly;
+
+  div.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    p {
+      margin: 0;
+      color: rgba(59, 56, 56, 1);
+      padding: 0.5em 0;
+
+      &.title {
+        color: rgba(147, 111, 0, 1);
+      }
+    }
+  }
+}

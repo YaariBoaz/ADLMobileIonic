@@ -1,66 +1,103 @@
-<div class="topContainer">
-    <div class="nameTop">
-        Evi Cohen
-    </div>
-    <div class="weaponContainer">
-        M-4
-    </div>
-    <div class="statsContainer">
-        <div class="statsLeft">
-            <div>
-                180
-            </div>
-            <div>Points</div>
-        </div>
-        <div class="imgWrapper">
-            <img class="avatar" src="../../assets/evi.png">
-        </div>
-        <div class="placeContainer">
-            <div>3rd</div>
-            <div>Place</div>
-        </div>
-    </div>
-</div>
-<div class="opacityContainer">
+<section class="dashboard">
+    <header>
 
-    <ion-slides class="slider" pager="true">
-        <ion-slide>
-            <div class="tabOne">
-                <div class="hitRatioContainer">
-                    <div class="hitRatioText">Hit Ratio</div>
-                    <span class="hitText">96</span><span class="totalBullets">/200</span>
-                </div>
-                <div class="hitRatioChartContainer"
-                     >
-                    <ngx-charts-pie-chart
-                            [scheme]="colorScheme"
-                            [gradient]="true"
-                            [results]="single"
-                            [doughnut]="true"
-                            [arcWidth]="0.4"
+        <div class="personal-titles">
+            <p class="name">Evi Cohen</p>
+            <p>M-4</p>
+        </div>
 
-                    >
-                    </ngx-charts-pie-chart>
-                    <div class="sumPrecent">67%</div>
+        <div class="personal-widget">
+            <div class="points">
+                <span class="amount">180</span>
+                <p>points</p>
+            </div>
+            <div class="avatar">
+                <img class="avatar" src="../../assets/evi.png" alt="avatar">
+            </div>
+            <div class="place">
+                <span class="amount">3rd</span>
+                <p>place</p>
+            </div>
+        </div>
+
+    </header>
+    <div class="container-background">
+        <div class="gray">
+            <div class="slider-stats">
+                <ion-slides [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
+                    <ion-slide>
+                        <div class="chart-and-stats">
+                            <div class="stats">
+                                <h1>HIT RATIO</h1>
+                                <p><b>96</b>/200</p>
+                            </div>
+
+                            <div class="hitRatioChartContainer">
+                                <div style="display: block;width: 100%;height:100%;">
+                                    <canvas baseChart
+                                            [legend]="false"
+                                            [plugins]="doughnutChartPlugins"
+                                            [colors]="donutColors"
+                                            [data]="doughnutChartData"
+                                            [labels]="doughnutChartLabels"
+                                            [chartType]="doughnutChartType">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <h1>Slide 2</h1>
+                    </ion-slide>
+
+                    <ion-slide>
+                        <div class="chart-and-stats">
+                            <div class="stats">
+                                <h1>HIT RATIO</h1>
+                                <p><b>96</b>/200</p>
+                            </div>
+
+                            <div class="hitRatioChartContainer" style="background-color: white"
+                                 [style.height.px]="screenWdith-(screenWdith*0.5)" [style.width.px]="screenWdith">
+                                <div style="display: block;width:100%">
+                                    <canvas baseChart
+                                            [datasets]="lineChartData"
+                                            [labels]="lineChartLabels"
+                                            [options]="lineChartOptions"
+                                            [colors]="lineChartColors"
+                                            [legend]="false"
+                                            [chartType]="lineChartType"
+                                            [plugins]="lineChartPlugins">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+            <div class="summaryContainer">
+                <div class="text-container">
+                    <p class="titleSummary">Longest Shoot</p>
+                    <p class="valueSummary">1250yds</p>
+                </div>
+
+                <div class="text-container">
+                    <p class="titleSummary">Fast Avg Split</p>
+                    <p class="valueSummary">2.5</p>
+                </div>
+
+
+                <div class="text-container">
+                    <p class="titleSummary">Best Avg Distance</p>
+                    <p class="valueSummary">3CM</p>
+                </div>
+
+                <div class="text-container">
+                    <p class="titleSummary">Last Shooting Session</p>
+                    <p class="valueSummary">08.07.2019 Monday</p>
                 </div>
             </div>
-        </ion-slide>
-        <ion-slide>
-            <h1>Slide 2</h1>
-        </ion-slide>
-        <ion-slide>
-            <h1>Slide 3</h1>
-        </ion-slide>
-    </ion-slides>
-    <div class="summarContainer">
-        <div class="titleSummary">Longest Shoot</div>
-        <div class="valueSummary">1250yds</div>
-        <div class="titleSummary">Fast Avg Split</div>
-        <div class="valueSummary">2.5</div>
-        <div class="titleSummary">Best Avg Distance</div>
-        <div class="valueSummary">3CM</div>
-        <div class="titleSummary">Last Shooting Session</div>
-        <div class="valueSummary" v>08.07.2019 Monday</div>
+        </div>
     </div>
-</div>
+</section>
 
