@@ -17,6 +17,11 @@ $RECYCLE.BIN/
 log.txt
 npm-debug.log*
 
+node_modules/
+temp/
+*.DS_Store
+*.log
+*.swp
 /.idea
 /.ionic
 /.sass-cache
