@@ -1,5 +1,8 @@
 {
   "name": "onTarget",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "d49a768e"
 }

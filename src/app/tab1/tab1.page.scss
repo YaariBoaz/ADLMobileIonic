@@ -1,4 +1,163 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+
+ion-content {
+  height: 75%;
+}
+.topContainer {
+
+  background: #3b3838;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.5em;
+  height: 20%;
+  justify-content: space-between;
+}
+
+.avatar {
+  height: 60%;
+  width: 60%;
+  border-radius: 50%;
+}
+
+
+.statsContainer {
+  padding: 0.5em;
+  width: 60%;
+  background-color: #d9d9d9;
+  height: 50%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-conent {
+  height: 100%;
+}
+
+.bgImg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+}
+
+.opacityContainer {
+  width: 100%;
+  height: 80%;
+  background: linear-gradient(rgba(255, 255, 255, .5), rgba(255, 255, 255, .5)), url("../../assets/images/tabsBG.png");
+}
+
+ion-slides {
+  height: 70%;
+}
+
+.hitRatioText {
+  font-size: 20px;
+  font-weight: 600;
+  color: #927000;
+}
+
+.hitText {
+  font-size: 20px;
+  font-weight: 600;
+  color: #927000;
+}
+
+.totalBullets {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(104, 100, 100);
+}
+
+.hitRatioContainer {
+  padding: 0.5em;
+  width: 100%;
+  text-align: left;
+}
+
+.hitRatioChartContainer {
+  height: 60%;
+  width: 60%;
+  padding: 0.5em;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+
+}
+
+.sumPrecent {
+  position: absolute;
+  font-size: 25px;
+}
+
+.titleSummary {
+  color: #5c5c5c;
+  font-size: 10px;
+}
+
+.valueSummary {
+  color: #927000;
+  font-size: 12px;
+}
+
+.nameTop {
+  color: #927000;
+  font-size: 20px;
+}
+
+.summarContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.weaponContainer {
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
+.tabOne {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.statsLeft {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.placeContainer {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.imgWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
+.slider {
+  height: 70%;
 }
