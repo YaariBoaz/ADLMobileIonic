@@ -1,0 +1,14 @@
+<section class="target-selection">
+    <div class="gray">
+        <header>
+            <h1>Select Target</h1>
+        </header>
+        <div class="target-list">
+            <div (click)="startSesstion(target)" class="target-wrapper" *ngFor="let target of targets">
+                <img src="../../assets/icons/bullseye_red.png">
+                <p> {{target}}</p>
+            </div>
+        </div>
+        <button> Start Session!</button>
+    </div>
+</section>

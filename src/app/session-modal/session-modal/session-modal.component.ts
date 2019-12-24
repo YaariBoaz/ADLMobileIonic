@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ShootingService} from '../shooting.service';
+import {WebsocketService} from '../websocket.service';
 
 @Component({
     selector: 'app-session-modal',
@@ -9,9 +11,12 @@ export class SessionModalComponent implements OnInit {
 
     sessionIsOver = false;
 
+
     constructor() {
+
     }
 
     ngOnInit() {
+
     }
 }

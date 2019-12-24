@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {SessionModalComponent} from '../session-modal/session-modal/session-modal.component';
+import {SelectTargetModalComponent} from '../select-target-modal/select-target-modal.component';
 
 @Component({
     selector: 'app-tab2',
@@ -70,7 +71,7 @@ export class Tab2Page {
 
     async startSesstion() {
         const modal = await this.modalController.create({
-            component: SessionModalComponent
+            component: SelectTargetModalComponent
         });
         return await modal.present();
     }
