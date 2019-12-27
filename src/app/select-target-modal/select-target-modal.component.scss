@@ -10,15 +10,18 @@
   margin-bottom: 40px;
 
   img {
-    width: 100%;
+    width: 70%;
   }
 }
 
 .target-list {
+  padding: 0.5em;
   overflow-y: auto;
   align-items: center;
   display: flex;
   flex-direction: column;
+  height: 75%;
+  border-bottom: 1px solid #ffffff61;
 }
 
 button {
@@ -44,18 +47,20 @@ section.target-selection {
 
   header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: rgba(59, 56, 56, 1);
     box-sizing: border-box;
     padding: 0.5em;
     height: 10%;
 
     h1 {
-      color: rgba(147, 111, 0, 1);
+      color: #936f00;
       text-align: center;
       margin: 0;
+      WIDTH: 100%;
+      position: absolute;
     }
   }
 
@@ -70,3 +75,9 @@ section.target-selection {
   }
 }
 
+.startBtnContainer {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -6,9 +6,11 @@
         <div class="target-list">
             <div (click)="startSesstion(target)" class="target-wrapper" *ngFor="let target of targets">
                 <img src="../../assets/icons/bullseye_red.png">
-                <p> {{target}}</p>
+                <p style="color:black;font-size: 18px;font-weight: bold"> {{target}}</p>
             </div>
         </div>
-        <button> Start Session!</button>
+        <div class="startBtnContainer">
+            <button> Start Session!</button>
+        </div>
     </div>
 </section>

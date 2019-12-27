@@ -24,11 +24,6 @@ export class SelectTargetModalComponent implements OnInit {
     }
 
     async startSesstion(target) {
-        // this.shootingService.notifyGatewayOnTargetId(target);
-        this.modalController.dismiss({
-            dismissed: true
-        });
-
         const modal = await this.modalController.create({
             component: SessionModalComponent
         });

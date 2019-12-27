@@ -2,19 +2,36 @@
     <div class="gray">
         <header>
             <h1>Shooting Session</h1>
+            <button style="height: 45px;
+    width: 45px;
+    background: transparent;
+    color: white;
+    font-size: 40px;" mat-button [matMenuTriggerFor]="menu">⋮
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
         </header>
 
         <div class="results">
             <p>Bullseye Drill</p>
             <div class="info">
-                <p><b>8</b>Bullets</p>
-                <p><b>100</b>M</p>
+                <p><b>{{drill?.numOfBullets}}</b>Bullets</p>
+                <p><b>{{drill?.range}}</b>{{drill?.rangeUOM}}</p>
             </div>
         </div>
 
         <div class="main-image">
-            <img src="../../../assets/images/bullseye_red.png" alt="bullsEye" *ngIf="!sessionIsOver">
+            <img #container src="../../../assets/images/bullseye_red.png" alt="bullsEye" *ngIf="!sessionIsOver">
             <img src="../../../assets/images/bullseye_black.png" alt="bullsEye" *ngIf="sessionIsOver">
+            <div *ngFor="let shot of shots" style="position: absolute;height:100%;width:100%">
+                <img src="../../../assets/images/bullethit.png"
+                     style="position: absolute;height:35px;width:35px"
+                     [style.top.px]=shot.x
+                     [style.right.px]=shot.x
+                >
+            </div>
         </div>
 
         <div class="details">

@@ -5,8 +5,6 @@ export interface INetworkAdapter {
 
     getOnlineTargets();
 
-    subscribeConnectionIssues();
-
     subscribeConnectionError();
 
     sendGateWayStop();

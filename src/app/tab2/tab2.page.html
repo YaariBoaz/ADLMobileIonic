@@ -37,7 +37,7 @@
                     <p>NUMBER OF BULLETS:</p>
                 </div>
                 <div style="width: 20%" class="inputs">
-                    <input type="number">
+                    <input [(ngModel)]="drill.numOfBullets" type="number">
                 </div>
             </div>
             <div class="container range">
@@ -47,10 +47,10 @@
                 </div>
 
                 <div class="inputs">
-                    <input type="number">
-                    <select>
-                        <option value="none">meters</option>
-                        <option value="none">centemeters</option>
+                    <input [(ngModel)]="drill.range" type="number">
+                    <select [(ngModel)]="drill.rangeUOM">
+                        <option value="Meters">Meters</option>
+                        <option value="Feet">Feet</option>
                     </select>
                 </div>
             </div>
@@ -60,12 +60,12 @@
                     <p>WEAPON:</p>
                 </div>
                 <div class="inputs">
-                    <select>
-                        <option value="none">AR-15</option>
-                        <option value="none">M4</option>
-                        <option value="none">MP5</option>
-                        <option value="none">DOUBLE BARREL SHOTGUN</option>
-                        <option value="none">P40</option>
+                    <select [(ngModel)]="drill.weapon">
+                        <option value="AR-15">AR-15</option>
+                        <option value="M4">M4</option>
+                        <option value="MP5">MP5</option>
+                        <option value="DOUBLE BARREL SHOTGUN">DOUBLE BARREL SHOTGUN</option>
+                        <option value="P40">P40</option>
                     </select>
                 </div>
             </div>
@@ -75,8 +75,8 @@
                     <p>SIGHT:</p>
                 </div>
                 <div class="inputs">
-                    <select>
-                        <option value="none">Trijicon</option>
+                    <select [(ngModel)]="drill.sight">
+                        <option value="Trijicon">Trijicon</option>
                     </select>
                 </div>
             </div>
@@ -86,16 +86,16 @@
                     <p>AMMO:</p>
                 </div>
                 <div class="inputs">
-                    <select>
-                        <option value="none">Plain (M193)</option>
-                        <option value="none">5.56</option>
-                        <option value="none">6.56</option>
-                        <option value="none">12 Guage</option>
+                    <select [(ngModel)]="drill.ammo">
+                        <option value="Plain (M193)">Plain (M193)</option>
+                        <option value="5.56">5.56</option>
+                        <option value="6.56">6.56</option>
+                        <option value="12 Guage">12 Guage</option>
                     </select>
                 </div>
             </div>
         </div>
-        <button (click)="startSesstion()"> Start Session!</button>
+        <button (click)="startSesstion()" routerLink="select"> Start Session!</button>
 
     </div>
 </section>

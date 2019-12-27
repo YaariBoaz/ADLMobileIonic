@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {SessionModalComponent} from '../session-modal/session-modal/session-modal.component';
 import {SelectTargetModalComponent} from '../select-target-modal/select-target-modal.component';
+import {ShootingService} from '../session-modal/shooting.service';
 
 @Component({
     selector: 'app-tab2',
@@ -42,7 +43,16 @@ export class Tab2Page {
         centeredSlides: true
     };
 
-    constructor(public modalController: ModalController) {
+    drill: DrillObject = {
+        numOfBullets: 8,
+        weapon: 'MP5',
+        range: 25,
+        rangeUOM: 'Meters',
+        sight: 'Trijicon',
+        ammo: '5.56'
+    };
+
+    constructor(public modalController: ModalController, private  shootingService: ShootingService) {
 
     }
 
@@ -69,12 +79,18 @@ export class Tab2Page {
     }
 
 
-    async startSesstion() {
-        const modal = await this.modalController.create({
-            component: SelectTargetModalComponent
-        });
-        return await modal.present();
+    startSesstion() {
+        this.shootingService.selectedDrill = this.drill;
     }
 
 
+}
+
+export interface DrillObject {
+    numOfBullets: number;
+    weapon: string;
+    range: number;
+    rangeUOM: string;
+    sight: string;
+    ammo: string;
 }

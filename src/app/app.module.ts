@@ -13,8 +13,8 @@ import {AppComponent} from './app.component';
 import {SessionModalComponent} from './session-modal/session-modal/session-modal.component';
 
 @NgModule({
-    declarations: [AppComponent, SessionModalComponent],
-    entryComponents: [SessionModalComponent],
+    declarations: [AppComponent],
+    entryComponents: [],
     imports: [HttpClientModule, BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule],
     providers: [
         StatusBar,

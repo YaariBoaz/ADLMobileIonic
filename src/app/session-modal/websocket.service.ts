@@ -2,41 +2,56 @@ import {Injectable} from '@angular/core';
 import {INetworkAdapter} from './INetworkAdapter';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import * as signalr from '@aspnet/signalr';
-import {ShootingService} from './shooting.service';
+import * as signalR from '@aspnet/signalr';
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+
 
 @Injectable({
     providedIn: 'root'
 })
 export class WebsocketService implements INetworkAdapter {
 
-    static BASE_URL = 'http://172.20.10.11:8089';
+    //static BASE_URL = '192.168.43.86:8089';
+    static BASE_URL = '10.0.0.8:8089';
     static GET_TARGETS_API = 'GetTargets';
-
+    myWebSocket: WebSocketSubject<any> = webSocket('ws://' + WebsocketService.BASE_URL);
     hubConnection;
     proxy;
     shotArrived$ = new BehaviorSubject(null);
 
     constructor(private http: HttpClient) {
+
+
     }
 
     initConnection(chosenTarget) {
-        this.hubConnection = new signalr.HubConnectionBuilder()
-            .withUrl(WebsocketService.BASE_URL + '/TargetHub')
-            .build();
+        const socket = new WebSocket('ws://' + WebsocketService.BASE_URL);
 
-        this.hubConnection.start().then(() => {
-            this.hubConnection.invoke('start', chosenTarget)
-                .done((directResponse) => {
+        socket.onopen = (e) => {
+            console.log('[open] Connection established');
+            socket.send('My name is John');
+        };
 
-                }).fail(() => {
-                console.warn('Something went wrong when calling server, it might not be up and running?');
-            });
-        }).catch(err => console.log('Error while starting connection: ' + err));
 
-        this.subscribeToUpdates();
-        this.subscribeConnectionIssues();
-        this.subscribeConnectionError();
+        socket.onmessage = (event) => {
+            console.log(`[message] Data received from server: ${event.data}`);
+            this.shotArrived$.next(event.data);
+        };
+
+        socket.onclose = (event) => {
+            if (event.wasClean) {
+                alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+            } else {
+                // e.g. server process killed or network down
+                // event.code is usually 1006 in this case
+                alert('[close] Connection died');
+            }
+        };
+
+        socket.onerror = (error) => {
+            alert(`[error] ${error}`);
+        };
+
 
     }
 
@@ -53,14 +68,8 @@ export class WebsocketService implements INetworkAdapter {
         });
     }
 
-    subscribeConnectionIssues() {
-        this.hubConnection.connectionSlow(() => {
-            console.log('We are currently experiencing difficulties with the connection.');
-        });
-    }
-
     subscribeConnectionError() {
-        this.hubConnection.error((error) => {
+        this.hubConnection.on('error', (error) => {
             const errorMessage = error.message;
             let detailedError = '';
             if (error.source && error.source._response) {
