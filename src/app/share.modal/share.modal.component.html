@@ -1,0 +1,28 @@
+<section>
+    <div>
+        <p>
+            Facebook:
+        </p>
+        <input [ngModel]="facebook" type="text">
+    </div>
+    <div>
+        <p>
+            Instagram:
+        </p>
+        <input [ngModel]="instagram" type="text">
+    </div>
+    <div>
+        <p>
+            Email:
+        </p>
+        <input [ngModel]="email" type="email">
+    </div>
+    <div>
+        <p>
+            Phone Number:
+        </p>
+        <input [ngModel]="phoneNumber" type="number">
+    </div>
+
+    <button (click)="onSave()"> Save</button>
+</section>

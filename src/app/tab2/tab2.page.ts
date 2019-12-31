@@ -44,7 +44,7 @@ export class Tab2Page {
     };
 
     drill: DrillObject = {
-        numOfBullets: 8,
+        numOfBullets: 16,
         weapon: 'MP5',
         range: 25,
         rangeUOM: 'Meters',
@@ -81,6 +81,7 @@ export class Tab2Page {
 
     startSesstion() {
         this.shootingService.selectedDrill = this.drill;
+        this.shootingService.numberOfBullersPerDrill = this.drill.numOfBullets;
     }
 
 

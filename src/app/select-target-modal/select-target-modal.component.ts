@@ -24,10 +24,10 @@ export class SelectTargetModalComponent implements OnInit {
     }
 
     async startSesstion(target) {
-        const modal = await this.modalController.create({
-            component: SessionModalComponent
-        });
-        return await modal.present();
+        // const modal = await this.modalController.create({
+        //     component: SessionModalComponent
+        // });
+        // return await modal.present();
 
     }
 }

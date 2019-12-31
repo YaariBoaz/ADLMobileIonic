@@ -27,7 +27,7 @@ header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   background-color: rgba(59, 56, 56, 1);
   box-sizing: border-box;
   padding: 0.5em;
@@ -38,9 +38,9 @@ header {
     text-align: center;
     margin: 0;
     position: absolute;
-    width: 50%;
+    width: 60%;
     text-align: center;
-    left: 25%;
+    left: 20%;
   }
 }
 
@@ -49,6 +49,7 @@ div.results {
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  height: 25%;
   padding: 0.5em;
 
   p {
@@ -81,20 +82,26 @@ div.main-image {
   box-sizing: border-box;
   padding: 0.5em;
   width: 100%;
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   position: relative;
+
   img {
     border-radius: 52%;
   }
+}
+
+.test_Timer_class {
+  color: black;
 }
 
 div.details {
   display: flex;
   align-items: center;
   width: 100%;
+  height: 100%;
   justify-content: space-evenly;
 
   div.box {
@@ -106,9 +113,14 @@ div.details {
       margin: 0;
       color: rgba(59, 56, 56, 1);
       padding: 0.5em 0;
+      font-size: 20px;
 
       &.title {
         color: rgba(147, 111, 0, 1);
+        color: #936f00;
+        font-weight: 500;
+        font-size: 16px;
+        text-decoration: underline;
       }
     }
   }
@@ -142,7 +154,7 @@ div.details {
   position: absolute;
   background-color: #f1f1f1;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -153,8 +165,21 @@ div.details {
   text-decoration: none;
   display: block;
 }
+
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {
+  background-color: #ddd
+}
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {display:block;}
+.show {
+  display: block;
+}
+
+.shareContainer {
+  padding: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3b3838;
+}
