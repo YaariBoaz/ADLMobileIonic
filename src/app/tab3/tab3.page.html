@@ -1,9 +1,34 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Three
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>
+            <button (click)="shareIt()">Shar It</button>
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
+<ion-content>
+    <div class="share-continer" *ngFor="let item of allData">
+            <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">
+        <div>
+            <span>Facebook: {{item.data.facebook}}</span>
+            <span>Instagram: {{item.data.instagram}}</span>
+            <span>Email: {{item.data.email}}</span>
+            <span>Phone Number: {{item.data.phoneNumber}}</span>
+        </div>
+    </div>
+</ion-content>
 
-<ion-content></ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

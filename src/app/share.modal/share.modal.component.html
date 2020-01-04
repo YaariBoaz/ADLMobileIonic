@@ -1,28 +1,34 @@
-<section>
-    <div>
-        <p>
-            Facebook:
-        </p>
-        <input [ngModel]="facebook" type="text">
+<section class="target-selection">
+    <div class="gray">
+        <header>
+            <h1>Select Target</h1>
+        </header>
+        <div class="inputs-share">
+            <div class="input-wrapper">
+                <p>
+                    Facebook:
+                </p>
+                <input [(ngModel)]="facebook" type="text">
+            </div>
+            <div class="input-wrapper">
+                <p>
+                    Instagram:
+                </p>
+                <input [(ngModel)]="instagram" type="text">
+            </div>
+            <div class="input-wrapper">
+                <p>
+                    Email:
+                </p>
+                <input [(ngModel)]="email" type="email">
+            </div>
+            <div class="input-wrapper">
+                <p>
+                    Phone Number:
+                </p>
+                <input [(ngModel)]="phoneNumber" type="number">
+            </div>
+        </div>
+        <button (click)="onSave()"> Save</button>
     </div>
-    <div>
-        <p>
-            Instagram:
-        </p>
-        <input [ngModel]="instagram" type="text">
-    </div>
-    <div>
-        <p>
-            Email:
-        </p>
-        <input [ngModel]="email" type="email">
-    </div>
-    <div>
-        <p>
-            Phone Number:
-        </p>
-        <input [ngModel]="phoneNumber" type="number">
-    </div>
-
-    <button (click)="onSave()"> Save</button>
 </section>

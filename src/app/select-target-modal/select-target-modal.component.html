@@ -4,11 +4,13 @@
             <h1>Select Target</h1>
         </header>
         <div class="target-list">
-            <div (click)="startSesstion(target)"  routerLink="/tabs/tab2/select2" class="target-wrapper" *ngFor="let target of targets">
+            <div routerLink="/tabs/tab2/select2" class="target-wrapper" *ngFor="let target of targets">
                 <img src="../../assets/icons/bullseye_red.png">
                 <p style="color:black;font-size: 18px;font-weight: bold"> {{target}}</p>
             </div>
         </div>
+
+        <button (click)="testWebSocket()">Test Web Socket</button>
         <div class="startBtnContainer">
             <button> Start Session!</button>
         </div>

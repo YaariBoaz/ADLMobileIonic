@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {SessionModalComponent} from '../session-modal/session-modal/session-modal.component';
-import {SelectTargetModalComponent} from '../select-target-modal/select-target-modal.component';
+import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {ShootingService} from '../session-modal/shooting.service';
+import {AlertController} from '@ionic/angular';
+
 
 @Component({
     selector: 'app-tab2',
@@ -51,8 +52,12 @@ export class Tab2Page {
         sight: 'Trijicon',
         ammo: '5.56'
     };
+    wifiSsid;
 
-    constructor(public modalController: ModalController, private  shootingService: ShootingService) {
+    constructor(public modalController: ModalController,
+                public alertController: AlertController,
+                private  shootingService: ShootingService,
+                private screenshot: Screenshot) {
 
     }
 
@@ -85,6 +90,16 @@ export class Tab2Page {
     }
 
 
+    async showLongRangeAlert() {
+        const alert = await this.alertController.create({
+            header: 'Wifi Error',
+            subHeader: 'Wifi not connected to gateway',
+            message: 'Please connect to long-range-target',
+            buttons: ['OK']
+        });
+
+        await alert.present();
+    }
 }
 
 export interface DrillObject {

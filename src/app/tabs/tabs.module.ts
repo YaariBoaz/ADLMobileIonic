@@ -6,7 +6,7 @@ import {ChartsModule} from 'ng2-charts';
 import {TabsPageRoutingModule} from './tabs-routing.module';
 
 import {TabsPage} from './tabs.page';
-import {WebsocketService} from '../session-modal/websocket.service';
+
 
 @NgModule({
     imports: [
@@ -16,7 +16,7 @@ import {WebsocketService} from '../session-modal/websocket.service';
         FormsModule,
         TabsPageRoutingModule
     ],
-    providers: [WebsocketService],
+    providers: [],
     declarations: [TabsPage]
 })
 export class TabsPageModule {

@@ -1,1 +1,21 @@
+.img-list {
+  height: 200px;
+  width: 40%;
+}
+
+.share-continer {
+  padding: 1em;
+  background: lightgray;
+  border: 10px solid white;
+  display: flex;
+  justify-content: space-around;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+}
+
+
 
