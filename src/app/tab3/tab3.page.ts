@@ -7,6 +7,7 @@ import {Base64} from '@ionic-native/base64/ngx';
 import {CDVPhotoLibraryPipe} from './ImagePipe';
 import * as json2csv from 'json2csv';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
+import {ShootingService} from '../session-modal/shooting.service';
 
 @Component({
     selector: 'app-tab3',
@@ -19,6 +20,7 @@ export class Tab3Page {
     images;
     allData = [];
     index = 0;
+    ip: any;
 
     constructor(private base64: Base64,
                 private emailComposer: EmailComposer,
@@ -26,6 +28,7 @@ export class Tab3Page {
                 private changeDetectorRef: ChangeDetectorRef,
                 private storage: Storage,
                 private platform: Platform,
+                private shootingService: ShootingService,
                 private photoLibrary: PhotoLibrary) {
         platform.ready().then(() => {
             this.photoLibrary.requestAuthorization().then(() => {
@@ -73,22 +76,22 @@ export class Tab3Page {
     }
 
     shareIt() {
+        this.storage.get('adl-contacts').then((storageData) => {
+            this.emailComposer.isAvailable().then((available: boolean) => {
+                if (available) {
+                    const email = {
+                        to: 'boazyaarii@gmail.com',
+                        cc: 'boazyaarii@gmail.com',
+                        subject: 'Drills',
+                        body: JSON.stringify(storageData),
+                        isHtml: true
+                    };
 
-        this.emailComposer.isAvailable().then((available: boolean) => {
-            if (available) {
-                const email = {
-                    to: 'boazyaarii@gmail.com',
-                    cc: 'boazyaarii@gmail.com',
-                    subject: 'Drills',
-                    body: JSON.stringify(this.allData),
-                    isHtml: true
-                };
-
-                this.emailComposer.open(email);
-            }
+                    this.emailComposer.open(email);
+                }
+            });
         });
 
-        json2csv({data: this.allData});
         // this.allData.forEach(item => {
         //
         //     alert('After Encoding');
@@ -107,5 +110,9 @@ export class Tab3Page {
     }
 
 
+    onSaveIP() {
+        this.shootingService.setBaseUrl(this.ip);
+        alert('IP was saved!!');
+    }
 }
 

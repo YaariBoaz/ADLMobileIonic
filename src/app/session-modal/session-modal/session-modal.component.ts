@@ -27,7 +27,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
     testConfig: any;
     sharedData;
 
-    BASE_URL = '192.168.0.86:8089';
+    BASE_URL = '192.168.0.86';
     socket: WebSocket;
 
     drillFinished = false;
@@ -43,6 +43,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
     totalTime: any;
     height: number;
     width: number;
+    private chosenTarget: any;
 
 
     constructor(private shootingService: ShootingService,
@@ -65,6 +66,9 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.testConfig.timerTexts.hourText = ':'; // default - hh
         this.testConfig.timerTexts.minuteText = ':'; // default - mm
         this.testConfig.timerTexts.secondsText = ' '; // default - ss
+        if (this.shootingService.BaseUrl) {
+            this.BASE_URL = this.shootingService.getBaseUrl();
+        }
     }
 
 
@@ -145,18 +149,22 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     restartSession() {
         this.shots = [];
+        this.initConnection(this.chosenTarget);
         this.initStats();
     }
 
     private takeScreenShot(imageId) {
         this.screenshot.save('jpg', 80, imageId).then((data) => {
             const d = JSON.stringify(data);
-         });
+        });
     }
 
     initConnection(chosenTarget) {
-
-        this.socket = new WebSocket('ws://' + this.BASE_URL);
+        this.chosenTarget = chosenTarget;
+        if (this.shootingService.BaseUrl) {
+            this.BASE_URL = this.shootingService.getBaseUrl();
+        }
+        this.socket = new WebSocket('ws://' + this.BASE_URL + ':8089');
         this.socket.onopen = (e) => {
             console.log('[open] Connection established');
             this.socket.send('11');
@@ -171,7 +179,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
             } else {
                 // e.g. server process killed or network down
                 // event.code is usually 1006 in this case
-             }
+            }
         };
         this.socket.onerror = (error) => {
         };
@@ -213,7 +221,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
             console.log('FINISH!!!!!!!!!!!!!!!!!');
         }
 
-        return {x: px-35 , y: py};
+        return {x: px - 35, y: py};
     }
 
     notifyGatewayOnTargetId(chosenTargetId) {

@@ -31,7 +31,7 @@ import {IonicStorageModule} from '@ionic/storage';
             {path: 'select', component: SelectTargetModalComponent},
             {path: 'select2', component: SessionModalComponent}])
     ],
-    providers: [ShootingService, Screenshot],
+    providers: [Screenshot],
     declarations: [Tab2Page, SelectTargetModalComponent, SessionModalComponent, ShareModalComponent],
     entryComponents: [ShareModalComponent]
 })

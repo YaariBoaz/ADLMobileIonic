@@ -6,7 +6,16 @@ import {Injectable} from '@angular/core';
 export class ShootingService {
     selectedDrill;
     numberOfBullersPerDrill: number;
+    BaseUrl;
 
     constructor() {
+    }
+
+    setBaseUrl(baseUrl) {
+        this.BaseUrl = baseUrl;
+    }
+
+    getBaseUrl() {
+        return this.BaseUrl;
     }
 }

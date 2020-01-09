@@ -11,12 +11,13 @@ import {HttpClient} from '@angular/common/http';
 export class SelectTargetModalComponent implements OnInit {
     targets = [11];
     BASE_URL_HTTP = '192.168.0.86:8087';
-    GET_TARGETS_API = 'http://' + this.BASE_URL_HTTP + '/api/GetTargets';
     BASE_URL = '192.168.0.86:8089';
     socket;
-
+    GET_TARGETS_API;
 
     constructor(private http: HttpClient, private shootingService: ShootingService) {
+        this.GET_TARGETS_API = 'http://' + this.BASE_URL + ':8087/api/GetTargets';
+
     }
 
     ngOnInit() {

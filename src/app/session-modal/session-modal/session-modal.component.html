@@ -14,12 +14,6 @@
     font-size: 40px;" mat-button [matMenuTriggerFor]="menu">⋮
                         </button>
                         <mat-menu #menu="matMenu">
-                            <button class="menu-item-wrapper" [style.width.px]="200" (click)="onStopSession()"
-                                    mat-menu-item>
-                                Stop
-                                Session
-                                <ion-icon name="alert"></ion-icon>
-                            </button>
                             <button (click)="restartSession()" class="menu-item-wrapper" [style.width.px]="200"
                                     mat-menu-item>
                                 Restart Session

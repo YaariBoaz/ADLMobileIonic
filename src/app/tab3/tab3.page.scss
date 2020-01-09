@@ -18,4 +18,36 @@
 }
 
 
+.settingsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: lightgray;
+
+  p {
+    color: red;
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+  }
+
+  button {
+    height: 120px;
+    width: 90%;
+    margin: 0.2em;
+    background: black;
+    color: white;
+    font-size: 30px;
+    box-sizing: border-box;
+  }
+
+  input {
+    height: 70px;
+    width: 90%;
+    font-size: 30px;
+  }
+}
 

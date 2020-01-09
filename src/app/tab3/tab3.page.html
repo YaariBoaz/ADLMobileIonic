@@ -1,20 +1,26 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            <button (click)="shareIt()">Shar It</button>
+            <button (click)="shareIt()">Export To Excel</button>
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <div class="share-continer" *ngFor="let item of allData">
-            <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">
-        <div>
-            <span>Facebook: {{item.data.facebook}}</span>
-            <span>Instagram: {{item.data.instagram}}</span>
-            <span>Email: {{item.data.email}}</span>
-            <span>Phone Number: {{item.data.phoneNumber}}</span>
-        </div>
+
+    <div class="settingsContainer">
+        <p> Please enter ip for example: 192.168.0.86</p>
+        <input [(ngModel)]="ip">
+        <button (click)="onSaveIP()"> Save</button>
     </div>
+    <!--    <div class="share-continer" *ngFor="let item of allData">-->
+    <!--            <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">-->
+    <!--        <div>-->
+    <!--            <span>Facebook: {{item.data.facebook}}</span>-->
+    <!--            <span>Instagram: {{item.data.instagram}}</span>-->
+    <!--            <span>Email: {{item.data.email}}</span>-->
+    <!--            <span>Phone Number: {{item.data.phoneNumber}}</span>-->
+    <!--        </div>-->
+    <!--    </div>-->
 </ion-content>
 
 
