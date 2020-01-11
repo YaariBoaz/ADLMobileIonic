@@ -14,6 +14,8 @@
     <access origin="*" />
     <allow-navigation href="*" />
     <preference name="ScrollEnabled" value="false" />
+    <preference name="SplashScreenDelay" value="0" />
+    <preference name="ShowSplashScreen" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />

@@ -27,6 +27,7 @@
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/email-composer": "^5.19.1",
     "@ionic-native/facebook": "^5.19.1",
+    "@ionic-native/native-audio": "^5.19.1",
     "@ionic-native/photo-library": "^5.19.0",
     "@ionic-native/screenshot": "^5.19.0",
     "@ionic-native/social-sharing": "^5.19.0",
@@ -44,6 +45,7 @@
     "cordova-plugin-email-composer": "^0.9.2",
     "cordova-plugin-facebook4": "^6.2.0",
     "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-photo-library": "^2.2.1",
     "cordova-plugin-wifiwizard2": "^3.1.1",
     "cordova-plugin-x-socialsharing": "^5.6.3",
@@ -55,6 +57,7 @@
     "jquery": "^3.4.1",
     "json2csv": "^4.5.4",
     "ng2-charts": "^2.3.0",
+    "ngx-animate": "^1.0.1",
     "ngx-timer": "^1.0.6",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -119,7 +122,8 @@
         "APP_NAME": "adl",
         "FACEBOOK_HYBRID_APP_EVENTS": "false",
         "FACEBOOK_ANDROID_SDK_VERSION": "5.5.2"
-      }
+      },
+      "cordova-plugin-nativeaudio": {}
     },
     "platforms": [
       "ios",

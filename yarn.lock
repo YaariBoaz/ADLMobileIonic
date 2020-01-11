@@ -335,6 +335,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@ionic-native/base64@^5.19.0":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/base64/-/base64-5.19.1.tgz#64a20b7cd8055d867b1a44214d105e9d79d959d9"
+  integrity sha512-pG1tlVfohqApPyq1D4wsyFJViM5usoW3wkDAHUGMSguGsiVCkz4PvjNpYc707NWGcGwtmoAcXUjupnZbmE4k6Q==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/core@^5.0.0":
   version "5.18.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.18.0.tgz#8d9fafa4af1129c3fb433dc2db567fbb791ef38a"
@@ -342,10 +349,45 @@
   dependencies:
     "@types/cordova" latest
 
+"@ionic-native/email-composer@^5.19.1":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/email-composer/-/email-composer-5.19.1.tgz#b7dc36cb2d4e368bf5d1a5e2416d618c9a167e8c"
+  integrity sha512-k6zUK/Sy/IL++GfzwTGnGGPUzyqwVwkLbiba0Xsk/RgODJpEXcjePDTPblq9Yh15zHhkJeaVJxFqp7PGcnvQig==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/facebook@^5.19.1":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/facebook/-/facebook-5.19.1.tgz#707ce07caf8502628ab3de45b07cc2d3b1ab85b9"
+  integrity sha512-9WL0jwEZJzsUO6avCE3VS1P4WYOZ97t61BrTadGQWnsuFmImn3MK+L/MHJ1y0kEhuci1A3Rm0eR2mZaNOU6r5A==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/native-audio@^5.19.1":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/native-audio/-/native-audio-5.19.1.tgz#f4c1b6cad10396642ce435ea3111a06a4f7cd177"
+  integrity sha512-5ZS7PNKAm5r1ovvM9LawchsdSsqd54GFFNfHCQWCN4NfOVRiQ+yOwIgu8BltYEN7vst5ZTddI4HYsgKj5SCoJw==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/photo-library@^5.19.0":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/photo-library/-/photo-library-5.19.1.tgz#d840c0e9a87536999f859283caa841bc3844ced7"
+  integrity sha512-X/5vcAiaGCQMdbpb0uJYrTpGAB9bGKYdqNx3uJ2itTfxuv7ZOaos8370aF75smrR8lN5sKE/TEv/9vhG1+P57Q==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/screenshot@^5.19.0":
   version "5.19.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/screenshot/-/screenshot-5.19.0.tgz#dd77030ee2dae1c29ff20333d0a70ea2862a5b5b"
   integrity sha512-pn9mkOsrQjxDnbeQw5i0tVayRdFcvHr1PGtzjsv76g2sF+TAEMsfeOnP3o1qA4iWf14DHReMqFvUBiRjxMCEvg==
+  dependencies:
+    "@types/cordova" latest
+
+"@ionic-native/social-sharing@^5.19.0":
+  version "5.19.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/social-sharing/-/social-sharing-5.19.1.tgz#15e2b709f6e6e1ba210209457b3afce8d50330bd"
+  integrity sha512-/7yvS7/MIXYIPlVMEXMAb1Bxowewkbp5FehIiE0sZH3+d3T8iw2dUXBA+hWgw9I/C2QyqF2lD9HW+GzVIj/Dfg==
   dependencies:
     "@types/cordova" latest
 
@@ -1021,7 +1063,7 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
-async@^2.5.0, async@^2.6.2:
+async@^2.1.4, async@^2.5.0, async@^2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
   integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
@@ -1824,6 +1866,11 @@ colors@^1.1.0:
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
   integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
+com-badrit-base64@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/com-badrit-base64/-/com-badrit-base64-0.2.0.tgz#bbd86033aa1e1acff7ee446a6c80c8bd42f4dd37"
+  integrity sha1-u9hgM6oeGs/37kRqbIDIvUL03Tc=
+
 com.darktalker.cordova.screenshot@^0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/com.darktalker.cordova.screenshot/-/com.darktalker.cordova.screenshot-0.1.6.tgz#647a53450f9617219b63283f586685e27cdb96b3"
@@ -1836,7 +1883,7 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@^2.11.0, commander@^2.12.1, commander@^2.20.0, commander@~2.20.3:
+commander@^2.11.0, commander@^2.12.1, commander@^2.15.1, commander@^2.20.0, commander@~2.20.3:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
   integrity sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==
@@ -2066,6 +2113,21 @@ cordova-plugin-device@^2.0.2:
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-2.0.3.tgz#c2b41b7efd0455dd097f89356d85bfdd5dadeb0f"
   integrity sha512-Jb3V72btxf3XHpkPQsGdyc8N6tVBYn1vsxSFj43fIz9vonJDUThYPCJJHqk6PX6N4dJw6I4FjxkpfCR4LDYMlw==
 
+cordova-plugin-email-composer@^0.9.2:
+  version "0.9.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-email-composer/-/cordova-plugin-email-composer-0.9.2.tgz#264c66d45679acf2781c2cec54e32b2c1facfdb8"
+  integrity sha512-w8eQZ6lbYWut13o/Cprixmacfyq5hds7DAjuTL34eQhyWWd/DA/o6ziiyY3So2ZOozeQ4DxQpyPN4BiqUKcyew==
+
+cordova-plugin-facebook4@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-facebook4/-/cordova-plugin-facebook4-6.2.0.tgz#0d2427556343a71cfdd96d4bd25e095371c6bb46"
+  integrity sha512-PDqm4Qzi126RwD23aIgefuHui2UQic0Y0ApDcC3OLy5D6QMuFlirgzwqycJeB35B4I8cj/7EdKoyDLj1AiTJ2Q==
+
+cordova-plugin-file@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-6.0.2.tgz#f3911479f8357e9aacb5576674f8d95b31a1fb20"
+  integrity sha512-m7cughw327CjONN/qjzsTpSesLaeybksQh420/gRuSXJX5Zt9NfgsSbqqKDon6jnQ9Mm7h7imgyO2uJ34XMBtA==
+
 cordova-plugin-ionic-keyboard@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.2.0.tgz#53ba9ccd5e765165446a094cfe042a2ddd87d81d"
@@ -2075,6 +2137,18 @@ cordova-plugin-ionic-webview@^4.1.3:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-4.1.3.tgz#7f3963208708951fedd975c0808a5d27382812a7"
   integrity sha512-hlrUF0kLjjEkZmpYlLJO0NnXmVjMmQ3MOZVXm1ytDihLPKHklYCOpCvjA5Wz3hJrPD1shFEsqi/SPnp873AsdQ==
+
+cordova-plugin-nativeaudio@^3.0.9:
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-nativeaudio/-/cordova-plugin-nativeaudio-3.0.9.tgz#16cebfdaee24beb23c05f49713cb8773bc78536c"
+  integrity sha1-Fs6/2u4kvrI8BfSXE8uHc7x4U2w=
+
+cordova-plugin-photo-library@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-photo-library/-/cordova-plugin-photo-library-2.2.1.tgz#d8b06b238c4875a5d535dcea5a9e4119acff8793"
+  integrity sha512-oz+iWBlW6tBtpmACGshCm0Z/deMbbFwcC67avnx8eFpX4o4nfA4jiHIImW1GO9NBMVkoTKH71OixDKIqq/0uXA==
+  dependencies:
+    async "^2.1.4"
 
 cordova-plugin-splashscreen@^5.0.2:
   version "5.0.3"
@@ -2095,6 +2169,11 @@ cordova-plugin-wifiwizard2@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-wifiwizard2/-/cordova-plugin-wifiwizard2-3.1.1.tgz#4efd08c663eb4855cfa414c6d98043732dfd0ef8"
   integrity sha512-Vd4aYUAxCTR6+zhhSOToWi67wT4Vycq4lYB4HnnxFWxrL3ewuKshq9eLxrrwIHwPvPI4u4g06+5jO9PnwEiKOw==
+
+cordova-plugin-x-socialsharing@^5.6.3:
+  version "5.6.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-x-socialsharing/-/cordova-plugin-x-socialsharing-5.6.3.tgz#7a8ce277a361b6c36bf22e0a23986bce0685d2be"
+  integrity sha512-veAoIOgviGL9RCUyol9e6BxBRpyPV5OWaAmFKglbLjF2uGvj73k+jPe2+2p39ySPetxC8KERAz+1I6tfjk42Zg==
 
 cordova-sqlite-storage-dependencies@2.1.1:
   version "2.1.1"
@@ -4353,6 +4432,15 @@ json-stringify-safe@~5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
+json2csv@^4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/json2csv/-/json2csv-4.5.4.tgz#2b59c2869a137ec48cd2e243e0180466155f773f"
+  integrity sha512-YxBhY4Lmn8IvVZ36nqg5omxneLy9JlorkqW1j/EDCeqvmi+CQ4uM+wsvXlcIqvGDewIPXMC/O/oF8DX9EH5aoA==
+  dependencies:
+    commander "^2.15.1"
+    jsonparse "^1.3.1"
+    lodash.get "^4.4.2"
+
 json3@^3.3.2:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.3.tgz#7fc10e375fc5ae42c4705a5cc0aa6f62be305b81"
@@ -4372,7 +4460,7 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonparse@^1.2.0:
+jsonparse@^1.2.0, jsonparse@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/jsonparse/-/jsonparse-1.3.1.tgz#3f4dae4a91fac315f71062f8521cc239f1366280"
   integrity sha1-P02uSpH6wxX3EGL4UhzCOfE2YoA=
@@ -4595,6 +4683,11 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
+
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
 
 lodash.tail@^4.1.1:
   version "4.1.1"
@@ -5006,6 +5099,11 @@ ng2-charts@^2.3.0:
     "@types/chart.js" "^2.7.48"
     lodash "^4.17.11"
     tslib "^1.9.0"
+
+ngx-animate@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-animate/-/ngx-animate-1.0.1.tgz#bb7275cc9f5d5b02575bc05470772f9022a41172"
+  integrity sha512-usZMhm0sX4Ptm/Ni9YmhlprD+L+zqx7xu0un8AMzxRqS6ZO5/cpd951B9VPcJ+ZmoKCRuNF3SmGLuVkft7OuhQ==
 
 ngx-timer@^1.0.6:
   version "1.0.6"
