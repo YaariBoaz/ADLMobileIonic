@@ -112,6 +112,7 @@ export class Tab3Page {
 
     onSaveIP() {
         this.shootingService.setBaseUrl(this.ip);
+        this.shootingService.setTargetsI();
         alert('IP was saved!!');
     }
 }

@@ -73,7 +73,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
     ngOnInit() {
-        this.initConnection(11);
+        this.initConnection(this.shootingService.chosenTarget);
     }
 
     onShotArrived(data) {
@@ -368,7 +368,6 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ionViewDidLeave() {
         this.socket.close();
-
         console.log('[OnDestroy] Session Component');
     }
 

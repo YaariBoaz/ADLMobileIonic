@@ -9,50 +9,35 @@ import {HttpClient} from '@angular/common/http';
     styleUrls: ['./select-target-modal.component.scss'],
 })
 export class SelectTargetModalComponent implements OnInit {
-    targets = [11];
+    targets = [];
     BASE_URL_HTTP = '192.168.0.86:8087';
-    BASE_URL = '192.168.0.86:8089';
     socket;
     GET_TARGETS_API;
 
     constructor(private http: HttpClient, private shootingService: ShootingService) {
-        this.GET_TARGETS_API = 'http://' + this.BASE_URL + ':8087/api/GetTargets';
-
+        if (!this.shootingService.getBaseUrl()) {
+            alert('You did not enter host, Please got to settings and enter host');
+        } else {
+            this.targets = this.shootingService.targets;
+        }
     }
 
     ngOnInit() {
-        // this.getOnlineTargets().subscribe(data => {
-        //     if (data) {
-        //         this.targets = JSON.parse(data);
-        //     }
-        // });
-    }
-
-    getOnlineTargets(): Observable<any> {
-        return this.http.get(this.GET_TARGETS_API);
-    }
-
-    testWebSocket() {
-        this.socket = null;
-        this.socket = new WebSocket('ws://' + this.BASE_URL);
-        this.socket.onopen = (e) => {
-            console.log('[open] Connection established');
-            this.socket.send('11');
-        };
-        this.socket.onmessage = (event) => {
-            console.log(`[message] ${event.data}`);
-        };
-        this.socket.onclose = (event) => {
-            if (event.wasClean) {
-                alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-            } else {
-                // e.g. server process killed or network down
-                // event.code is usually 1006 in this case
-                alert('[close] Connection died');
+        this.shootingService.targetsArrived.subscribe((data) => {
+            if (data) {
+                this.targets = data;
             }
-        };
-        this.socket.onerror = (error) => {
-            alert('[error] ' + JSON.stringify(error, ['message', 'arguments', 'type', 'name']));
-        };
+        });
+    }
+
+    getOnlineTargets() {
+        this.http.get(this.GET_TARGETS_API).subscribe((data: any) => {
+            this.targets = data;
+        });
+    }
+
+
+    onTargetChosen(target) {
+        this.shootingService.chosenTarget = target;
     }
 }
