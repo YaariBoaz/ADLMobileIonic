@@ -1,10 +1,11 @@
 <section class="target-selection">
     <div class="gray">
         <header>
+            <ion-icon (click)="onBackPressed()" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
             <h1>Select Target</h1>
         </header>
         <div class="target-list" *ngIf="shootingService.targets">
-            <div (click)="onTargetChosen(target)" routerLink="/tabs/tab2/select2" class="target-wrapper" *ngFor="let target of shootingService.targets">
+            <div (click)="onTargetChosen(target)" routerLink="/home/tabs/tab2/select2" class="target-wrapper" *ngFor="let target of shootingService.targets">
                 <img src="../../assets/icons/bullseye_red.png">
                 <p style="color:black;font-size: 18px;font-weight: bold"> {{target}}</p>
             </div>

@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label, MultiDataSet, PluginServiceGlobalRegistrationAndOptions} from 'ng2-charts';
+import {Storage} from '@ionic/storage';
+import {NetworkService} from '../network.service';
 
 @Component({
     selector: 'app-tab1',
@@ -138,18 +140,21 @@ export class Tab1Page {
     // options
     showLegend = true;
     showLabels = true;
-
+    profile;
     options = {
 
         height: 10
     };
 
 
-    constructor(private platform: Platform) {
+    constructor(private platform: Platform, private storage: Storage, private networkService: NetworkService) {
         Object.assign(this, this.single);
         this.platform.ready().then((readySource) => {
             this.screenHeight = this.platform.height();
             this.screenWdith = this.platform.width();
+            this.storage.get('user').then((val) => {
+                this.profile = val;
+            });
         });
     }
 

@@ -4,7 +4,7 @@
             <ion-row>
                 <ion-col>
                     <header>
-                        <ion-icon (click)="onBackPressed()" routerLink="/tabs/tab2" class="back-btn"
+                        <ion-icon (click)="onBackPressed()" routerLink="/home/tabs/tab2" class="back-btn"
                                   name="arrow-back"></ion-icon>
                         <h1>Shooting Session</h1>
                         <button style="height: 45px;
@@ -17,6 +17,10 @@
                             <button (click)="restartSession()" class="menu-item-wrapper" [style.width.px]="200"
                                     mat-menu-item>
                                 Restart Session
+                            </button>
+                            <button (click)="stopAndShare()" class="menu-item-wrapper" [style.width.px]="200"
+                                    mat-menu-item>
+                                Stop And Share
                             </button>
                         </mat-menu>
                     </header>

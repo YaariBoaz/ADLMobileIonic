@@ -83,20 +83,13 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
                     this.width = this.container.nativeElement.offsetWidth;
                     this.height = this.container.nativeElement.offsetHeight;
                 }
-
                 const x = data.split(',')[1];
                 const y = data.split(',')[2];
                 const result = this.handelShoot(this.height, this.width, {x, y});
-                console.log('NOW ADDING TO SHOTS ARRAY: ', result);
                 this.shots.push(result);
-                console.log(this.shots);
-
-
             } else if (data[0] === 'B') {
-                console.log(data);
 
             } else {
-                console.log(data);
             }
         }
     }
@@ -106,7 +99,6 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     async share() {
         const imageId = this.uuidv4();
-        this.takeScreenShot(imageId);
         const modal = await this.modalController.create({
             component: ShareModalComponent
         });
@@ -120,6 +112,9 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         dataFromStoarge.push(this.sharedData);
         this.storage.set('adl-contacts', dataFromStoarge);
+        setTimeout(() => {
+            this.takeScreenShot(imageId);
+        }, 500);
     }
 
     private onError(error) {
@@ -167,7 +162,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
         this.socket = new WebSocket('ws://' + this.BASE_URL + ':8089');
         this.socket.onopen = (e) => {
             console.log('[open] Connection established');
-            this.socket.send('11');
+            this.socket.send(this.shootingService.chosenTarget);
         };
         this.socket.onmessage = (event) => {
             console.log(`[message] ${event.data}`);
@@ -221,7 +216,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
             console.log('FINISH!!!!!!!!!!!!!!!!!');
         }
 
-        return {x: px - 35, y: py};
+        return {x: px - (px * 0.2), y: py + 5};
     }
 
     notifyGatewayOnTargetId(chosenTargetId) {
@@ -373,5 +368,9 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ionViewWillUnload() {
         console.log('In ionViewWillUnload()');
+    }
+
+    stopAndShare() {
+        this.drillFinished = true;
     }
 }

@@ -1,10 +1,11 @@
 <section class="dashboard">
     <header>
-
         <div class="personal-titles">
-            <p class="name">Evi Cohen</p>
+            <p *ngIf="profile" class="name">{{profile.name}}</p>
+            <p *ngIf="!profile" class="name">John Smith</p>
             <p>M-4</p>
         </div>
+
 
         <div class="personal-widget">
             <div class="points">
@@ -12,7 +13,11 @@
                 <p>points</p>
             </div>
             <div class="avatar">
-                <img class="avatar" src="../../assets/evi.png" alt="avatar">
+                <img *ngIf="profile &&  profile.picture_small" class="avatar" [src]="profile.picture_small.data.url"
+                     alt="avatar">
+                <img *ngIf="!profile || !profile.picture_small" class="avatar" src="../../assets/avatar.svg"
+                     alt="avatar">
+                <!--                <img class="avatar" src="../../assets/evi.png" alt="avatar">-->
             </div>
             <div class="place">
                 <span class="amount">3rd</span>

@@ -1,19 +1,11 @@
-import { Component } from '@angular/core';
-import { trigger, transition, useAnimation } from '@angular/animations';
-import { rollIn } from 'ngx-animate';
-
+import {Component} from '@angular/core';
 
 
 @Component({
     selector: 'app-tabs',
     templateUrl: 'tabs.page.html',
     styleUrls: ['tabs.page.scss'],
-    animations: [
-        trigger('rollIn', [transition('* => *', useAnimation(rollIn, {
-            // Set the duration to 5seconds and delay to 2seconds
-            params: { timing: 1 }
-        }))])
-    ],
+
 })
 export class TabsPage {
     isDashbord = true;
@@ -24,10 +16,10 @@ export class TabsPage {
     splash = true;
     secondPage = TabsPage;
     tabBarElement: any;
+    isLoading = false;
+
     constructor() {
         this.tabBarElement = document.querySelector('.tabbar');
-        this.fakeProgrssBar()
-
     }
 
     ionViewDidLoad() {
@@ -37,22 +29,6 @@ export class TabsPage {
             this.tabBarElement.style.display = 'flex';
         }, 4000);
     }
-    fakeProgrssBar() {
-        this.fakeProgrssBarValue = 1
-        var id = setInterval(() => {
-            if (this.fakeProgrssBarValue >= 100) {
-                clearInterval(id);
-                this.fakeProgrssBarValue = 0;
-                this.splash = false;
-            } else {
-                this.fakeProgrssBarValue++;
-            }
-        }, 100);
-
-
-    }
-
-
 
     onTabOneClick() {
         this.isDashbord = true;

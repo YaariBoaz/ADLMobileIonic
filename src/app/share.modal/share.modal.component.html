@@ -4,31 +4,20 @@
             <h1>Select Target</h1>
         </header>
         <div class="inputs-share">
-            <div class="input-wrapper">
+            <div>
                 <p>
-                    Facebook:
+                    Full Name:
                 </p>
-                <input [(ngModel)]="facebook" type="text">
+                <input #a (keyup.enter)="moveFocus(c)" [value]="facebook" [(ngModel)]="fullName" type="text">
             </div>
-            <div class="input-wrapper">
-                <p>
-                    Instagram:
-                </p>
-                <input [(ngModel)]="instagram" type="text">
-            </div>
-            <div class="input-wrapper">
+            <div>
                 <p>
                     Email:
                 </p>
-                <input [(ngModel)]="email" type="email">
+                <input #c [value]="email" [(ngModel)]="email" type="email">
             </div>
-            <div class="input-wrapper">
-                <p>
-                    Phone Number:
-                </p>
-                <input [(ngModel)]="phoneNumber" type="number">
-            </div>
+            <button #e (click)="onSave()"> Save</button>
         </div>
-        <button (click)="onSave()"> Save</button>
+
     </div>
 </section>

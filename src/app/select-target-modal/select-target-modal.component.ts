@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ShootingService} from '../session-modal/shooting.service';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-select-target-modal',
@@ -14,9 +16,17 @@ export class SelectTargetModalComponent implements OnInit {
     socket;
     GET_TARGETS_API;
 
-    constructor(private http: HttpClient, private shootingService: ShootingService) {
+    constructor(private http: HttpClient, private storage: Storage, private shootingService: ShootingService, private router: Router) {
         if (!this.shootingService.getBaseUrl()) {
-            alert('You did not enter host, Please got to settings and enter host');
+            this.storage.get('ip').then((data) => {
+                if (!data) {
+                    alert('You did not enter host, You will be routed to the IP page');
+                    this.router.navigateByUrl('/home/tabs/tab3');
+                } else {
+                    this.shootingService.setBaseUrl(data);
+                    this.shootingService.setTargetsI();
+                }
+            });
         } else {
             this.targets = this.shootingService.targets;
         }
@@ -39,5 +49,9 @@ export class SelectTargetModalComponent implements OnInit {
 
     onTargetChosen(target) {
         this.shootingService.chosenTarget = target;
+    }
+
+    onBackPressed() {
+        this.router.navigateByUrl('/home/tabs/tab2');
     }
 }

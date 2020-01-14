@@ -4,8 +4,6 @@ import {Platform} from '@ionic/angular';
 import {PhotoLibrary} from '@ionic-native/photo-library/ngx';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
-import {CDVPhotoLibraryPipe} from './ImagePipe';
-import * as json2csv from 'json2csv';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
 import {ShootingService} from '../session-modal/shooting.service';
 
@@ -21,6 +19,7 @@ export class Tab3Page {
     allData = [];
     index = 0;
     ip: any;
+    isLoading = true;
 
     constructor(private base64: Base64,
                 private emailComposer: EmailComposer,
@@ -38,30 +37,36 @@ export class Tab3Page {
     }
 
     private callIt() {
+        this.allData = [];
         this.storage.get('adl-contacts').then((storageData) => {
             this.photoLibrary.getLibrary().subscribe({
                 next: library => {
                     this.images = [...(library as any).library];
                     this.data = storageData;
                     this.images.forEach(image => {
-                        this.data.forEach(dataItem => {
-                            if (image.fileName.indexOf(dataItem.imageId) > -1) {
-                                let urlShot: string;
-                                if (image.id.split(';').length > 0) {
-                                    urlShot = 'file://' + image.id.split(';')[1];
+                        if (this.data) {
+                            this.data.forEach(dataItem => {
+                                if (image.fileName.indexOf(dataItem.imageId) > -1) {
+                                    let urlShot: string;
+                                    let urlForUpload;
+                                    if (image.id.split(';').length > 0) {
+                                        urlShot = 'file://' + image.id.split(';')[1];
+                                        urlForUpload = 'file://' + image.id.split(';')[1];
+                                    }
+                                    urlShot = (window as any).Ionic.WebView.convertFileSrc(urlShot);
+                                    this.allData.push({
+                                        data: dataItem,
+                                        url: urlShot,
+                                        urlForUpload,
+                                        photoUrl: image,
+                                        index: this.index
+                                    });
                                 }
-                                urlShot = (window as any).Ionic.WebView.convertFileSrc(urlShot);
-                                this.allData.push({
-                                    data: dataItem,
-                                    url: urlShot,
-                                    photoUrl: image,
-                                    index: this.index
-                                });
-                            }
-                            this.index++;
-                            console.log(image);
-                            console.log(dataItem);
-                        });
+                                this.index++;
+                                console.log(image);
+                                console.log(dataItem);
+                            });
+                        }
                     });
                     this.changeDetectorRef.detectChanges();
                 },
@@ -80,11 +85,12 @@ export class Tab3Page {
             this.emailComposer.isAvailable().then((available: boolean) => {
                 if (available) {
                     const email = {
-                        to: 'boazyaarii@gmail.com',
-                        cc: 'boazyaarii@gmail.com',
+                        to: 'evi@adl.solutions',
+                        cc: 'alon@adl.solutions',
                         subject: 'Drills',
                         body: JSON.stringify(storageData),
-                        isHtml: true
+                        isHtml: true,
+
                     };
 
                     this.emailComposer.open(email);
@@ -112,8 +118,51 @@ export class Tab3Page {
 
     onSaveIP() {
         this.shootingService.setBaseUrl(this.ip);
+        this.storage.set('ip', this.ip);
         this.shootingService.setTargetsI();
         alert('IP was saved!!');
+    }
+
+
+    shareEmail(item) {
+        this.storage.get('adl-contacts').then((storageData) => {
+            this.emailComposer.isAvailable().then((available: boolean) => {
+                if (available) {
+                    const email = {
+                        to: 'boazyaarii@gmail.com',
+                        cc: 'boazyaarii@gmail.com',
+                        subject: 'Drills',
+                        body: JSON.stringify(storageData),
+                        isHtml: true,
+                        attachments: [
+                            item.urlForUpload
+                        ],
+                    };
+
+                    this.emailComposer.open(email);
+                }
+            });
+        });
+    }
+
+    shareInstagram(item) {
+        this.socialSharing.shareViaInstagram('Hello', item.urlForUpload).then(() => {
+
+        }).catch((e) => {
+            alert(e);
+            // Sharing via email is not possible
+        });
+
+    }
+
+    shareFacebook(item) {
+        this.socialSharing.shareViaFacebook('This is My Shots..', item.urlForUpload, item.urlForUpload).then(() => {
+
+        });
+    }
+
+    onRefresh() {
+        this.callIt();
     }
 }
 

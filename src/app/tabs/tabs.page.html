@@ -1,36 +1,25 @@
-<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
-  <div class="flb">
-    <img class="gifContainer" src="assets/splash.gif">
-    <img class="logoImage" src="assets/ontarget.png">
-    <div id="myProgress">
-      <div [style.width.%]="fakeProgrssBarValue" id="myBar"></div>
-    </div>
-  </div>
-<div>
-  
-</div>
-
-
-
+<div *ngIf="isLoading" class="overlay">
+    <img src="../../assets/loading.gif">
 </div>
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" (click)="onTabOneClick()">
-      <img class="icon-tab" *ngIf="isDashbord" src="../../assets/icons/dashboard.png">
-      <img class="icon-tab" *ngIf="!isDashbord" src="../../assets/icons/dashboard-not-selected.png">
-    </ion-tab-button>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="tab1" (click)="onTabOneClick()">
+            <img class="icon-tab" *ngIf="isDashbord" src="../../assets/icons/dashboard.png">
+            <img class="icon-tab" *ngIf="!isDashbord" src="../../assets/icons/dashboard-not-selected.png">
+        </ion-tab-button>
 
-    <ion-tab-button tab="tab2" (click)="onTabTwoClick()">
-      <img class="icon-tab" *ngIf="isWeapon" src="../../assets/icons/weapon.png">
-      <img class="icon-tab" *ngIf="!isWeapon" src="../../assets/icons/weapon-grey.png">
-    </ion-tab-button>
+        <ion-tab-button tab="tab2" (click)="onTabTwoClick()">
+            <img class="icon-tab" *ngIf="isWeapon" src="../../assets/icons/weapon.png">
+            <img class="icon-tab" *ngIf="!isWeapon" src="../../assets/icons/weapon-grey.png">
+        </ion-tab-button>
 
-    <ion-tab-button tab="tab3" (click)="onTabThreeClick()">
-      <img class="icon-tab" *ngIf="isSettings" src="../../assets/icons/business-card-of-a-man-with-contact-info.png">
-      <img class="icon-tab" *ngIf="!isSettings"
-        src="../../assets/icons/business-card-of-a-man-with-contact-info-disabled.png">
-    </ion-tab-button>
-  </ion-tab-bar>
+        <ion-tab-button tab="tab3" (click)="onTabThreeClick()">
+            <img class="icon-tab" *ngIf="isSettings"
+                 src="../../assets/icons/business-card-of-a-man-with-contact-info.png">
+            <img class="icon-tab" *ngIf="!isSettings"
+                 src="../../assets/icons/business-card-of-a-man-with-contact-info-disabled.png">
+        </ion-tab-button>
+    </ion-tab-bar>
 
 </ion-tabs>

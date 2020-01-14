@@ -8,10 +8,9 @@ import {ModalController} from '@ionic/angular';
     styleUrls: ['./share.modal.component.scss'],
 })
 export class ShareModalComponent implements OnInit {
-    instagram: any;
-    facebook: any;
+
     email: any;
-    phoneNumber: any;
+    fullName: any;
 
     constructor(public modalController: ModalController) {
     }
@@ -19,13 +18,16 @@ export class ShareModalComponent implements OnInit {
     ngOnInit() {
     }
 
+
     onSave() {
         const shareData = {
-            instagram: this.instagram,
-            facebook: this.facebook,
             email: this.email,
-            phoneNumber: this.phoneNumber
+            fullName: this.fullName
         };
         this.modalController.dismiss({data: shareData});
+    }
+
+    moveFocus(nextElement) {
+        nextElement.focus();
     }
 }
