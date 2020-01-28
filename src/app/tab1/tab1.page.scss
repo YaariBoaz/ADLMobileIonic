@@ -1,10 +1,13 @@
+@import "../../assets/colors";
+
 section.dashboard {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
   color: white;
-
+  background-color: $white_three;
+  overflow-y: auto;
 
   p {
     margin: 0;
@@ -20,8 +23,8 @@ section.dashboard {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: black;
-    height: 20%;
+    background-color: $headerBG;
+    height: 20vh;
 
     div.personal-titles {
       display: flex;
@@ -29,36 +32,52 @@ section.dashboard {
       align-items: center;
       box-sizing: border-box;
       padding: 0.2em 0;
+
+      p {
+        margin: 0;
+        color: $profile-bg;
+        font-size: 6vw;
+      }
+
+      p.weapon {
+        color: $profile-bg;
+        font-weight: 300;
+        font-size: 4vw;
+      }
     }
 
     div.personal-widget {
-      width: 70%;
-      height: auto;
-      background-color: lightgray;
-
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-
+      background-color: white;
+      border-radius: 25px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       position: relative;
 
+      width: 50%;
+      height: 11vw;
+
       div.avatar {
-        width: 70px;
-        height: auto;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        border-radius: 100%;
+        background-color: $profile-bg;
 
-        img {
-          display: block;
-          border-radius: 100%;
-          border: 5px solid orange;
+        width: 15vw;
+        height: 15vw;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        h1 {
+          color: white;
+          text-align: center;
+          margin: 0;
+          font-size: 6vw;
         }
       }
 
@@ -68,36 +87,31 @@ section.dashboard {
         flex-direction: column;
         align-items: center;
         box-sizing: border-box;
-        padding: 0.5em;
+        padding: 0.2em;
         width: 30%;
+        color: $profile-bg;
 
         span.amount {
-          color: darkgoldenrod;
+          color: $profile-bg;
           font-weight: 700;
-          font-size: 1.2em;
+          font-size: 4vw;
         }
 
         p {
           margin: 0;
+          font-size: 3vw;
         }
       }
     }
-
   }
-
   // Only bg
   div.container-background {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - 20vh);
     width: 100%;
-
-    background-image: url("../../assets/images/tabsBG.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 100% 100%;
+    background-color: $white_three;
   }
-
   div.gray {
     background-color: rgba(231, 231, 231, 0.8);
     display: flex;
@@ -106,14 +120,12 @@ section.dashboard {
     height: 100%;
     color: white;
   }
-
-
   div.slider-stats {
     box-sizing: border-box;
     padding: 0.5em;
     display: flex;
     flex-direction: column;
-    height: 60%;
+    height: 100%;
 
     div.chart-and-stats {
       height: 100%;
@@ -123,29 +135,33 @@ section.dashboard {
       box-sizing: border-box;
       padding-bottom: 10px;
     }
-
+    div.stats-precision,
     div.stats {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       width: 100%;
-
+      padding-left: 15px;
       h1 {
         margin: 0;
-        color: darkgoldenrod;
+        color: $profile-bg;
+        font-weight: 400;
+        font-size: 9.5vw;
       }
 
       p {
         margin: 0;
-        color: black;
+        color: #b9b9b9;
+        font-size: 5vw;
+        font-weight: 300;
 
         b {
-          color: darkgoldenrod;
-          font-size: 1.2em;
+          color: $army-brown;
+          font-size: 7vw;
+          font-weight: 400;
         }
       }
     }
-
     div.hitRatioChartContainer {
       height: 70%;
       width: 100%;
@@ -178,15 +194,49 @@ section.dashboard {
         transform: translate(-50%, -50%);
       }
     }
-  }
 
+    /* ARROWS */
+
+    div.arrow-left,
+    div.arrow-right {
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      svg {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    div.arrow-left {
+      left: 1em;
+    }
+
+    div.arrow-right {
+      right: 1em;
+    }
+  }
+  div.stats-precision{
+    p{
+      color:$coral_pink !important;
+      font-size: 7vw !important;
+      font-weight: 400 !important;
+    }
+
+    span {
+      color: #838383;
+      font-size: 4vw;
+    }
+  }
   div.summaryContainer {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     padding: 0.5em;
     justify-content: space-evenly;
-    height: 40%;
 
     div.text-container {
       display: flex;
@@ -195,16 +245,35 @@ section.dashboard {
       width: 100%;
 
       p.titleSummary {
-        color: #5c5c5c;
-        font-size: 1em;
-        font-weight: bold;
+        color: $warm_grey;
+        font-size: 0.8rem;
       }
 
       p.valueSummary {
-        color: #927000;
-        font-size: 1.1em;
-        font-weight: bold;
+        color: $profile-bg;
+        font-size: 1.1rem;
       }
+    }
+  }
+
+  .stats-text {
+    padding-bottom: 8vw;
+    padding-top: 2vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  justify-content: center;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    p {
+      color: $black_two;
+      margin: 0;
+      font-size: 4vw;
+      padding-left: 10px;
     }
   }
 

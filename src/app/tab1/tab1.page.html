@@ -1,101 +1,163 @@
 <section class="dashboard">
     <header>
-
         <div class="personal-titles">
-            <p class="name">Evi Cohen</p>
-            <p>M-4</p>
+            <p class="name">Jack Smith Anderson</p>
+            <p class="weapon">M-4</p>
         </div>
-
         <div class="personal-widget">
             <div class="points">
                 <span class="amount">180</span>
                 <p>points</p>
             </div>
             <div class="avatar">
-                <img class="avatar" src="../../assets/evi.png" alt="avatar">
+                <h1>IA</h1>
             </div>
             <div class="place">
                 <span class="amount">3rd</span>
                 <p>place</p>
             </div>
         </div>
-
     </header>
+
+
     <div class="container-background">
-        <div class="gray">
-            <div class="slider-stats">
-                <ion-slides [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
-                    <ion-slide>
-                        <div class="chart-and-stats">
-                            <div class="stats">
-                                <h1>HIT RATIO</h1>
-                                <p><b>96</b>/200</p>
-                            </div>
+        <div class="slider-stats">
+            <ion-slides (ionSlideDidChange)="slideChanged()" #slides [ngClass]="'myClass' + slideIndex" [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
+                <ion-slide>
+                    <div class="chart-and-stats">
+                        <div class="stats">
+                            <h1>HIT RATIO</h1>
+                            <p><b>96</b>/200</p>
+                        </div>
 
-                            <div class="hitRatioChartContainer">
-                                <div style="display: block;width: 100%;height:100%;">
-                                    <canvas baseChart
-                                            [legend]="false"
-                                            [plugins]="doughnutChartPlugins"
-                                            [colors]="donutColors"
-                                            [data]="doughnutChartData"
-                                            [labels]="doughnutChartLabels"
-                                            [chartType]="doughnutChartType">
-                                    </canvas>
-                                </div>
+                        <div class="hitRatioChartContainer">
+                            <div style="display: block;width: 100%;height:100%;">
+                                <canvas baseChart
+                                        [legend]="false"
+                                        [plugins]="doughnutChartPlugins"
+                                        [colors]="donutColors"
+                                        [data]="doughnutChartData"
+                                        [labels]="doughnutChartLabels"
+                                        [chartType]="doughnutChartType">
+                                </canvas>
                             </div>
                         </div>
-                    </ion-slide>
-                    <ion-slide>
-                        <h1>Slide 2</h1>
-                    </ion-slide>
+                        <div class="stats-text">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.897 16.311">
+                                <defs>
+                                    <style>
+                                        .check {
+                                            fill: #00b673
+                                        }
+                                    </style>
+                                </defs>
+                                <path id="green_V"
+                                      d="M291.761 3757.522c-2.2-.525-2.066.658-1.965 2.334s4.776 5.807 5.973 5.583 11.42-12.334 11.809-13.754-.914-3.619-2.724-1.945-9.085 12.2-9.085 12.2-1.81-3.893-4.008-4.418z"
+                                      class="check" data-name="green V" transform="translate(-289.75 -3749.138)"/>
+                            </svg>
+                            <p>You're better than most</p>
+                        </div>
+                    </div>
+                    <div class="arrow-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
+                                </style>
+                            </defs>
+                            <path id="right_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                        </svg>
+                    </div>
+                </ion-slide>
 
-                    <ion-slide>
-                        <div class="chart-and-stats">
-                            <div class="stats">
-                                <h1>HIT RATIO</h1>
-                                <p><b>96</b>/200</p>
-                            </div>
+                <ion-slide>
+                    <div class="arrow-left">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
+                                </style>
+                            </defs>
+                            <path id="left_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="left chevron" transform="rotate(90 -1924.394 974.844)"/>
+                        </svg>
+                    </div>
+                    <div class="chart-and-stats">
+                        <div class="stats-precision">
+                            <h1>HIT RATIO</h1>
+                            <p>3cm</p>
+                            <span>from center</span>
+                        </div>
 
-                            <div class="hitRatioChartContainer" style="background-color: white"
-                                 [style.height.px]="screenWdith-(screenWdith*0.5)" [style.width.px]="screenWdith">
-                                <div style="display: block;width:100%">
-                                    <canvas baseChart
-                                            [datasets]="lineChartData"
-                                            [labels]="lineChartLabels"
-                                            [options]="lineChartOptions"
-                                            [colors]="lineChartColors"
-                                            [legend]="false"
-                                            [chartType]="lineChartType"
-                                            [plugins]="lineChartPlugins">
-                                    </canvas>
-                                </div>
+                        <div class="hitRatioChartContainer">
+                            <div style="display: block;width: 100%;height:100%;">
+                                <canvas baseChart
+                                        [legend]="false"
+                                        [data]="doughnutChartDataPrecision"
+                                        [colors]="donutColorsPrecision"
+                                        [labels]="doughnutChartLabelsPrecision"
+                                        [chartType]="doughnutChartTypePrecision">
+                                </canvas>
                             </div>
                         </div>
-                    </ion-slide>
-                </ion-slides>
+                    </div>
+                    <div class="arrow-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
+                                </style>
+                            </defs>
+                            <path id="right_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                        </svg>
+                    </div>
+                </ion-slide>
+
+                <ion-slide>
+                    <div class="chart-and-stats">
+                        <div class="stats">
+                            <h1>HIT RATIO</h1>
+                            <p><b>96</b>/200</p>
+                        </div>
+
+                        <div class="hitRatioChartContainer" style="background-color: white"
+                             [style.height.px]="screenWdith-(screenWdith*0.5)" [style.width.px]="screenWdith">
+                            <div style="display: block;width:100%">
+                                <canvas baseChart
+                                        [datasets]="lineChartData"
+                                        [labels]="lineChartLabels"
+                                        [options]="lineChartOptions"
+                                        [colors]="lineChartColors"
+                                        [legend]="false"
+                                        [chartType]="lineChartType"
+                                        [plugins]="lineChartPlugins">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+            <hr style="height: 1px;width: 40%;background: #cdcdcd;">
+        </div>
+        <div class="summaryContainer">
+            <div class="text-container">
+                <p class="titleSummary">Longest Shoot</p>
+                <p class="valueSummary">1250yds</p>
             </div>
-            <div class="summaryContainer">
-                <div class="text-container">
-                    <p class="titleSummary">Longest Shoot</p>
-                    <p class="valueSummary">1250yds</p>
-                </div>
 
-                <div class="text-container">
-                    <p class="titleSummary">Fast Avg Split</p>
-                    <p class="valueSummary">2.5</p>
-                </div>
+            <div class="text-container">
+                <p class="titleSummary">Fast Avg Split</p>
+                <p class="valueSummary">2.5</p>
+            </div>
 
 
-                <div class="text-container">
-                    <p class="titleSummary">Best Avg Distance</p>
-                    <p class="valueSummary">3CM</p>
-                </div>
+            <div class="text-container">
+                <p class="titleSummary">Best Avg Distance</p>
+                <p class="valueSummary">3CM</p>
+            </div>
 
-                <div class="text-container">
-                    <p class="titleSummary">Last Shooting Session</p>
-                    <p class="valueSummary">08.07.2019 Monday</p>
-                </div>
+            <div class="text-container">
+                <p class="titleSummary">Last Shooting Session</p>
+                <p class="valueSummary">08.07.2019 Monday</p>
             </div>
         </div>
     </div>

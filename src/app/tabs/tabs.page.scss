@@ -1,9 +1,38 @@
+@import "../../assets/colors";
 
-ion-tab-bar{
-    --background: #3b3838;
+ion-tab-bar {
+  --background: white;
 }
 
-.icon-tab{
-    height: 40px;
-    width: 40px;
+div.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  padding: 0.5em;
+
+  p {
+    margin: 0;
+    text-align: center;
+    font-weight: 300;
+    color: #909090;
+    transition: all 0.3s;
+  }
+
+  svg {
+    height: 30px;
+    width: 30px;
+    transition: all 0.3s;
+  }
+
+  &.active {
+    svg .cls-2 {
+      fill: $dull_orange
+    }
+
+    p {
+      color: $dull_orange;
+    }
+  }
 }
