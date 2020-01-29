@@ -126,8 +126,8 @@ export class SinginComponent implements OnInit {
     }
 
     onLogin() {
-        if (this.password && this.password > 3 && this.userName.indexOf('adl') > -1) {
+        // if (this.password && this.password > 3 && this.userName.indexOf('adl') > -1) {
             this.router.navigateByUrl('/home/tabs/tab1');
-        }
+        // }
     }
 }

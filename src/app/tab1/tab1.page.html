@@ -18,12 +18,69 @@
             </div>
         </div>
     </header>
-
-
     <div class="container-background">
         <div class="slider-stats">
-            <ion-slides (ionSlideDidChange)="slideChanged()" #slides [ngClass]="'myClass' + slideIndex" [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
+            <ion-slides (ionSlideDidChange)="slideChanged()" #slides [ngClass]="'myClass' + slideIndex"
+                        [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
                 <ion-slide>
+                    <div class="chart-and-stats">
+                        <div class="stats-precision">
+                            <h1>HIT RATIO</h1>
+                            <p>3cm</p>
+                            <span>from center</span>
+                        </div>
+
+                        <div class="hitRatioChartContainer">
+                            <div style="display: block;width: 100%;height:100%;">
+                                <canvas baseChart
+                                        [datasets]="radarChartData"
+                                        [options]="radarChartOptions"
+                                        [labels]="radarChartLabels"
+                                        [colors]="radarColorsPrecision"
+                                        [chartType]="radarChartType"
+                                        [legend]="false"
+                                >
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arrow-right" (click)="onNextSlide()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron {
+                                        fill: #fff;
+                                        stroke: #6f6f6f;
+                                        stroke-linecap: round;
+                                        stroke-width: 3.5px
+                                    }
+                                </style>
+                            </defs>
+                            <path id="right_chevron"
+                                  d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                                  class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                        </svg>
+                    </div>
+                </ion-slide>
+
+                <ion-slide>
+                    <div class="arrow-left" (click)="onPrevSlide()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron {
+                                        fill: #fff;
+                                        stroke: #6f6f6f;
+                                        stroke-linecap: round;
+                                        stroke-width: 3.5px
+                                    }
+                                </style>
+                            </defs>
+                            <path id="left_chevron"
+                                  d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                                  class="chevron" data-name="left chevron" transform="rotate(90 -1924.394 974.844)"/>
+                        </svg>
+                    </div>
                     <div class="chart-and-stats">
                         <div class="stats">
                             <h1>HIT RATIO</h1>
@@ -58,69 +115,52 @@
                             <p>You're better than most</p>
                         </div>
                     </div>
-                    <div class="arrow-right">
+
+
+                    <div class="arrow-right" (click)="onNextSlide()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
                             <defs>
                                 <style>
-                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
+                                    .chevron {
+                                        fill: #fff;
+                                        stroke: #6f6f6f;
+                                        stroke-linecap: round;
+                                        stroke-width: 3.5px
+                                    }
                                 </style>
                             </defs>
-                            <path id="right_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                            <path id="right_chevron"
+                                  d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                                  class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
                         </svg>
                     </div>
                 </ion-slide>
 
                 <ion-slide>
-                    <div class="arrow-left">
+                    <div class="arrow-left" (click)="onPrevSlide()">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
                             <defs>
                                 <style>
-                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
+                                    .chevron {
+                                        fill: #fff;
+                                        stroke: #6f6f6f;
+                                        stroke-linecap: round;
+                                        stroke-width: 3.5px
+                                    }
                                 </style>
                             </defs>
-                            <path id="left_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="left chevron" transform="rotate(90 -1924.394 974.844)"/>
+                            <path id="left_chevron"
+                                  d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                                  class="chevron" data-name="left chevron" transform="rotate(90 -1924.394 974.844)"/>
                         </svg>
                     </div>
-                    <div class="chart-and-stats">
-                        <div class="stats-precision">
-                            <h1>HIT RATIO</h1>
-                            <p>3cm</p>
-                            <span>from center</span>
-                        </div>
-
-                        <div class="hitRatioChartContainer">
-                            <div style="display: block;width: 100%;height:100%;">
-                                <canvas baseChart
-                                        [legend]="false"
-                                        [data]="doughnutChartDataPrecision"
-                                        [colors]="donutColorsPrecision"
-                                        [labels]="doughnutChartLabelsPrecision"
-                                        [chartType]="doughnutChartTypePrecision">
-                                </canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="arrow-right">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
-                            <defs>
-                                <style>
-                                    .chevron{fill:#fff;stroke:#6f6f6f;stroke-linecap:round;stroke-width:3.5px}
-                                </style>
-                            </defs>
-                            <path id="right_chevron" d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z" class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
-                        </svg>
-                    </div>
-                </ion-slide>
-
-                <ion-slide>
                     <div class="chart-and-stats">
                         <div class="stats">
                             <h1>HIT RATIO</h1>
                             <p><b>96</b>/200</p>
                         </div>
 
-                        <div class="hitRatioChartContainer" style="background-color: white"
-                             [style.height.px]="screenWdith-(screenWdith*0.5)" [style.width.px]="screenWdith">
+                        <div class="hitRatioChartContainer">
                             <div style="display: block;width:100%">
                                 <canvas baseChart
                                         [datasets]="lineChartData"
@@ -133,6 +173,23 @@
                                 </canvas>
                             </div>
                         </div>
+                    </div>
+                    <div class="arrow-right" (click)="onNextSlide()">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                            <defs>
+                                <style>
+                                    .chevron {
+                                        fill: #fff;
+                                        stroke: #6f6f6f;
+                                        stroke-linecap: round;
+                                        stroke-width: 3.5px
+                                    }
+                                </style>
+                            </defs>
+                            <path id="right_chevron"
+                                  d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                                  class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                        </svg>
                     </div>
                 </ion-slide>
             </ion-slides>
@@ -158,6 +215,43 @@
             <div class="text-container">
                 <p class="titleSummary">Last Shooting Session</p>
                 <p class="valueSummary">08.07.2019 Monday</p>
+            </div>
+        </div>
+        <div class="training-log-header">
+            <hr style="height: 1px;width: 40%;background: #cdcdcd;">
+            <p class="training-log-header"> Training Log</p>
+        </div>
+        <div class="history-container">
+            <div class="train-line" *ngFor="let train of trains">
+                <div class="right-side-and-train-info-container">
+                    <div class="right-side">
+                        <div class="circle"></div>
+                        <hr>
+                        <hr>
+                        <hr>
+                    </div>
+                    <div class="train-info">
+                        <p><span class="date">{{train.date}}</span>, <span class="day">{{train.day}}</span></p>
+                        <p class="light-text"> {{train.numberOfDrills}} Drills</p>
+                    </div>
+                </div>
+                <div class="arrow-right" (click)="onActivityClicked(train)">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                        <defs>
+                            <style>
+                                .chevron {
+                                    fill: #f0e3d2;
+                                    stroke: #f0e3d2;
+                                    stroke-linecap: round;
+                                    stroke-width: 3.5px
+                                }
+                            </style>
+                        </defs>
+                        <path id="right_chevron"
+                              d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                              class="chevron" data-name="right chevron" transform="rotate(-90 -956.514 -1919.785)"/>
+                    </svg>
+                </div>
             </div>
         </div>
     </div>

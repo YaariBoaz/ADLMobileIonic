@@ -53,6 +53,7 @@
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-photo-library": "^2.2.1",
     "cordova-plugin-screen-orientation": "^3.0.2",
+    "cordova-plugin-video-player": "git+https://github.com/moust/cordova-plugin-videoplayer.git",
     "cordova-plugin-wifiwizard2": "^3.1.1",
     "cordova-plugin-x-socialsharing": "^5.6.3",
     "cordova-sqlite-storage": "^4.0.0",
@@ -131,7 +132,8 @@
       "cordova-plugin-nativeaudio": {},
       "cordova-instagram-plugin": {},
       "cordova-plugin-network-information": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "com.moust.cordova.videoplayer": {}
     },
     "platforms": [
       "ios",

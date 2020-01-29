@@ -1,0 +1,47 @@
+{
+  "kpis": {
+    "combatReadiness": "85%",
+    "totalTrainingTime": 22,
+    "trainingComplete": "89%",
+    "squadRank": 7,
+    "squadCount": 12
+  },
+  "charts": {
+    "shootingSkills": {
+      "realTime": 56,
+      "simulation": 86
+    },
+    "fireDrillAchiemvent": {
+      "realTime": 56,
+      "simulation": 86
+    },
+    "physicalRate": {
+      "realTime": 56,
+      "simulation": 86
+    }
+  },
+  "team": [
+    {
+      "name": "Evi Cohen",
+      "rank": "1st SGT",
+      "combatReadiness": "95"
+    }
+  ],
+  "reccomendations": {
+    "rangeSessions": [
+      {
+        "sessionName": "Zero Sight",
+        "bullets": 5,
+        "minScore": 10
+      }
+    ],
+    "fireDrills": [
+      {
+        "sessionName": "Urban",
+        "time": "on",
+        "bullets": 10,
+        "exposeTime": "7 sec"
+      }
+    ]
+  }
+}

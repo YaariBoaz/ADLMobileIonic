@@ -1,0 +1,93 @@
+<section class="activity-history">
+    <header>
+        <div class="back-btn-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
+                <defs>
+                    <style>
+                        .chevron {
+                            fill: #fff;
+                            stroke: #6f6f6f;
+                            stroke-linecap: round;
+                            stroke-width: 3.5px
+                        }
+                    </style>
+                </defs>
+                <path id="left_chevron"
+                      d="M-2888.028-952.029l-1.276 1.208 1.276-1.208L-2898-962l9.972 9.972L-2877.5-962l-10.525 9.972 1.208 1.208z"
+                      class="chevron" data-name="left chevron" transform="rotate(90 -1924.394 974.844)"/>
+            </svg>
+        </div>
+        <h1 class="title"> Training History</h1>
+        <ion-menu side="start" menuId="custom" class="my-custom-menu">
+            <ion-header>
+                <ion-toolbar color="tertiary">
+                    <ion-title>Custom Menu</ion-title>
+                </ion-toolbar>
+            </ion-header>
+            <ion-content>
+                <ion-list>
+                    <ion-item>Menu Item</ion-item>
+                    <ion-item>Menu Item</ion-item>
+                    <ion-item>Menu Item</ion-item>
+                    <ion-item>Menu Item</ion-item>
+                    <ion-item>Menu Item</ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
+    </header>
+    <div class="train-line">
+        <div class="right-side-and-train-info-container">
+            <div class="right-side">
+                <div class="circle"></div>
+                <hr>
+                <hr>
+                <hr>
+            </div>
+            <div class="train-info">
+                <p><span class="date">{{train.date}}</span>, <span class="day">{{train.day}}</span></p>
+                <p class="light-text"> {{train.numberOfDrills}} Drills</p>
+            </div>
+        </div>
+    </div>
+    <div class="activity-history-container">
+        <div class="history-card">
+            <div class="right-line">
+
+            </div>
+            <div class="info-wrapper">
+                <div class="title">
+                    <img src="../../assets/images/bullseye_black.png">
+                    <div>
+                        <p>Drill #1</p>
+                        <span>12 Points</span>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="hits">
+                        <div><h1>10</h1>/<h2>12</h2></div>
+                        <span class="hint">HITS</span>
+                    </div>
+                    <div class="range">
+                        <h1 class="meter">100</h1>
+                        <span class="hint">RANGE</span>
+                    </div>
+                    <div class="limit">
+                        <span class="hint">NO TIME LIMIT</span>
+                    </div>
+                </div>
+                <div class="description">
+                    <p>Description</p>
+                    <span>Suprise drills, 3 bullets at a time. Pre-planned jam and magazine switch.</span>
+                </div>
+                <hr style="height: 1px;width: 40%;background: #cdcdcd;">
+                <div class="see-target" (click)="this.showTargetFlag = !this.showTargetFlag;">
+                    <p>SEE TARGET</p>
+                    <ion-icon name="arrow-dropdown"></ion-icon>
+                </div>
+                <div class="target-container">
+                     <video></video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

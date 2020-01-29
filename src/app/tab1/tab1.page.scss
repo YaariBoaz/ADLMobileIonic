@@ -104,6 +104,7 @@ section.dashboard {
       }
     }
   }
+
   // Only bg
   div.container-background {
     display: flex;
@@ -112,6 +113,7 @@ section.dashboard {
     width: 100%;
     background-color: $white_three;
   }
+
   div.gray {
     background-color: rgba(231, 231, 231, 0.8);
     display: flex;
@@ -120,6 +122,7 @@ section.dashboard {
     height: 100%;
     color: white;
   }
+
   div.slider-stats {
     box-sizing: border-box;
     padding: 0.5em;
@@ -135,6 +138,7 @@ section.dashboard {
       box-sizing: border-box;
       padding-bottom: 10px;
     }
+
     div.stats-precision,
     div.stats {
       display: flex;
@@ -142,6 +146,7 @@ section.dashboard {
       align-items: flex-start;
       width: 100%;
       padding-left: 15px;
+
       h1 {
         margin: 0;
         color: $profile-bg;
@@ -162,6 +167,7 @@ section.dashboard {
         }
       }
     }
+
     div.hitRatioChartContainer {
       height: 70%;
       width: 100%;
@@ -219,9 +225,10 @@ section.dashboard {
       right: 1em;
     }
   }
-  div.stats-precision{
-    p{
-      color:$coral_pink !important;
+
+  div.stats-precision {
+    p {
+      color: $coral_pink !important;
       font-size: 7vw !important;
       font-weight: 400 !important;
     }
@@ -231,6 +238,7 @@ section.dashboard {
       font-size: 4vw;
     }
   }
+
   div.summaryContainer {
     display: flex;
     flex-direction: column;
@@ -262,7 +270,7 @@ section.dashboard {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-  justify-content: center;
+    justify-content: center;
 
     svg {
       height: 20px;
@@ -279,4 +287,71 @@ section.dashboard {
 
 }
 
+.history-container {
+  background-color: white;
+  padding-top: 20px;
+  .train-line {
+    display: flex;
+    justify-content: space-around;
+    color: black;
+    align-items: center;
 
+    .right-side-and-train-info-container {
+      width: 60vw;
+      display: flex;
+      justify-content: space-evenly;
+
+      .right-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 20vw;
+
+        .circle {
+          border: 2px solid #e9d7bf;
+          height: 4vw;
+          width: 4vw;
+          border-radius: 100%;
+        }
+
+        hr {
+          background-color: #cbcbcb;
+          height: 3vw;
+          width: 0.5vw;
+          margin: 0;
+        }
+      }
+
+      .train-info {
+        .date {
+          font-weight: 600;
+          font-size: 5vw;
+        }
+
+        .day {
+          color: #5a5a5a;
+          font-size: 4.8vw;
+        }
+        .light-text{
+          color:#848484;
+          font-weight: 100;
+        }
+      }
+    }
+
+    .arrow-right {
+      svg {
+        height: 6vw;
+        fill: #f0e3d2;
+       }
+    }
+  }
+}
+
+.training-log-header {
+  color: #707070;
+  font-size: 7vw;
+  text-align: center;
+  padding: 0.5em;
+}

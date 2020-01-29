@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonSlides, Platform} from '@ionic/angular';
-import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
+import {ChartDataSets, ChartOptions, ChartType, RadialChartOptions} from 'chart.js';
 import {Color, Label, MultiDataSet, PluginServiceGlobalRegistrationAndOptions} from 'ng2-charts';
 import {Storage} from '@ionic/storage';
 import {NetworkService} from '../network.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-tab1',
@@ -16,19 +17,24 @@ export class Tab1Page implements OnInit {
 
     @ViewChild('slides', {static: true}) slides: IonSlides;
 
-    public doughnutChartLabelsPrecision: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
-    public doughnutChartDataPrecision: MultiDataSet = [
-        [0, 0, 100],
-        [50, 150, 120],
-    ];
-    private donutColorsPrecision = [
-        {
-            backgroundColor: [
-                'rgba(252, 44, 49)',
-                'rgba(69, 69, 69)',
-            ],
-            borderWidth: [0, 0, 0, 0],
+    public radarChartOptions: RadialChartOptions = {
+        responsive: true,
+        scale: {
+            gridLines: {
+                color: 'rgba(255, 255, 255)'
+            }
         }
+    };
+    public radarChartLabels: Label[] = ['Precision', 'SPEED', 'HIT RELIABILITY', 'PARTICIPATION', 'HANDLING'];
+
+    public radarChartData: ChartDataSets[] = [
+        {data: [65, 90, 90, 81, 100], label: 'Series A', backgroundColor: 'rgba(255, 255, 255)'},
+        {data: [100, 100, 100, 100, 100], label: 'Series A', backgroundColor: 'rgba(255, 255, 255)'},
+    ];
+    public radarChartType: ChartType = 'radar';
+    private radarColorsPrecision = [
+        {backgroundColor: 'rgba(195, 147, 82)'},
+        {backgroundColor: 'rgba(255, 255, 255)'}
     ];
     public doughnutChartTypePrecision: ChartType = 'doughnut';
 
@@ -107,31 +113,6 @@ export class Tab1Page implements OnInit {
     screenWdith;
 
 
-    singleLine = [
-        {
-            name: 'Karthikeyan',
-            series: [
-                {
-                    name: '2016',
-                    value: '15000'
-                },
-                {
-                    name: '2017',
-                    value: '20000'
-                },
-                {
-                    name: '2018',
-                    value: '25000'
-                },
-                {
-                    name: '2019',
-                    value: '30000'
-                }
-            ],
-        },
-    ];
-
-
     single = [
         {
             name: 'Germany',
@@ -143,23 +124,24 @@ export class Tab1Page implements OnInit {
         },
     ];
 
-
-    xAxisLabel = 'Country';
-    yAxisLabel = 'Population';
-
-
-    // options
-    showLegend = true;
-    showLabels = true;
     profile;
     options = {
         borderWidth: [0, 0, 0, 0],
         height: 10
 
     };
+    trains = [{
+        date: '05.07.18',
+        day: 'Tuesday',
+        numberOfDrills: 6
+    }, {
+        date: '05.07.18',
+        day: 'Tuesday',
+        numberOfDrills: 6
+    }];
 
 
-    constructor(private platform: Platform, private storage: Storage, private networkService: NetworkService) {
+    constructor(private platform: Platform, private storage: Storage, private networkService: NetworkService, private router: Router) {
         Object.assign(this, this.single);
         this.platform.ready().then((readySource) => {
             this.screenHeight = this.platform.height();
@@ -188,4 +170,20 @@ export class Tab1Page implements OnInit {
             console.log('currentIndex:', index);
         });
     }
+
+    onNextSlide() {
+        this.slides.slideNext(1000);
+    }
+
+    onPrevSlide() {
+        this.slides.slidePrev(1000);
+    }
+
+    onActivityClicked(train) {
+        this.router.navigate(['/home/tabs/tab1/activity-history'], {queryParams: {activity: JSON.stringify(train)}});
+    }
 }
+
+
+
+

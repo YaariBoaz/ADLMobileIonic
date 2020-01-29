@@ -1,0 +1,187 @@
+@import "../../assets/colors";
+
+.activity-history {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  background: #f9f9f9;
+
+  header {
+    align-items: center;
+    height: 20vw;
+    display: flex;
+    background-color: $headerBG;
+
+    .back-btn-container {
+      position: absolute;
+      left: 5px;
+
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    h1 {
+      width: 100%;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .train-line {
+    display: flex;
+    justify-content: space-around;
+    color: black;
+    align-items: center;
+    background: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+    .right-side-and-train-info-container {
+      width: 60vw;
+      display: flex;
+      justify-content: space-evenly;
+
+      .right-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 20vw;
+
+        .circle {
+          border: 2px solid #e9d7bf;
+          height: 4vw;
+          width: 4vw;
+          border-radius: 100%;
+        }
+
+        hr {
+          background-color: #cbcbcb;
+          height: 3vw;
+          width: 0.5vw;
+          margin: 0;
+        }
+      }
+
+      .train-info {
+        .date {
+          font-weight: 600;
+          font-size: 5vw;
+        }
+
+        .day {
+          color: #5a5a5a;
+          font-size: 4.8vw;
+        }
+
+        .light-text {
+          color: #848484;
+          font-weight: 100;
+        }
+      }
+    }
+  }
+
+  .history-card {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+
+    .right-line {
+      width: 15px;
+      background: #dfa14c;
+    }
+
+    .title {
+      display: flex;
+      height: 20vw;
+      background: white;
+
+      img {
+        height: 15vw;
+        width: 15vw;
+        padding: 0.5em;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+    .stats {
+      background-color: #eae8e8;
+      display: flex;
+      justify-content: space-evenly;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      height: 20vw;
+      align-items: center;
+
+      .hits {
+        display: flex;
+        flex-direction: column;
+
+        div {
+          display: flex;
+          align-items: center;
+
+          h1 {
+            margin: 0
+          }
+
+          h2 {
+            margin: 0
+          }
+        }
+      }
+
+      .range {
+        h1 {
+          margin: 0
+        }
+
+        h2 {
+          margin: 0
+        }
+      }
+    }
+
+    .description {
+      padding: 0.5em;
+    }
+
+    .more-info {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+}
+
+.activity-history-container {
+  padding: 0.5em;
+  padding-top: 30px;
+}
+
+.see-target {
+   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p{
+    padding-right: 10px;
+  }
+}
+
+.target-container {
+
+}
