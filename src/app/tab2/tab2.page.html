@@ -1,104 +1,114 @@
 <section class="target-selection">
-    <div class="gray">
-        <header>
-            <h1>Edit Session</h1>
-        </header>
-        <div class="chooseTargetWrapper">
-            <img src="../../assets/images/brown_icon_target.png" alt="gun-shooting-targer">
-            <p>CHOOSE TARGET TYPE:
-            <p>
+    <header>
+        <div class="personal-titles">
+            <p class="name">Jack Smith Anderson</p>
+            <p class="weapon">M-4</p>
         </div>
-        <ion-slides class="sliders" pager="true">
-            <ion-slide>
-                <div class="imgWrapper">
-                    <img src="../../assets/icons/bullseye_red.png" alt="No image">
-                    <p>Bullseye</p>
-                </div>
-            </ion-slide>
-            <ion-slide>
-                <div class="imgWrapper">
-                    <img src="../../assets/icons/Zero.png" alt="No image">
-                    <p>Zero</p>
-                </div>
-            </ion-slide>
-            <ion-slide>
-                <div class="imgWrapper">
-                    <img src="../../assets/icons/Hostage.png" alt="No image">
-                    <p>Hostage</p>
-                </div>
-            </ion-slide>
-        </ion-slides>
-        <div class="form">
-            <div class="container">
-                <div style="width: 80%" class="title-and-icon">
-                    <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
-                    <p>NUMBER OF BULLETS:</p>
-                </div>
-                <div style="width: 20%" class="inputs">
-                    <input [(ngModel)]="drill.numOfBullets" type="number">
-                </div>
+        <div class="personal-widget">
+            <div class="points">
+                <span class="amount">180</span>
+                <p>points</p>
             </div>
-            <div class="container range">
-                <div class="title-and-icon">
-                    <img src="../../assets/images/ic_illust_half_fullrange.png" alt="gun-shooting-targer">
-                    <p>RANGE:</p>
-                </div>
-
-                <div class="inputs">
-                    <input [(ngModel)]="drill.range" type="number">
-                    <select [(ngModel)]="drill.rangeUOM">
-                        <option value="Meters">Meters</option>
-                        <option value="Feet">Feet</option>
-                    </select>
-                </div>
+            <div class="avatar">
+                <h1>IA</h1>
             </div>
-            <div class="container">
-                <div class="title-and-icon">
-                    <img src="../../assets/icons/rifle.png" alt="gun-shooting-targer" class="border">
-                    <p>WEAPON:</p>
-                </div>
-                <div class="inputs">
-                    <select [(ngModel)]="drill.weapon">
-                        <option value="Bergara HMR Pro">Bergara HMR Pro</option>
-                        <option value="AR-15">AR-15</option>
-                        <option value="Bergara Ridge">Bergara Ridge</option>
-                        <option value="M4">M4</option>
-                        <option value="MP5">MP5</option>
-                        <option value="Ruger AR-556 MPR">Ruger AR-556 MPR</option>
-                        <option value="Remington 700">Remington 700</option>
-                    </select>
-                </div>
-            </div>
-            <div class="container">
-                <div class="title-and-icon">
-                    <img src="../../assets/icons/gun-shooting-target.png" alt="gun-shooting-targer" class="border">
-                    <p>SIGHT:</p>
-                </div>
-                <div class="inputs">
-                    <select [(ngModel)]="drill.sight">
-                        <option value="V6 5-30 X 50">V6 5-30 X 50</option>
-                        <option value="0.25 MOA">0.25 MOA</option>
-                        <option value="Trijicon">Trijicon</option>
-                    </select>
-                </div>
-            </div>
-            <div class="container">
-                <div class="title-and-icon">
-                    <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
-                    <p>AMMO:</p>
-                </div>
-                <div class="inputs">
-                    <select [(ngModel)]="drill.ammo">
-                        <option value="Creedmor 6.5">Creedmor 6.5</option>
-                        <option value="Plain (M193)">Plain (M193)</option>
-                        <option value="5.56">5.56</option>
-                        <option value="6.56">6.56</option>
-                        <option value="12 Guage">12 Guage</option>
-                    </select>
-                </div>
+            <div class="place">
+                <span class="amount">3rd</span>
+                <p>place</p>
             </div>
         </div>
-        <button (click)="startSesstion()" routerLink="select"> Start Session!</button>
+    </header>
 
+    <div class="chooseTargetWrapper">
+        <img src="../../assets/images/brown_icon_target.png" alt="gun-shooting-targer">
+        <p>CHOOSE TARGET TYPE:
+        <p>
     </div>
+    <ion-slides class="sliders" pager="true">
+
+        <ion-slide>
+            <div class="imgWrapper">
+                <img src="../../assets/icons/Zero.png" alt="No image">
+                <p>Zero</p>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="imgWrapper">
+                <img src="../../assets/icons/bullseye_red.png" alt="No image">
+                <p>Bullseye</p>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="imgWrapper">
+                <img src="../../assets/icons/Hostage.png" alt="No image">
+                <p>Hostage</p>
+            </div>
+        </ion-slide>
+    </ion-slides>
+    <div class="form">
+        <div class="container">
+            <div style="width: 80%" class="title-and-icon">
+                <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
+                <p>NUMBER OF BULLETS:</p>
+            </div>
+            <div style="width: 20%" class="inputs">
+                <input [(ngModel)]="drill.numOfBullets" type="number">
+            </div>
+        </div>
+        <div class="container range">
+            <div class="title-and-icon">
+                <img src="../../assets/images/ic_illust_half_fullrange.png" alt="gun-shooting-targer">
+                <p>RANGE:</p>
+            </div>
+
+            <div class="inputs">
+                <input [(ngModel)]="drill.range" type="number">
+                <select [(ngModel)]="drill.rangeUOM">
+                    <option value="Meters">Meters</option>
+                    <option value="Feet">Feet</option>
+                </select>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title-and-icon">
+                <img src="../../assets/icons/rifle.png" alt="gun-shooting-targer" class="border">
+                <p>WEAPON:</p>
+            </div>
+            <div class="inputs">
+                <select [(ngModel)]="drill.weapon">
+                    <option value="AR-15">AR-15</option>
+                    <option value="M4">M4</option>
+                    <option value="MP5">MP5</option>
+                    <option value="DOUBLE BARREL SHOTGUN">DOUBLE BARREL SHOTGUN</option>
+                    <option value="P40">P40</option>
+                </select>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title-and-icon">
+                <img src="../../assets/icons/gun-shooting-target.png" alt="gun-shooting-targer" class="border">
+                <p>SIGHT:</p>
+            </div>
+            <div class="inputs">
+                <select [(ngModel)]="drill.sight">
+                    <option value="Trijicon">Trijicon</option>
+                </select>
+            </div>
+        </div>
+        <div class="container">
+            <div class="title-and-icon">
+                <img src="../../assets/images/ic_illust_half_fullbullet.png" alt="gun-shooting-targer">
+                <p>AMMO:</p>
+            </div>
+            <div class="inputs">
+                <select [(ngModel)]="drill.ammo">
+                    <option value="Plain (M193)">Plain (M193)</option>
+                    <option value="5.56">5.56</option>
+                    <option value="6.56">6.56</option>
+                    <option value="12 Guage">12 Guage</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <button (click)="startSesstion()" routerLink="select"> Start Session!</button>
 </section>

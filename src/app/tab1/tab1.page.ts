@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {Platform} from '@ionic/angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {IonSlides, Platform} from '@ionic/angular';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Color, Label, MultiDataSet, PluginServiceGlobalRegistrationAndOptions} from 'ng2-charts';
 import {Storage} from '@ionic/storage';
@@ -10,7 +10,27 @@ import {NetworkService} from '../network.service';
     templateUrl: 'tab1.page.html',
     styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+
+    slideIndex = 0;
+
+    @ViewChild('slides', {static: true}) slides: IonSlides;
+
+    public doughnutChartLabelsPrecision: Label[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+    public doughnutChartDataPrecision: MultiDataSet = [
+        [0, 0, 100],
+        [50, 150, 120],
+    ];
+    private donutColorsPrecision = [
+        {
+            backgroundColor: [
+                'rgba(252, 44, 49)',
+                'rgba(69, 69, 69)',
+            ],
+            borderWidth: [0, 0, 0, 0],
+        }
+    ];
+    public doughnutChartTypePrecision: ChartType = 'doughnut';
 
 
     lineChartData: ChartDataSets[] = [
@@ -55,8 +75,8 @@ export class Tab1Page {
             // Pick a new font size so it will not be larger than the height of label.
             const fontSizeToUse = Math.min(newFontSize, elementHeight);
 
-            ctx.font = fontSizeToUse + 'px Arial';
-            ctx.fillStyle = 'white';
+            ctx.font = fontSizeToUse + 'px Open Sans';
+            ctx.fillStyle = '#c39352';
 
             // Draw text in center
             ctx.fillText('67%', centerX, centerY);
@@ -69,7 +89,8 @@ export class Tab1Page {
             backgroundColor: [
                 'rgba(217, 143, 43)',
                 'rgba(238, 238, 238)',
-            ]
+            ],
+            borderWidth: [0, 0, 0, 0],
         }
     ];
 
@@ -82,8 +103,6 @@ export class Tab1Page {
     public doughnutChartType: ChartType = 'doughnut';
 
 
-    dashboardImageOn = '../../assets/icons/dashboard.png';
-    dashboardImageOff = '../../assets/icons/dashboard-not-selected.png';
     screenHeight;
     screenWdith;
 
@@ -124,14 +143,6 @@ export class Tab1Page {
         },
     ];
 
-    colorSchemeLine = {
-        domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-    };
-
-    colorScheme = {
-        domain: ['#d98f2b', '#EEEEEE']
-    };
-
 
     xAxisLabel = 'Country';
     yAxisLabel = 'Population';
@@ -142,8 +153,9 @@ export class Tab1Page {
     showLabels = true;
     profile;
     options = {
-
+        borderWidth: [0, 0, 0, 0],
         height: 10
+
     };
 
 
@@ -167,4 +179,13 @@ export class Tab1Page {
         console.log(event, active);
     }
 
+    ngOnInit(): void {
+    }
+
+    slideChanged() {
+        this.slides.getActiveIndex().then((index: number) => {
+            this.slideIndex = index;
+            console.log('currentIndex:', index);
+        });
+    }
 }

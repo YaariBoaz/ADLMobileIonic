@@ -9,19 +9,72 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 /* Core CSS required for Ionic components to work properly */
 @import "~@ionic/angular/css/core.css";
-
 /* Basic CSS for apps built with Ionic */
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
-
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "assets/colors";
+
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url("assets/fonts/OpenSans-Light.ttf");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url("assets/fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: url("assets/fonts/OpenSans-Bold.ttf");
+}
+
+body {
+  font-family: 'Open Sans', sans-serif, Arial;
+}
+
+// Army Brown
+.myClass0 {
+  .swiper-pagination-bullet-active {
+    padding: 2vw;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(209, 137, 39, 1) 27%) !important;
+  }
+}
+
+// Cherry Red
+.myClass1 {
+  .swiper-pagination-bullet-active {
+    padding: 2vw;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(252, 94, 98) 27%) !important;
+  }
+}
+
+// Blue
+.myClass2 {
+  .swiper-pagination-bullet-active {
+    padding: 2vw;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(7, 133, 201) 27%) !important;
+  }
+}
+
+.swiper-pagination-bullet {
+  padding: 2vw;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(153, 153, 153, 1) 27%);
+}
