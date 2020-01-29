@@ -36,6 +36,8 @@ export class SelectTargetModalComponent implements OnInit {
         this.shootingService.targetsArrived.subscribe((data) => {
             if (data) {
                 this.targets = data;
+            } else {
+                alert('Check your internet connection or the IP you entered');
             }
         });
     }
@@ -53,5 +55,9 @@ export class SelectTargetModalComponent implements OnInit {
 
     onBackPressed() {
         this.router.navigateByUrl('/home/tabs/tab2');
+    }
+
+    onGetTargets() {
+        this.shootingService.setTargetsI();
     }
 }

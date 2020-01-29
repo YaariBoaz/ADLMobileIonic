@@ -3,6 +3,7 @@
         <header>
             <ion-icon (click)="onBackPressed()" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
             <h1>Select Target</h1>
+            <ion-icon (click)="onGetTargets()" ios="ios-refresh" md="md-refresh"></ion-icon>
         </header>
         <div class="target-list" *ngIf="shootingService.targets">
             <div (click)="onTargetChosen(target)" routerLink="/home/tabs/tab2/select2" class="target-wrapper" *ngFor="let target of shootingService.targets">
@@ -16,3 +17,4 @@
         </div>
     </div>
 </section>
+

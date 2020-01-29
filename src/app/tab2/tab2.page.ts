@@ -35,7 +35,7 @@ export class Tab2Page {
                 },
             ]
         };
-
+s
 
     slideOptsTwo = {
         initialSlide: 1,
@@ -45,12 +45,12 @@ export class Tab2Page {
     };
 
     drill: DrillObject = {
-        numOfBullets: 16,
-        weapon: 'MP5',
-        range: 25,
+        numOfBullets: 5,
+        weapon: 'Bergara HMR Pro',
+        range: 150,
         rangeUOM: 'Meters',
-        sight: 'Trijicon',
-        ammo: '5.56'
+        sight: 'V6 5-30 X 50',
+        ammo: 'Creedmor 6.5'
     };
     wifiSsid;
 

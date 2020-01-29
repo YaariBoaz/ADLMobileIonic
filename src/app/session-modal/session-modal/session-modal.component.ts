@@ -143,6 +143,7 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     restartSession() {
+        this.socket.close();
         this.shots = [];
         this.initConnection(this.chosenTarget);
         this.initStats();

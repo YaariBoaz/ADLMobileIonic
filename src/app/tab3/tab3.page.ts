@@ -125,15 +125,20 @@ export class Tab3Page {
 
 
     shareEmail(item) {
+        const body = ' Dear ' + item.data.fullName + '.' + '\r\n' +
+            'It was great fun shooting with you at the range.' + '\r\n' +
+            'We attached your session from today for you to keep, share and see our capabilities.' + '\r\n' +
+            'Please visit our website ( https://www.adlsmartshooting.com/ ) and contact us for any more questions.' + '\r\n' +
+            'don\'t forget to follow us on Instagram and tag @adlontarget' + '\r\n' +
+            'Best regards.';
+
         this.storage.get('adl-contacts').then((storageData) => {
             this.emailComposer.isAvailable().then((available: boolean) => {
                 if (available) {
                     const email = {
-                        to: 'boazyaarii@gmail.com',
-                        cc: 'boazyaarii@gmail.com',
-                        subject: 'Drills',
-                        body: JSON.stringify(storageData),
-                        isHtml: true,
+                        to: item.data.email,
+                        subject: 'Your results from ADL Smart Shooting Target',
+                        body,
                         attachments: [
                             item.urlForUpload
                         ],

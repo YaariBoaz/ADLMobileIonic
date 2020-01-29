@@ -5,30 +5,23 @@
 </header>
 <div class="tab3-container">
     <div class="gray">
-<!--        <div class="share-continer" *ngIf="allData.length > 0; else loggedOut">-->
-<!--            <div class="share-continer-child" *ngFor="let item of allData">-->
-<!--                <div class="image-and-info">-->
-<!--                    <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">-->
-<!--                    <div>-->
-<!--                        <span>Facebook: {{item.data.facebook}}</span>-->
-<!--                        <span>Instagram: {{item.data.instagram}}</span>-->
-<!--                        <span>Email: {{item.data.email}}</span>-->
-<!--                        <span>Phone Number: {{item.data.phoneNumber}}</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="share-buttons">-->
-<!--                    <button (click)="shareFacebook(item)">Facebook</button>-->
-<!--                    <button (click)="shareInstagram(item)">Instush</button>-->
-<!--                    <button (click)="shareEmail(item)">Email</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <ng-template #loggedOut>-->
-<!--            <div class="noData">-->
-<!--                <h1> No Data, Try Refreshing.</h1>-->
-<!--                <h6>Or Maybe You Dont Have Any Data Yet</h6>-->
-<!--            </div>-->
-<!--        </ng-template>-->
+
+        <div class="share-continer" *ngIf="allData.length > 0; else loggedOut">
+            <div class="share-continer-child" *ngFor="let item of allData">
+                <div class="image-and-info">
+                    <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">
+                </div>
+                <div class="share-buttons">
+                    <button (click)="shareEmail(item)">Email</button>
+                </div>
+            </div>
+        </div>
+        <ng-template #loggedOut>
+            <div class="noData">
+                <h1> No Data, Try Refreshing.</h1>
+                <h6>Or Maybe You Dont Have Any Data Yet</h6>
+            </div>
+        </ng-template>
         <div class="settingsContainer">
             <p> Please enter ip for example: 192.168.0.86</p>
             <input [(ngModel)]="ip">
