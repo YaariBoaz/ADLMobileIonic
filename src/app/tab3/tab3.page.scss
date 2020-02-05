@@ -1,14 +1,9 @@
+@import "../../assets/colors";
 .tab3-container {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url("../../assets/images/soldier-background.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
-
-
   div.gray {
     background-color: rgba(231, 231, 231, 0.8);
     display: flex;
@@ -21,22 +16,88 @@
 
 header {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: row;
-  -webkit-box-align: center;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  background-color: #3b3838;
-  box-sizing: border-box;
-  padding: 0.5em;
-  height: 10%;
-  color: #936f00;
+  justify-content: space-evenly;
+  background-color: $headerBG;
+  height: 25%;
 
-  ion-icon {
-    font-size: 25px;
-    border: 1px solid;
-    padding: 0.3em;
+  div.personal-titles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0.2em 0;
+
+    p {
+      margin: 0;
+      color: $profile-bg;
+      font-size: 6vw;
+    }
+
+    p.weapon {
+      color: $profile-bg;
+      font-weight: 300;
+      font-size: 4vw;
+    }
+  }
+
+  div.personal-widget {
+    background-color: white;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+
+    width: 50%;
+    height: 11vw;
+
+    div.avatar {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 100%;
+      background-color: $profile-bg;
+
+      width: 15vw;
+      height: 15vw;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      h1 {
+        color: white;
+        text-align: center;
+        margin: 0;
+        font-size: 6vw;
+      }
+    }
+
+    div.points,
+    div.place {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 0.2em;
+      width: 30%;
+      color: $profile-bg;
+
+      span.amount {
+        color: $profile-bg;
+        font-weight: 700;
+        font-size: 4vw;
+      }
+
+      p {
+        margin: 0;
+        font-size: 3vw;
+      }
+    }
   }
 }
 

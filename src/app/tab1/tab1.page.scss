@@ -167,7 +167,7 @@ section.dashboard {
         }
       }
     }
-
+    .rateOfFireChartContainer,
     div.hitRatioChartContainer {
       height: 70%;
       width: 100%;
@@ -200,9 +200,41 @@ section.dashboard {
         transform: translate(-50%, -50%);
       }
     }
-
+    .rateOfFireChartContainer{
+      width: 80%;
+      align-self: center;
+    }
     /* ARROWS */
+    .stats-rateOfFire{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding-left: 15px;
 
+      span{
+        color: darkgray;
+      }
+      h1 {
+        margin: 0;
+        color: $profile-bg;
+        font-weight: 400;
+        font-size: 9.5vw;
+      }
+
+      p {
+        margin: 0;
+        color: #b9b9b9;
+        font-size: 5vw;
+        font-weight: 300;
+
+        b {
+          color: $cerulean;
+          font-size: 7vw;
+          font-weight: 400;
+        }
+      }
+    }
     div.arrow-left,
     div.arrow-right {
       width: 35px;
@@ -218,11 +250,11 @@ section.dashboard {
     }
 
     div.arrow-left {
-      left: 1em;
+      left: 0vw;
     }
 
     div.arrow-right {
-      right: 1em;
+      right: 0vw;
     }
   }
 

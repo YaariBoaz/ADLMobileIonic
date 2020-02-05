@@ -6,21 +6,26 @@ import {FormsModule} from '@angular/forms';
 import {Tab1Page} from './tab1.page';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {ChartsModule} from 'ng2-charts';
-import {ActivityHistoryComponent} from '../activity-history/activity-history.component';
+import {Screenshot} from '@ionic-native/screenshot/ngx';
+import {ActivityHistoryPageComponent} from './activity-history-page/activity-history-page.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
     imports: [
         IonicModule,
         CommonModule,
         FormsModule,
+        SharedModule,
         NgxChartsModule,
         ChartsModule,
         RouterModule.forChild([
             {path: '', component: Tab1Page},
-            {path: 'activity-history', component: ActivityHistoryComponent},
+            {path: 'activity-history', component: ActivityHistoryPageComponent},
         ])
     ],
-    declarations: [Tab1Page, ActivityHistoryComponent]
+    providers: [Screenshot],
+    declarations: [Tab1Page, ActivityHistoryPageComponent],
+
 })
 export class Tab1PageModule {
 }

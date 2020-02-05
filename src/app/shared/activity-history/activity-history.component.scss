@@ -1,5 +1,7 @@
-@import "../../assets/colors";
-
+@import "../../../assets/colors";
+:host{
+  height: 100%;
+}
 .activity-history {
   display: flex;
   height: 100%;
@@ -9,7 +11,7 @@
 
   header {
     align-items: center;
-    height: 20vw;
+    height: 25vw;
     display: flex;
     background-color: $headerBG;
 
@@ -32,16 +34,16 @@
 
   .train-line {
     display: flex;
-    justify-content: space-around;
     color: black;
     align-items: center;
     background: white;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.19), 0 0px 5px rgba(0, 0, 0, 0.23);
 
     .right-side-and-train-info-container {
       width: 60vw;
       display: flex;
-      justify-content: space-evenly;
+      align-items: center;
+      padding-left: 10px;
 
       .right-side {
         display: flex;
@@ -49,6 +51,7 @@
         align-items: center;
         justify-content: space-between;
         height: 20vw;
+        padding-right: 20px;
 
         .circle {
           border: 2px solid #e9d7bf;
@@ -88,6 +91,12 @@
     display: flex;
     flex-direction: row;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    margin-bottom: 15px;
+
+    .info-wrapper {
+      width: 100%;
+      background: white;
+    }
 
     .right-line {
       width: 15px;
@@ -98,6 +107,7 @@
       display: flex;
       height: 20vw;
       background: white;
+      align-items: center;
 
       img {
         height: 15vw;
@@ -157,6 +167,13 @@
 
     .description {
       padding: 0.5em;
+      background-color: white;
+      p {
+        color: #acacac;
+        font-size: 6vw;
+        margin: 0;
+        font-weight: 100;
+      }
     }
 
     .more-info {
@@ -168,16 +185,19 @@
 }
 
 .activity-history-container {
-  padding: 0.5em;
+  padding-right: 13px;
+  padding-left: 10px;
   padding-top: 30px;
+  overflow-y: auto;
 }
 
 .see-target {
-   text-align: center;
+  text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  p{
+
+  p {
     padding-right: 10px;
   }
 }
@@ -185,3 +205,40 @@
 .target-container {
 
 }
+
+.accordion {
+  background-color: #fff;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #fff;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+

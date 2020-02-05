@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ShootingService} from '../shooting.service';
 import {countUpTimerConfigModel, timerTexts} from 'ngx-timer';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
@@ -8,16 +8,16 @@ import {Storage} from '@ionic/storage';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {INetworkAdapter} from '../INetworkAdapter';
-import {DrillObject} from '../../tab2/tab2.page';
-import {CountupTimerService} from 'ngx-timer';
+ import {CountupTimerService} from 'ngx-timer';
 
 @Component({
     selector: 'app-session-modal',
     templateUrl: './session-modal.component.html',
     styleUrls: ['./session-modal.component.scss'],
 })
-export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
+export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
+    @Input() isHistory = false;
     @ViewChild('container', {static: false}) container: ElementRef;
     @ViewChild('screen', {static: false}) screen: ElementRef;
     @ViewChild('canvas', {static: false}) canvas: ElementRef;
@@ -75,6 +75,13 @@ export class SessionModalComponent implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit() {
         this.initConnection(this.shootingService.chosenTarget);
     }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.isHistory) {
+            this.isHistory = changes.isHistory.currentValue;
+        }
+    }
+
 
     onShotArrived(data) {
         if (data) {

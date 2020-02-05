@@ -1,11 +1,14 @@
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ChartsModule } from 'ng2-charts';
-import { TabsPageRoutingModule } from './tabs-routing.module';
+import {IonicModule} from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {ChartsModule} from 'ng2-charts';
+import {TabsPageRoutingModule} from './tabs-routing.module';
 
-import { TabsPage } from './tabs.page';
+import {TabsPage} from './tabs.page';
+import {MatMenuModule} from '@angular/material';
+import {NgxTimerModule} from 'ngx-timer';
+import {Screenshot} from '@ionic-native/screenshot/ngx';
 
 
 @NgModule({
@@ -15,9 +18,12 @@ import { TabsPage } from './tabs.page';
         ChartsModule,
         FormsModule,
         TabsPageRoutingModule,
+        MatMenuModule,
+        NgxTimerModule,
     ],
-    providers: [],
-    declarations: [TabsPage]
+    providers: [Screenshot],
+    declarations: [TabsPage],
+    exports: []
 })
 export class TabsPageModule {
 }

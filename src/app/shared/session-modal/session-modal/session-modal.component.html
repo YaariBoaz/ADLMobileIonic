@@ -1,7 +1,7 @@
 <section class="wrapper-qll">
-    <div class="gray">
+    <div [class.isHistoryBG]="isHistory===true" class="gray">
         <ion-grid>
-            <ion-row>
+            <ion-row *ngIf="!isHistory">
                 <ion-col>
                     <header>
                         <ion-icon (click)="onBackPressed()" routerLink="/home/tabs/tab2" class="back-btn"
@@ -26,7 +26,7 @@
                     </header>
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row *ngIf="!isHistory">
                 <ion-col>
                     <div class="results">
                         <p>Bullseye Drill</p>
@@ -39,7 +39,7 @@
             </ion-row>
             <ion-row>
                 <ion-col>
-                    <div class="main-image" #screen>
+                    <div [class.isHistory]="isHistory===true" class="main-image" #screen>
                         <img style="width:100%;" #container src="../../../assets/images/bullseye_red.png" alt="bullsEye"
                              *ngIf="!drillFinished">
                         <img style="width:100%;"

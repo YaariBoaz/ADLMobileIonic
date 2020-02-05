@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./authentication/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./shared/authentication/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'home',

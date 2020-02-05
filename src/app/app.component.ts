@@ -5,6 +5,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {TabsPage} from './tabs/tabs.page';
+import {NetworkService} from './shared/network.service';
 
 @Component({
     selector: 'app-root',
@@ -15,18 +16,15 @@ export class AppComponent {
 
 
     splash = true;
-    secondPage = TabsPage;
-    tabBarElement: any;
-
 
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private screenOrientation: ScreenOrientation
+        private screenOrientation: ScreenOrientation,
+        private netWorkService: NetworkService
     ) {
         this.initializeApp();
-
     }
 
 
@@ -36,6 +34,7 @@ export class AppComponent {
             this.statusBar.overlaysWebView(false);
             this.splashScreen.hide();
             this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+            this.netWorkService.hasInternet();
         });
     }
 }

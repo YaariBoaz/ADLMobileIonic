@@ -5,7 +5,7 @@ import {PhotoLibrary} from '@ionic-native/photo-library/ngx';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
-import {ShootingService} from '../session-modal/shooting.service';
+import {ShootingService} from '../shared/session-modal/shooting.service';
 
 @Component({
     selector: 'app-tab3',

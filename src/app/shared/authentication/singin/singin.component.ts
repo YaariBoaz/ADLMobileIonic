@@ -4,10 +4,11 @@ import {Router} from '@angular/router';
 import {Storage} from '@ionic/storage';
 import {trigger, transition, useAnimation} from '@angular/animations';
 import {zoomIn, bounceInRight, bounceInLeft, bounceInUp, bounceInDown} from 'ngx-animate';
-import {NetworkService} from '../../network.service';
 import {HttpClient} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
 import {ShareModalComponent} from '../../share.modal/share.modal.component';
+import {NetworkService} from '../../network.service';
+import {UserService} from '../../user.service';
 
 @Component({
     selector: 'app-singin',
@@ -38,7 +39,6 @@ import {ShareModalComponent} from '../../share.modal/share.modal.component';
 })
 export class SinginComponent implements OnInit {
     splash = true;
-    url = 'https://cors-test.appspot.com/test';
     isSignIn = true;
 
     userName;
@@ -50,41 +50,22 @@ export class SinginComponent implements OnInit {
         private storage: Storage,
         private router: Router,
         private  modalService: ModalController,
-        private  network: NetworkService) {
-        this.network.connectionStatus.subscribe((connectionStatus) => {
-            this.http.get(this.url).subscribe(
-                (response) => {
-                    this.network.hasInternet = true;
-                    this.storage.get('user').then(user => {
-                        if (user) {
-                            setTimeout(() => {
-                                this.router.navigateByUrl('/home/tabs/tab1');
-                            }, 1000);
-                        } else {
-                            setTimeout(() => {
-                                this.splash = false;
-                            }, 1000);
-
-
-                        }
-                    });
-                },
-                (error) => {
-                    this.network.hasInternet = false;
-                    this.storage.get('user').then(user => {
-                            if (user) {
-                                this.router.navigateByUrl('/home/tabs/tab1');
-                            } else {
-                                this.splash = false;
-                            }
-                        }
-                    );
-                    this.splash = false;
-                });
-
+        private  network: NetworkService,
+        private userService: UserService) {
+        this.network.hasConnectionSubject$.subscribe((connectionStatus) => {
+            this.storage.get('user').then(user => {
+                if (user) {
+                    this.userService.setUser(user);
+                    setTimeout(() => {
+                        this.router.navigateByUrl('/home/tabs/tab1');
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        this.splash = false;
+                    }, 1000);
+                }
+            });
         });
-
-
     }
 
 
@@ -127,7 +108,7 @@ export class SinginComponent implements OnInit {
 
     onLogin() {
         // if (this.password && this.password > 3 && this.userName.indexOf('adl') > -1) {
-            this.router.navigateByUrl('/home/tabs/tab1');
+        this.router.navigateByUrl('/home/tabs/tab1');
         // }
     }
 }

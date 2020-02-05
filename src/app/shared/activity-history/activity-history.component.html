@@ -1,6 +1,6 @@
 <section class="activity-history">
     <header>
-        <div class="back-btn-container">
+        <div class="back-btn-container" (click)="onBackPressed()">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
                 <defs>
                     <style>
@@ -50,43 +50,47 @@
         </div>
     </div>
     <div class="activity-history-container">
-        <div class="history-card">
+        <div class="history-card" *ngFor="let drill of drills; let i = index">
             <div class="right-line">
 
             </div>
             <div class="info-wrapper">
                 <div class="title">
-                    <img src="../../assets/images/bullseye_black.png">
+                    <div class="img-container" [ngSwitch]="drill.drillType">
+                        <img *ngSwitchCase="'Zero'" src="../../assets/images/bullseye_black.png">
+                        <img *ngSwitchCase="'Hostage'" src="../../assets/images/conv_a_bullseye_head.png">
+                    </div>
                     <div>
                         <p>Drill #1</p>
-                        <span>12 Points</span>
+                        <span>{{drill.points}} Points</span>
                     </div>
                 </div>
                 <div class="stats">
                     <div class="hits">
-                        <div><h1>10</h1>/<h2>12</h2></div>
+                        <div><h1>{{drill.hits}}</h1>/<h2>{{drill.totalShots}}</h2></div>
                         <span class="hint">HITS</span>
                     </div>
                     <div class="range">
-                        <h1 class="meter">100</h1>
+                        <h1 class="meter">{{drill.range}}</h1>
                         <span class="hint">RANGE</span>
                     </div>
                     <div class="limit">
-                        <span class="hint">NO TIME LIMIT</span>
+                        <span *ngIf="!drill.timeLimit" class="hint">NO TIME LIMIT</span>
+                        <span *ngIf="drill.timeLimit" class="hint">{{drill.timeLimit}}</span>
                     </div>
                 </div>
                 <div class="description">
-                    <p>Description</p>
-                    <span>Suprise drills, 3 bullets at a time. Pre-planned jam and magazine switch.</span>
+                    <p>Recommendation</p>
+                    <span>{{drill.reccomendation}}</span>
                 </div>
                 <hr style="height: 1px;width: 40%;background: #cdcdcd;">
-                <div class="see-target" (click)="this.showTargetFlag = !this.showTargetFlag;">
-                    <p>SEE TARGET</p>
-                    <ion-icon name="arrow-dropdown"></ion-icon>
+                <button class="accordion" (click)="toggleAccordian($event,i)">
+                    SEE TARGET
+                </button>
+                <div class="panel" hide="drill.isActive">
+                    <app-session-modal [isHistory]="true"></app-session-modal>
                 </div>
-                <div class="target-container">
-                     <video></video>
-                </div>
+
             </div>
         </div>
     </div>

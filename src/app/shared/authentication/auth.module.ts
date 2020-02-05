@@ -6,8 +6,7 @@ import {IonicModule} from '@ionic/angular';
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {SignupComponent} from './signup/signup.component';
-import {ShareModalComponent} from '../share.modal/share.modal.component';
-import {FormsModule} from '@angular/forms';
+ import {FormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [SinginComponent, SignupComponent],

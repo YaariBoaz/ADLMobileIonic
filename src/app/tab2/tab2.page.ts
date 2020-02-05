@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
-import {ShootingService} from '../session-modal/shooting.service';
+import {ShootingService} from '../shared/session-modal/shooting.service';
 import {AlertController} from '@ionic/angular';
-
 
 @Component({
     selector: 'app-tab2',

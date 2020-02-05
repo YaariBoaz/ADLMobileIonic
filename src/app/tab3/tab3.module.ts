@@ -10,6 +10,7 @@ import {CDVPhotoLibraryPipe} from './ImagePipe';
 import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
+import {SharedModule} from '../shared/shared.module';
 
 // @ts-ignore
 @NgModule({
@@ -17,6 +18,7 @@ import {EmailComposer} from '@ionic-native/email-composer/ngx';
         IonicModule,
         CommonModule,
         FormsModule,
+        SharedModule,
         IonicStorageModule,
         RouterModule.forChild([{path: '', component: Tab3Page}])
     ],

@@ -8,27 +8,31 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {IonicStorageModule} from '@ionic/storage';
-import {ShootingService} from './session-modal/shooting.service';
-import {Network} from '@ionic-native/network/ngx';
+import {SharedModule} from './shared/shared.module';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [HttpClientModule, IonicStorageModule.forRoot(),
-        BrowserModule, BrowserAnimationsModule, IonicModule.forRoot(), AppRoutingModule],
+    imports: [
+        HttpClientModule,
+        IonicStorageModule.forRoot(),
+        BrowserModule,
+        BrowserAnimationsModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        SharedModule
+    ],
     providers: [
         StatusBar,
         SplashScreen,
-        ShootingService,
-        Network,
         ScreenOrientation,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    exports: []
 })
 export class AppModule {
 }

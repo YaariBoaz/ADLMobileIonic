@@ -16,7 +16,7 @@ section.results {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url("../../../assets/images/soldier-background.png");
+  background-image: url("../../../../assets/images/soldier-background.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 100% 100%;
@@ -95,9 +95,19 @@ div.main-image {
   color: black;
 }
 
+.isHistory {
+  img {
+    width: 50vw !important;
+    height: 50vw;
+  }
+}
+
+.isHistoryBG {
+  background-color: white !important;
+}
+
 div.details {
   display: flex;
-  align-items: center;
   width: 100%;
   height: 100%;
   justify-content: space-evenly;
