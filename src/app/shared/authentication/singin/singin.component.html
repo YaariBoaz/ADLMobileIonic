@@ -9,35 +9,26 @@
 </div>
 
 <ion-content>
-    <section class="wrapper" *ngIf="!splash">
-        <div class="gray">
-            <header>
-                <h1>Identify Yourself Soldier!</h1>
-            </header>
-            <img src="assets/ontarget.png" (click)="onLogoClick()">
-            <div class="centerPart" *ngIf="!splash">
-
-                <div class="centerPart" *ngIf="!splash && !isSignIn">
-                    <app-signup></app-signup>
+    <div class="bg-image" *ngIf="!splash && isSignIn"></div>
+    <div class="shadow" *ngIf="!splash && isSignIn"></div>
+    <section class="wrapper" *ngIf="!splash  && isSignIn">
+        <img src="assets/ontarget.png">
+        <div class="centerPart" *ngIf="!splash">
+            <div class="signin-wrapper" *ngIf="!splash && isSignIn">
+                <div class="regular-wrapper">
+                    <input [(ngModel)]="userName" placeholder="Email">
+                    <input [(ngModel)]="password" type="password" placeholder="Password">
+                    <span (click)="onLogin()">GO!</span>
                 </div>
-                <div class="signin-wrapper" *ngIf="!splash && isSignIn">
-                    <div class="social">
-                        <button (click)="onFBClick()" class="loginBtn loginBtn--facebook">
-                            Login with Facebook
-                        </button>
-                    </div>
-                    <p>OR</p>
-                    <div class="regular-wrapper">
-                        <input [(ngModel)]="userName" placeholder="Email">
-                        <input [(ngModel)]="password" type="password" placeholder="Password">
-                        <button (click)="onLogin()">Sign In</button>
-                    </div>
-                    <p> You Junior Enlisted?! </p>
-                    <span (click)="goToSignUp()"> Sign Up!</span>
+                <span (click)="goToSignUp()"> Forgot Password</span>
+                <div class="social">
+                    <button class="loginBtn loginBtn--facebook">
+                        Login with Facebook
+                    </button>
                 </div>
+                <span (click)="goToSignUp()"> Create an account</span>
             </div>
-
         </div>
     </section>
-
+    <app-signup *ngIf="!isSignIn"></app-signup>
 </ion-content>

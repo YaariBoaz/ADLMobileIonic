@@ -1,48 +1,52 @@
 <header>
-    <div class="personal-titles">
-        <p class="name">Jack Smith Anderson</p>
-        <p class="weapon">M-4</p>
-    </div>
-    <div class="personal-widget">
-        <div class="points">
-            <span class="amount">180</span>
-            <p>points</p>
-        </div>
-        <div class="avatar">
-            <h1>IA</h1>
-        </div>
-        <div class="place">
-            <span class="amount">3rd</span>
-            <p>place</p>
-        </div>
-    </div>
+    <h1> Personal Details</h1>
 </header>
-<div class="tab3-container">
-    <div class="gray">
-
-        <div class="share-continer" *ngIf="allData.length > 0; else loggedOut">
-            <div class="share-continer-child" *ngFor="let item of allData">
-                <div class="image-and-info">
-                    <img class="img-list" alt="no image" [src]="item.url | cdvphotolibrary">
-                </div>
-                <div class="share-buttons">
-                    <button (click)="shareEmail(item)">Email</button>
-                </div>
+<section class="wrapper">
+    <div class="user-img-name">
+        <img src="../../assets/evi.png">
+        <h5>Evi Cohen</h5>
+    </div>
+    <hr>
+    <div class="user-details">
+        <div class="read-mode">
+            <div>
+                <h3> Age</h3>
+                <h3> Gender</h3>
+                <h3> Country</h3>
+                <h3> State</h3>
+                <h3> Email</h3>
             </div>
-        </div>
-        <ng-template #loggedOut>
-            <div class="noData">
-                <h1> No Data, Try Refreshing.</h1>
-                <h6>Or Maybe You Dont Have Any Data Yet</h6>
+            <div>
+                <h3 class="value">35</h3>
+                <h3 class="value">Male</h3>
+                <h3 class="value">USA</h3>
+                <h3 class="value">Virginia</h3>
+                <h3 class="value">evic@adl.solutions</h3>
             </div>
-        </ng-template>
-        <div class="settingsContainer">
-            <p> Please enter ip for example: 192.168.0.86</p>
-            <input [(ngModel)]="ip">
-            <button (click)="onSaveIP()"> Save</button>
         </div>
     </div>
-</div>
+    <hr>
+    <div class="default-drill">
+        <div>
+            <img src="../../assets/icons/rifle.png">
+            <h5> GUN </h5>
+            <span> AR-15 , AK, Tavor</span>
+        </div>
+        <hr>
+        <div>
+            <img src="../../assets/icons/gun-shooting-target.png">
+            <h5> SIGHT </h5>
+            <span>Trijicon,Mapro</span>
+        </div>
+        <hr>
+        <div>
+            <img src="../../assets/icons/bullseye_red.png   ">
+            <h5> TARGET </h5>
+            <span>eTarget 64</span>
+        </div>
+    </div>
+</section>
+
 
 
 

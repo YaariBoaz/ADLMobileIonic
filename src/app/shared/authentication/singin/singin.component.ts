@@ -62,7 +62,7 @@ export class SinginComponent implements OnInit {
                 } else {
                     setTimeout(() => {
                         this.splash = false;
-                    }, 1000);
+                    }, 5000);
                 }
             });
         });
