@@ -9,6 +9,7 @@ import {ChartsModule} from 'ng2-charts';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {ActivityHistoryPageComponent} from './activity-history-page/activity-history-page.component';
 import {SharedModule} from '../shared/shared.module';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
     imports: [
@@ -17,6 +18,8 @@ import {SharedModule} from '../shared/shared.module';
         FormsModule,
         SharedModule,
         NgxChartsModule,
+        MatIconModule,
+
         ChartsModule,
         RouterModule.forChild([
             {path: '', component: Tab1Page},

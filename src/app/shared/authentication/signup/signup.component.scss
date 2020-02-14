@@ -24,7 +24,7 @@
       color: $profile-bg;
     }
 
-    .login-form {
+    .signInForm {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -49,6 +49,11 @@
           font-weight: 600;
           color: $warm_grey;
         }
+
+      }
+
+      div.center {
+        align-items: center;
       }
 
       button {
@@ -61,6 +66,10 @@
       }
     }
   }
+}
+
+.invalid-feedback{
+  color:red;
 }
 
 

@@ -11,6 +11,8 @@ import {SocialSharing} from '@ionic-native/social-sharing/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
 import {SharedModule} from '../shared/shared.module';
+import {GunlistComponent} from './gunlist/gunlist.component';
+ import {SightlistComponent} from './sightlist/sightlist.component';
 
 // @ts-ignore
 @NgModule({
@@ -19,11 +21,11 @@ import {SharedModule} from '../shared/shared.module';
         CommonModule,
         FormsModule,
         SharedModule,
-        IonicStorageModule,
+        IonicStorageModule.forRoot(),
         RouterModule.forChild([{path: '', component: Tab3Page}])
     ],
     providers: [PhotoLibrary, EmailComposer, SocialSharing, Base64, CDVPhotoLibraryPipe],
-    declarations: [Tab3Page, CDVPhotoLibraryPipe],
+    declarations: [Tab3Page, CDVPhotoLibraryPipe, GunlistComponent, SightlistComponent],
     entryComponents: []
 })
 export class Tab3PageModule {

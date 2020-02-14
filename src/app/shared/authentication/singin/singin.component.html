@@ -22,7 +22,7 @@
                 </div>
                 <span (click)="goToSignUp()"> Forgot Password</span>
                 <div class="social">
-                    <button class="loginBtn loginBtn--facebook">
+                    <button (click)="onFBClick()" class="loginBtn loginBtn--facebook">
                         Login with Facebook
                     </button>
                 </div>
@@ -30,5 +30,5 @@
             </div>
         </div>
     </section>
-    <app-signup *ngIf="!isSignIn"></app-signup>
+    <app-signup (back)="backToSignin()" *ngIf="!isSignIn"></app-signup>
 </ion-content>

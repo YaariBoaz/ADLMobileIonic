@@ -38,7 +38,8 @@ header {
   align-items: center;
   justify-content: space-evenly;
   background-color: $headerBG;
-  height: 25%;
+  height: 10%;
+  padding: 0.5em;
 
   div.personal-titles {
     display: flex;
@@ -57,6 +58,7 @@ header {
       color: $profile-bg;
       font-weight: 300;
       font-size: 4vw;
+      padding: 0.5em;
     }
   }
 
@@ -261,4 +263,12 @@ div.form {
     height: 45px;
     padding-right: 15px;
   }
+}
+
+header:after {
+  content: '\2807';
+  font-size: 40px;
+  position: absolute;
+  right: 0;
+
 }

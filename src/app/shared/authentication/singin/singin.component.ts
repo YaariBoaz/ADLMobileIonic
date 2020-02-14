@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {Facebook, FacebookLoginResponse} from '@ionic-native/facebook/ngx';
 import {Router} from '@angular/router';
-import {Storage} from '@ionic/storage';
 import {trigger, transition, useAnimation} from '@angular/animations';
 import {zoomIn, bounceInRight, bounceInLeft, bounceInUp, bounceInDown} from 'ngx-animate';
 import {HttpClient} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
-import {ShareModalComponent} from '../../share.modal/share.modal.component';
 import {NetworkService} from '../../network.service';
 import {UserService} from '../../user.service';
+import {StorageService} from '../../storage.service';
+import {AlertController} from '@ionic/angular';
+
 
 @Component({
     selector: 'app-singin',
@@ -40,39 +41,33 @@ import {UserService} from '../../user.service';
 export class SinginComponent implements OnInit {
     splash = true;
     isSignIn = true;
-
     userName;
     password;
 
     constructor(
         private fb: Facebook,
         private http: HttpClient,
-        private storage: Storage,
         private router: Router,
+        private storageService: StorageService,
         private  modalService: ModalController,
+        public alertController: AlertController,
         private  network: NetworkService,
         private userService: UserService) {
-        this.network.hasConnectionSubject$.subscribe((connectionStatus) => {
-            this.storage.get('user').then(user => {
-                if (user) {
-                    this.userService.setUser(user);
-                    setTimeout(() => {
-                        this.router.navigateByUrl('/home/tabs/tab1');
-                    }, 1000);
-                } else {
-                    setTimeout(() => {
-                        this.splash = false;
-                    }, 5000);
-                }
-            });
-        });
+
     }
 
-
     ionViewDidLoad() {
+
     }
 
     ngOnInit() {
+        setTimeout(() => {
+            if (this.storageService.getItem('isLogedIn')) {
+                this.router.navigateByUrl('/home/tabs/tab1');
+            } else {
+                this.splash = false;
+            }
+        }, 5000);
     }
 
     onFBClick() {
@@ -84,14 +79,12 @@ export class SinginComponent implements OnInit {
                         'me?fields=id,name,email,first_name,last_name,picture.width(600).height(600).as(picture_small),picture.width(360).height(360).as(picture_large)',
                         [])
                         .then((profileData) => {
-                            console.log(JSON.stringify(profileData));
-                            // tslint:disable-next-line:max-line-length
-                            const homo = profileData.picture = 'https://graph.facebook.com/' + profileData.id + '/picture?width=1024&height=1024';
-                            this.storage.set('user', profileData);
+                            profileData.picture = 'https://graph.facebook.com/' + profileData.id + '/picture?width=1024&height=1024';
+                            this.storageService.setItem('profileData', profileData);
+                            this.storageService.setItem('isLogedIn', true);
                             this.router.navigateByUrl('/home/tabs/tab1');
-
                         }, (err) => {
-                            console.log(JSON.stringify(err));
+                            this.showAlert();
                         });
                 }
                 console.log('Logged into Facebook!', response);
@@ -102,6 +95,16 @@ export class SinginComponent implements OnInit {
         this.fb.logEvent(this.fb.EVENTS.EVENT_NAME_ADDED_TO_CART);
     }
 
+    async showAlert() {
+        const alert = await this.alertController.create({
+            header: 'Alert',
+            subHeader: 'Subtitle',
+            message: 'This is an alert message.',
+            buttons: ['OK']
+        });
+        alert.present();
+    }
+
     goToSignUp() {
         this.isSignIn = false;
     }
@@ -110,5 +113,9 @@ export class SinginComponent implements OnInit {
         // if (this.password && this.password > 3 && this.userName.indexOf('adl') > -1) {
         this.router.navigateByUrl('/home/tabs/tab1');
         // }
+    }
+
+    backToSignin() {
+        this.isSignIn = true;
     }
 }

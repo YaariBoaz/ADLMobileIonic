@@ -6,11 +6,11 @@ import {IonicModule} from '@ionic/angular';
 import {Facebook} from '@ionic-native/facebook/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {SignupComponent} from './signup/signup.component';
- import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [SinginComponent, SignupComponent],
-    imports: [IonicModule, AuthRouting, IonicStorageModule, CommonModule, FormsModule],
+    imports: [IonicModule, AuthRouting, IonicStorageModule, CommonModule, FormsModule, ReactiveFormsModule],
     providers: [Facebook],
     entryComponents: []
 })

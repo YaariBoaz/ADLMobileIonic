@@ -1,10 +1,20 @@
-<header>
-    <h1> Personal Details</h1>
-</header>
-<section class="wrapper">
+<section class="wrapper" *ngIf="profile">
+    <header>
+        <h1>Personal Settings</h1>
+    </header>
     <div class="user-img-name">
-        <img src="../../assets/evi.png">
-        <h5>Evi Cohen</h5>
+        <div class="edit-container">
+            <ion-icon ios="ios-create" md="md-create" size="large"></ion-icon>
+        </div>
+        <div class="image-and-name">
+            <div *ngIf="profile.picture" class="round-border">
+                <img src="../../assets/evi.png">
+            </div>
+            <div *ngIf="!profile.picture" class="round-border">
+                <img class="camera" src="../../assets/icons/camera.png"/>
+            </div>
+            <h5>{{profile.firstName}} {{profile.lastName}}</h5>
+        </div>
     </div>
     <hr>
     <div class="user-details">
@@ -17,11 +27,11 @@
                 <h3> Email</h3>
             </div>
             <div>
-                <h3 class="value">35</h3>
-                <h3 class="value">Male</h3>
-                <h3 class="value">USA</h3>
-                <h3 class="value">Virginia</h3>
-                <h3 class="value">evic@adl.solutions</h3>
+                <h3 class="value"> {{profile.age}}</h3>
+                <h3 class="value"> {{profile.gender}}</h3>
+                <h3 class="value"> {{profile.conutry}}</h3>
+                <h3 class="value"> {{profile.state}}</h3>
+                <h3 class="value"> {{profile.email}}</h3>
             </div>
         </div>
     </div>
@@ -30,23 +40,48 @@
         <div>
             <img src="../../assets/icons/rifle.png">
             <h5> GUN </h5>
-            <span> AR-15 , AK, Tavor</span>
+            <!--            <ion-select multiple="true" cancelText="Nah" okText="Okay!">-->
+            <!--                <ion-select-option *ngFor="let gun of gunList" value="{{gun}}">{{gun}}</ion-select-option>-->
+            <!--            </ion-select>-->
+            <div class="gunsWrapper" (click)="onSelectWeapons()">
+                <div *ngIf="myGuns">
+                    <div *ngFor="let gun of myGuns;let i = index">
+                        {{gun}}
+                        <span class="coma" *ngIf="i < myGuns.length-1">,</span>
+                    </div>
+                </div>
+                <div *ngIf="!myGuns" (click)="onSelectWeapons()">
+                    <h2> Select Default Weapon</h2>
+                </div>
+
+            </div>
         </div>
         <hr>
         <div>
             <img src="../../assets/icons/gun-shooting-target.png">
             <h5> SIGHT </h5>
-            <span>Trijicon,Mapro</span>
+            <div class="gunsWrapper" (click)="onSelectSights()">
+                <div *ngIf="mySights">
+                    <div *ngFor="let sight of mySights;let i = index">
+                        {{sight}}
+                        <span class="coma" *ngIf="i < mySights.length-1">,</span>
+                    </div>
+                </div>
+                <div *ngIf="!mySights">
+                    <h2> Select Default Sight</h2>
+                </div>
+            </div>
         </div>
         <hr>
-        <div>
-            <img src="../../assets/icons/bullseye_red.png   ">
-            <h5> TARGET </h5>
-            <span>eTarget 64</span>
-        </div>
+        <!--        <div>-->
+        <!--            <img src="../../assets/icons/bullseye_red.png   ">-->
+        <!--            <h5> TARGET </h5>-->
+        <!--            <span>eTarget 64</span>-->
+        <!--        </div>-->
     </div>
 </section>
-
+<app-gunlist (close)="onHidetWeapons()" class="gunlist" *ngIf="isGunList"></app-gunlist>
+<app-sightlist (close)="onHideSights()" class="gunlist" *ngIf="isSightList"></app-sightlist>
 
 
 
