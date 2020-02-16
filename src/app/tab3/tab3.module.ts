@@ -12,7 +12,8 @@ import {Base64} from '@ionic-native/base64/ngx';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
 import {SharedModule} from '../shared/shared.module';
 import {GunlistComponent} from './gunlist/gunlist.component';
- import {SightlistComponent} from './sightlist/sightlist.component';
+import {SightlistComponent} from './sightlist/sightlist.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 // @ts-ignore
 @NgModule({
@@ -21,6 +22,7 @@ import {GunlistComponent} from './gunlist/gunlist.component';
         CommonModule,
         FormsModule,
         SharedModule,
+        MatMenuModule,
         IonicStorageModule.forRoot(),
         RouterModule.forChild([{path: '', component: Tab3Page}])
     ],

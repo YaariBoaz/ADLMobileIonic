@@ -32,7 +32,7 @@ export class GunlistComponent implements OnInit {
     }
 
     filterList($event) {
-        const searchTerm = $event.srcElement.value;t
+        const searchTerm = $event.srcElement.value;
         if (!searchTerm) {
             return;
         }

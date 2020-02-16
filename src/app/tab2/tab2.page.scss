@@ -23,14 +23,7 @@ section.target-selection {
   }
 }
 
-button {
-  background-color: #3b3838;
-  width: 60%;
-  height: 20vw;
-  margin: 0.5em auto;
-  color: white;
-  font-size: 1.2em;
-}
+
 
 header {
   display: flex;
@@ -185,7 +178,6 @@ div.form {
 
       p {
         font-size: 1em;
-        font-weight: bold;
         margin: 0;
         color: black;
       }
@@ -229,6 +221,14 @@ div.form {
         font-weight: bold;
         background-color: transparent;
       }
+      button {
+        background-color: #3b3838;
+        width: 60%;
+        height: 20vw;
+        margin: 0.5em auto;
+        color: white;
+        font-size: 1.2em;
+      }
     }
 
 
@@ -265,10 +265,23 @@ div.form {
   }
 }
 
-header:after {
-  content: '\2807';
-  font-size: 40px;
+.menuBtn {
   position: absolute;
-  right: 0;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  span{
+    font-size: 40px;
+    font-weight: bold;
+    color: $profile-bg;
+  }
+}
 
+.startSessionBtn {
+  background-color: #3b3838;
+  width: 60%;
+  height: 20vw;
+  margin: 0.5em auto;
+  color: white;
+  font-size: 1.2em;
 }

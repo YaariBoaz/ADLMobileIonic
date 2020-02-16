@@ -1,13 +1,17 @@
 <section class="dashboard">
     <header>
         <div class="personal-titles">
-            <p class="name">Jack Smith Anderson</p>
+            <div>
+                <p class="name">Jack Smith Anderson</p>
+                <button class="menuBtn" mat-button [matMenuTriggerFor]="menu" style="">
+                    <span>⋮</span>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item>Item 1</button>
+                    <button mat-menu-item>Item 2</button>
+                </mat-menu>
+            </div>
             <p class="weapon">M-4</p>
-            <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>Item 1</button>
-                <button mat-menu-item>Item 2</button>
-            </mat-menu>
         </div>
         <div class="personal-widget">
             <div class="points">
@@ -122,8 +126,6 @@
                                 <p>You're better than most</p>
                             </div>
                         </div>
-
-
                         <div class="arrow-right" (click)="onNextSlide()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.721 22.938">
                                 <defs>

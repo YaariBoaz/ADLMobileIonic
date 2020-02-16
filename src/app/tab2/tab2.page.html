@@ -1,6 +1,13 @@
 <section class="target-selection">
     <header>
         <h1> Edit Drill</h1>
+        <button class="menuBtn" mat-button [matMenuTriggerFor]="menu" style="">
+            <span>⋮</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Item 1</button>
+            <button mat-menu-item>Item 2</button>
+        </mat-menu>
     </header>
     <div class="chooseTargetWrapper">
         <img src="../../assets/images/brown_icon_target.png" alt="gun-shooting-targer">
@@ -93,5 +100,5 @@
             </div>
         </div>
     </div>
-    <button (click)="startSesstion()" routerLink="select"> Start Session!</button>
+    <button class="startSessionBtn" (click)="startSesstion()" routerLink="select"> Start Session!</button>
 </section>

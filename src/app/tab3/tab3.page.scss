@@ -94,19 +94,13 @@ header {
   }
 }
 
-header:after {
-  content: '\2807';
-  font-size: 40px;
-  position: absolute;
-  right: 0;
-
-}
 
 .wrapper {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  background-color: $white_three;
 
   .user-img-name {
     display: flex;
@@ -183,9 +177,9 @@ header:after {
       span {
         padding: 0.5em;
         border: 1px solid;
-        width: 50%;
         text-align: left;
         padding-left: 10px;
+        font-size: 4vw;
       }
     }
   }
@@ -238,13 +232,18 @@ hr {
 
 .round-border {
   border-radius: 100%;
-  border: 4px solid #70524b;
+  border: 0.5vw solid #70524b;
 }
 
-header:after {
-  content: '\2807';
-  font-size: 40px;
+.menuBtn {
   position: absolute;
-  right: 0;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
 
+  span {
+    font-size: 40px;
+    font-weight: bold;
+    color: $profile-bg;
+  }
 }

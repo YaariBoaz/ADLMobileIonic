@@ -1,25 +1,11 @@
 .my-custom-menu {
   --width: 500px;
 }
-
-div.gray {
-  background-color: rgba(231, 231, 231, 0.8);
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  color: white;
-}
-
 section.results {
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-image: url("../../../../assets/images/soldier-background.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 100% 100%;
 }
 
 
