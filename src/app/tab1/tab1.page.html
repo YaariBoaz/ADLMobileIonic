@@ -1,8 +1,8 @@
 <section class="dashboard">
-    <header>
+    <header *ngIf="profile">
         <div class="personal-titles">
             <div>
-                <p class="name">Jack Smith Anderson</p>
+                <p class="name">{{profile.firstName}} {{profile.lastName}}</p>
                 <button class="menuBtn" mat-button [matMenuTriggerFor]="menu" style="">
                     <span>⋮</span>
                 </button>
@@ -11,15 +11,18 @@
                     <button mat-menu-item>Item 2</button>
                 </mat-menu>
             </div>
-            <p class="weapon">M-4</p>
         </div>
         <div class="personal-widget">
             <div class="points">
                 <span class="amount">180</span>
                 <p>points</p>
             </div>
-            <div class="avatar">
-                <h1>IA</h1>
+            <div *ngIf="!profile.picture" class="avatar">
+                <h1>{{profile.firstName | slice:0:1}}</h1>
+                <h1>{{profile.lastName | slice:0:1}}</h1>
+            </div>
+            <div *ngIf="profile.picture" class="avatar">
+                <img [src]="profile.picture"/>
             </div>
             <div class="place">
                 <span class="amount">3rd</span>
@@ -29,7 +32,7 @@
     </header>
     <div class="container-background">
         <div class="top-container">
-            <div class="slider-stats">
+            <div class="slider-stats" *ngIf="data">
                 <ion-slides (ionSlideDidChange)="slideChanged()" #slides [ngClass]="'myClass' + slideIndex"
                             [options]="options" class="slider" pager="true" style="height: 100%;    width: 100%;">
                     <!--                <ion-slide>-->
@@ -104,7 +107,7 @@
                                             [legend]="false"
                                             [plugins]="doghnuChartMetaData.doughnutChartPlugins"
                                             [colors]="doghnuChartMetaData.donutColors"
-                                            [data]="dashboardData.doughnutChartData"
+                                            [data]="data.hitRatioChart.data"
                                             [labels]="doghnuChartMetaData.doughnutChartLabels"
                                             [chartType]="'doughnut'">
                                     </canvas>
@@ -175,8 +178,8 @@
                             <div class="rateOfFireChartContainer">
                                 <div style="display: block;width:100%">
                                     <canvas baseChart
-                                            [datasets]="dashboardData.lineChartData"
-                                            [labels]="lineChartMetaData.lineChartLabels"
+                                            [datasets]="data.rateOfFireChart.chartData"
+                                            [labels]="data.rateOfFireChart.chartLabels"
                                             [options]="lineChartMetaData.lineChartOptions"
                                             [colors]="lineChartMetaData.lineChartColors"
                                             [legend]="false"
@@ -208,26 +211,26 @@
                 </ion-slides>
                 <hr style="height: 1px;width: 40%;background: #cdcdcd;">
             </div>
-            <div class="summaryContainer">
+            <div class="summaryContainer" *ngIf="data">
                 <div class="text-container">
                     <p class="titleSummary">Longest Shoot</p>
-                    <p class="valueSummary">1250yds</p>
+                    <p class="valueSummary">{{data.bestScores.longestShot}}</p>
                 </div>
 
                 <div class="text-container">
                     <p class="titleSummary">Fast Avg Split</p>
-                    <p class="valueSummary">2.5</p>
+                    <p class="valueSummary">{{data.bestScores.avgSplit}}</p>
                 </div>
 
 
                 <div class="text-container">
                     <p class="titleSummary">Best Avg Distance</p>
-                    <p class="valueSummary">3CM</p>
+                    <p class="valueSummary">{{data.bestScores.avgDistance}}</p>
                 </div>
 
                 <div class="text-container">
                     <p class="titleSummary">Last Shooting Session</p>
-                    <p class="valueSummary">08.07.2019 Monday</p>
+                    <p class="valueSummary">{{data.bestScores.lastShooting}}</p>
                 </div>
             </div>
         </div>
@@ -236,8 +239,9 @@
                 <hr style="height: 1px;width: 40%;background: #cdcdcd;">
                 <p class="training-log-header"> Training Log</p>
             </div>
-            <div class="history-container">
-                <div class="train-line" *ngFor="let train of dashboardData.trains" (click)="onActivityClicked(train)">
+            <div class="history-container" *ngIf="data">
+                <div class="train-line" *ngFor="let train of data.trainingHistorySummary"
+                     (click)="onActivityClicked(train)">
                     <div class="right-side-and-train-info-container">
                         <div class="right-side">
                             <div class="circle"></div>
@@ -246,8 +250,8 @@
                             <hr>
                         </div>
                         <div class="train-info">
-                            <p><span class="date">{{train.date}}</span>, <span class="day">{{train.day}}</span></p>
-                            <p class="light-text"> {{train.numberOfDrills}} Drills</p>
+                            <p><span class="date">{{train.date}}</span>, <span class="day">{{train.date}}</span></p>
+                            <p class="light-text"> {{train.numOfDrills}} Drills</p>
                         </div>
                     </div>
                     <div class="arrow-right">

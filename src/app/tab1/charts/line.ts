@@ -1,6 +1,5 @@
 export const lineChartMetaData = {
-    lineChartLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    lineChartOptions: {
+     lineChartOptions: {
         annotation: undefined,
         responsive: true
     },

@@ -17,8 +17,7 @@ export class StorageService {
         }));
     }
 
-    getItem(key?: string) {
-
+    getItem(key?: string): any {
         return this.data[key];
     }
 

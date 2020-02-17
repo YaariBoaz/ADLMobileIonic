@@ -1,4 +1,4 @@
-export const doghnuChartMetaData = {
+export const doghnuChartMetaData: DoghnuChartMetaData = {
     doughnutChartPlugins: [{
         beforeDraw(chart: any) {
             const ctx = chart.ctx;
@@ -42,3 +42,8 @@ export const doghnuChartMetaData = {
     doughnutChartLabels: ['Hits', 'Missed']
 };
 
+export interface DoghnuChartMetaData {
+    doughnutChartPlugins: any;
+    donutColors: any
+    doughnutChartLabels: any;
+}
