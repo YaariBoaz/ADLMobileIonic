@@ -66,15 +66,29 @@ export class BestScores {
 
 }
 
-export class TrainingHistorySummary {
-    date: Date;
-    day: string;
-    numOfDrills: number;
+export class TrainingHistory {
+    date?: string;
+    day?: string;
+    numberOfDrills?: number;
+    drillType?: string;
+    hits?: number;
+    totalShots?: number;
+    range?: number;
+    timeLimit?: number;
+    points?: number;
+    recommendation?: string;
 
     constructor() {
-        this.date = new Date();
+        this.date = '';
         this.day = '';
-        this.numOfDrills = 0;
+        this.numberOfDrills = 0;
+        this.drillType = '';
+        this.hits = 0;
+        this.totalShots = 0;
+        this.range = 0;
+        this.timeLimit = 0;
+        this.points = 0;
+        this.recommendation = '';
     }
 }
 
@@ -82,12 +96,14 @@ export class DashboardModel {
     hitRatioChart: HitRatioChart;
     rateOfFireChart: RateOfFireChart;
     bestScores: BestScores;
-    trainingHistorySummary: TrainingHistorySummary[];
+    trainingHistory: TrainingHistory[];
 
     constructor() {
         this.hitRatioChart = new HitRatioChart('Hit Ratio');
         this.rateOfFireChart = new RateOfFireChart('Rate Of Fire');
         this.bestScores = new BestScores();
-        this.trainingHistorySummary = new Array<TrainingHistorySummary>();
+        this.trainingHistory = new Array<TrainingHistory>();
     }
 }
+
+

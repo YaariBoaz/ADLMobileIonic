@@ -1,8 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
-import {ShootingService} from '../shared/session-modal/shooting.service';
 import {AlertController} from '@ionic/angular';
+import {ShootingService} from '../shared/services/shooting.service';
+import {StorageService} from '../shared/services/storage.service';
 
 @Component({
     selector: 'app-tab2',
@@ -11,74 +12,67 @@ import {AlertController} from '@ionic/angular';
 })
 export class Tab2Page {
 
-    sliderTwo =
-        {
-            isBeginningSlide: true,
-            isEndSlide: false,
-            slidesItems: [
-                {
-                    id: 6,
-                    image: '../../assets/icons/Zero.png',
-                },
-                {
-                    id: 7,
-                    image: '../../assets/icons/Hostage.png',
-                },
-                {
-                    id: 8,
-                    image: '../../assets/icons/Zero.png',
-                },
-                {
-                    id: 9,
-                    image: '../../assets/icons/bullseye_red.png',
-                },
-            ]
-        };
-s
+    @ViewChild('slides', {static: false}) slides;
 
-    slideOptsTwo = {
-        initialSlide: 1,
-        slidesPerView: 2,
-        loop: true,
-        centeredSlides: true
-    };
-
+    s;
+    mySights;
+    myGuns;
     drill: DrillObject = {
         numOfBullets: 5,
         weapon: 'Bergara HMR Pro',
         range: 150,
         rangeUOM: 'Meters',
         sight: 'V6 5-30 X 50',
-        ammo: 'Creedmor 6.5'
+        ammo: 'Creedmor 6.5',
+        drillType: 'Bullseye',
+        shots: new Array<{ x, y }>()
     };
-    wifiSsid;
+    DEFAULT_WEAPONS = [
+        'AR-15',
+        'M4',
+        'MP5',
+        'DOUBLE BARREL SHOTGUN',
+        'P40'
+    ];
+    DEFAULT_SIGHTS = [
+        'Trij',
+        'SLT',
+        'XXX',
+        'DP',
+        'P40'
+    ];
 
     constructor(public modalController: ModalController,
                 public alertController: AlertController,
                 private  shootingService: ShootingService,
-                private screenshot: Screenshot) {
+                private screenshot: Screenshot,
+                private storageService: StorageService) {
+        this.mySights = this.storageService.getItem('sightList');
+        this.myGuns = this.storageService.getItem('gunList');
+        this.drill.weapon = this.myGuns[0];
+        this.drill.sight = this.mySights[0];
+        if (!this.myGuns) {
 
+        }
+        if (!this.mySights) {
+
+        }
     }
 
-    SlideDidChange(object, slideView) {
-        this.checkIfNavDisabled(object, slideView);
-    }
+    slideDidChange(event) {
+        this.slides.getActiveIndex().then(index => {
+            switch (index) {
+                case 0:
+                    this.drill.drillType = 'Bullseye';
+                    break;
+                case 1:
+                    this.drill.drillType = 'Zero';
+                    break;
+                case 2:
+                    this.drill.drillType = 'Hostage';
+                    break;
+            }
 
-
-    checkIfNavDisabled(object, slideView) {
-        this.checkisBeginning(object, slideView);
-        this.checkisEnd(object, slideView);
-    }
-
-    checkisBeginning(object, slideView) {
-        slideView.isBeginning().then((istrue) => {
-            object.isBeginningSlide = istrue;
-        });
-    }
-
-    checkisEnd(object, slideView) {
-        slideView.isEnd().then((istrue) => {
-            object.isEndSlide = istrue;
         });
     }
 
@@ -88,6 +82,10 @@ s
         this.shootingService.numberOfBullersPerDrill = this.drill.numOfBullets;
     }
 
+    compareFn() {
+
+
+    }
 
     async showLongRangeAlert() {
         const alert = await this.alertController.create({
@@ -108,4 +106,6 @@ export interface DrillObject {
     rangeUOM: string;
     sight: string;
     ammo: string;
+    drillType: string;
+    shots: Array<{ x: number, y: number }>;
 }

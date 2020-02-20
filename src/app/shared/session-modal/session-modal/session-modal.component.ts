@@ -1,14 +1,13 @@
 import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ShootingService} from '../shooting.service';
+import {ShootingService} from '../../services/shooting.service';
 import {countUpTimerConfigModel, timerTexts} from 'ngx-timer';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {ModalController, Platform} from '@ionic/angular';
-import {ShareModalComponent} from '../../share.modal/share.modal.component';
 import {Storage} from '@ionic/storage';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {INetworkAdapter} from '../INetworkAdapter';
- import {CountupTimerService} from 'ngx-timer';
+import {CountupTimerService} from 'ngx-timer';
+import {DrillObject} from '../../../tab2/tab2.page';
 
 @Component({
     selector: 'app-session-modal',
@@ -18,12 +17,13 @@ import {INetworkAdapter} from '../INetworkAdapter';
 export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
     @Input() isHistory = false;
+    @Input() historyDrill: DrillObject;
     @ViewChild('container', {static: false}) container: ElementRef;
     @ViewChild('screen', {static: false}) screen: ElementRef;
     @ViewChild('canvas', {static: false}) canvas: ElementRef;
     @ViewChild('downloadLink', {static: false}) downloadLink: ElementRef;
     shots = [];
-    drill;
+    drill: DrillObject;
     testConfig: any;
     sharedData;
 
@@ -80,6 +80,9 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
         if (changes && changes.isHistory) {
             this.isHistory = changes.isHistory.currentValue;
         }
+        if (changes && changes.historyDrill) {
+            this.historyDrill = changes.historyDrill.currentValue;
+        }
     }
 
 
@@ -105,23 +108,7 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
     }
 
     async share() {
-        const imageId = this.uuidv4();
-        const modal = await this.modalController.create({
-            component: ShareModalComponent
-        });
-        await modal.present();
-        this.sharedData = await modal.onWillDismiss();
-        this.sharedData = this.sharedData.data.data;
-        this.sharedData.imageId = imageId;
-        let dataFromStoarge = await this.storage.get('adl-contacts');
-        if (!dataFromStoarge) {
-            dataFromStoarge = [];
-        }
-        dataFromStoarge.push(this.sharedData);
-        this.storage.set('adl-contacts', dataFromStoarge);
-        setTimeout(() => {
-            this.takeScreenShot(imageId);
-        }, 500);
+
     }
 
     private onError(error) {

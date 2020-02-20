@@ -1,8 +1,11 @@
+// @ts-ignore
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {NetworkService} from '../services/network.service';
+import {StorageService} from '../services/storage.service';
+import {parse} from 'date-fns';
+import {Router} from '@angular/router';
 
+// @ts-ignore
 @Component({
     selector: 'app-activity-history',
     templateUrl: './activity-history.component.html',
@@ -14,47 +17,26 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
         day: 'Tuesday',
         numberOfDrills: 6
     };
-    showTargetFlag = false;
-    drills = [
-        {
-            date: '05.07.18',
-            day: 'Tuesday',
-            numberOfDrills: 6,
-            hits: 10,
-            totalShots: 12,
-            range: 100,
-            timeLimit: null,
-            drillType: 'Zero',
-            points: 14,
-            reccomendation: 'Eat shit for breakfest'
-        },
-        {
-            date: '06.07.18',
-            day: 'Wednsday',
-            numberOfDrills: 9,
-            drillType: 'Hostage',
-            hits: 5,
-            totalShots: 9,
-            range: 30,
-            timeLimit: 30,
-            points: 12,
-            reccomendation: 'Take a shower'
-        }
-    ];
+    drills: TrainingHistory[];
+    hasConnection;
 
-    constructor(public activatedRoute: ActivatedRoute, private  router: Router) {
+    constructor(private  router: Router, private  networkService: NetworkService, private stoargeService: StorageService) {
+        this.networkService.hasConnectionSubject$.subscribe(hasConnection => {
+            this.hasConnection = hasConnection;
+            if (this.hasConnection) {
+                this.handleOfflineScenario();
+            } else {
+                this.handleOfflineScenario();
+            }
+        });
     }
 
     ngOnInit() {
-        this.activatedRoute.queryParams.subscribe((data: any) => {
-            this.train = JSON.parse(data);
-        });
 
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-    debugger;
-    }
+     }
 
     toggleAccordian(event, index) {
         const element = event.target;
@@ -75,4 +57,41 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     onBackPressed() {
         this.router.navigateByUrl('/home/tabs/tab1');
     }
+
+    handleOfflineScenario() {
+        this.stoargeService.historicalTrainingsDate$.subscribe((date) => {
+            if (date) {
+                this.drills = [];
+                const tempDrills = this.stoargeService.getItem('homeData').trainingHistory;
+                const [day, month, year] = date.split('.');
+                const dateObject = new Date(year, month - 1, day);
+                tempDrills.forEach((drill) => {
+                    const [day1, month1, year1] = date.split('.');
+                    const dateObject1 = new Date(year1, month1 - 1, day1);
+                    if (dateObject1.getMonth() === dateObject.getMonth()) {
+                        this.drills.push(drill);
+                    }
+                });
+            }
+
+        });
+
+    }
+
+    handleOnlineScenario() {
+
+    }
+}
+
+export interface TrainingHistory {
+    date: string;
+    day: string;
+    numberOfDrills: number;
+    hits: number;
+    totalShots: number;
+    range: number;
+    timeLimit: number;
+    drillType: string;
+    points: number;
+    recommendation: string;
 }

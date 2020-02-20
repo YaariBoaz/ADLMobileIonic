@@ -1,6 +1,9 @@
+@import "../../../../assets/colors";
+
 .my-custom-menu {
   --width: 500px;
 }
+
 section.results {
   height: 100%;
   width: 100%;
@@ -8,26 +11,86 @@ section.results {
   flex-direction: column;
 }
 
-
-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(59, 56, 56, 1);
-  box-sizing: border-box;
-  padding: 0.5em;
+.wrapper-qll {
   height: 100%;
+  width: 100%;
+  background-color: $white_three;
 
-  h1 {
-    color: #936f00;
-    text-align: center;
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 10vw;
+
+    .menuBtn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: transparent;
+
+      span {
+        font-size: 25px;
+        color: #9f9f9f;
+      }
+    }
+
+    p {
+      margin: 0;
+      text-align: center;
+      width: 33%;
+      color: #9f9f9f;
+    }
+
+    p.drill-type {
+      font-weight: bold;
+      color: #616161;
+    }
+  }
+
+  .target-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+
+    .icons {
+      display: flex;
+      flex-direction: column;
+
+      .wifi-status {
+        display: flex;
+        align-items: center;
+
+        p {
+          margin: 0;
+          font-size: 12px;
+          margin-left: 5px;
+        }
+      }
+
+      img {
+        height: 20px
+      }
+    }
+
+    .clear-target {
+      width: 40vw;
+      background: black;
+      color: white;
+      padding: 0.5em;
+      border-radius: 8px;
+      text-align: center;
+    }
+  }
+
+  hr {
+    height: 1px;
+    background-color: gray;
     margin: 0;
-    width: 100%;
-    text-align: center;
-    left: 20%;
   }
 }
+
 
 div.results {
   display: flex;
@@ -105,13 +168,12 @@ div.details {
 
     p {
       margin: 0;
-      color: rgba(59, 56, 56, 1);
+      color: #0785c9;
       padding: 0.5em 0;
       font-size: 20px;
 
       &.title {
-        color: rgba(147, 111, 0, 1);
-        color: #936f00;
+         color: #6f6f6f;
         font-weight: 500;
         font-size: 16px;
         text-decoration: underline;
@@ -200,25 +262,3 @@ div.details {
   height: 45px;
 }
 
-ion-grid {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-}
-
-ion-row {
-  padding: 0;
-}
-
-ion-col {
-  padding: 0;
-}
-
-.wrapper-qll {
-  height: 100%;
-  width: 100%;
-
-}

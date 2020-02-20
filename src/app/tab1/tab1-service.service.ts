@@ -3,7 +3,7 @@ import {ChartDataSets, ChartType, RadialChartOptions} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {Storage} from '@ionic/storage';
 import {Observable} from 'rxjs';
-import {ApiService} from '../shared/api.service';
+import {ApiService} from '../shared/services/api.service';
 
 @Injectable({
     providedIn: 'root'

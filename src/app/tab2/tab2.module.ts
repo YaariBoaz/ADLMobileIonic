@@ -11,7 +11,7 @@ import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {SelectTargetModalComponent} from '../shared/select-target-modal/select-target-modal.component';
 import {SessionModalComponent} from '../shared/session-modal/session-modal/session-modal.component';
-import {SharedModule} from '../shared/shared.module';
+import {SharedModule} from '../shared/services/shared.module';
 
 // @ts-ignore
 // @ts-ignore

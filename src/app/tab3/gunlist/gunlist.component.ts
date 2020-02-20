@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {StorageService} from '../../shared/storage.service';
+import {StorageService} from '../../shared/services/storage.service';
 
 @Component({
     selector: 'app-gunlist',
@@ -17,10 +17,8 @@ export class GunlistComponent implements OnInit {
     };
     public goalList: any[];
     public loadedGoalList: {};
-
-    gunTypes;
     models = null;
-    myGuns = null;
+        myGuns = null;
     private selectedGunType = '';
 
     constructor(private storage: Storage, private storageService: StorageService) {
@@ -54,15 +52,15 @@ export class GunlistComponent implements OnInit {
 
     onShowModel(item) {
         this.selectedGunType = item.key;
-        this.models = this.gunTypes[item.key];
+        this.models = this.DEFUALT_GUNS[item.key];
     }
 
     onModelClicked(item: any) {
         if (!this.myGuns) {
             this.myGuns = [];
         }
-        this.myGuns.push(this.selectedGunType + ', ' + item.model);
-        this.gunTypes[this.selectedGunType].forEach(model => {
+        this.myGuns.push(item.model);
+        this.DEFUALT_GUNS[this.selectedGunType].forEach(model => {
             if (model.model === item.model) {
                 model.isSelected = !model.isSelected;
             }

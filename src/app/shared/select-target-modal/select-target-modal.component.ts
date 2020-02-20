@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ShootingService} from '../session-modal/shooting.service';
+import {ShootingService} from '../services/shooting.service';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Storage} from '@ionic/storage';
+import {StorageService} from '../services/storage.service';
 
 @Component({
     selector: 'app-select-target-modal',
@@ -15,8 +16,18 @@ export class SelectTargetModalComponent implements OnInit {
     BASE_URL_HTTP = '192.168.0.86:8087';
     socket;
     GET_TARGETS_API;
+    targetList = [
+        'eTarget 64',
+        'eTarget 16',
+    ];
+    myTargets = [];
 
-    constructor(private http: HttpClient, private storage: Storage, private shootingService: ShootingService, private router: Router) {
+    constructor(private http: HttpClient,
+                private storageService: StorageService,
+                private shootingService: ShootingService,
+                private router: Router) {
+        this.myTargets = this.storageService.getItem('myTargets');
+
         // if (!this.shootingService.getBaseUrl()) {
         //     this.storage.get('ip').then((data) => {
         //         if (!data) {
@@ -51,6 +62,10 @@ export class SelectTargetModalComponent implements OnInit {
 
     onTargetChosen(target) {
         this.shootingService.chosenTarget = target;
+    }
+
+    startTraining() {
+        this.router.navigateByUrl('/home/tabs/tab2/select2');
     }
 
     onBackPressed() {

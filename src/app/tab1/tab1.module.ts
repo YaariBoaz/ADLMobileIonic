@@ -8,9 +8,10 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {ChartsModule} from 'ng2-charts';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {ActivityHistoryPageComponent} from './activity-history-page/activity-history-page.component';
-import {SharedModule} from '../shared/shared.module';
+import {SharedModule} from '../shared/services/shared.module';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material';
+import {DateFnsModule} from 'ngx-date-fns';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatMenuModule} from '@angular/material';
         MatIconModule,
         MatMenuModule,
         ChartsModule,
+        DateFnsModule,
         RouterModule.forChild([
             {path: '', component: Tab1Page},
             {path: 'activity-history', component: ActivityHistoryPageComponent},

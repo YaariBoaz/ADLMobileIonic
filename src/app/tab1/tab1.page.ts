@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonSlides, Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {UserService} from '../shared/user.service';
-import {NetworkService} from '../shared/network.service';
+import {UserService} from '../shared/services/user.service';
+import {NetworkService} from '../shared/services/network.service';
 import * as radarChartMetaData from './charts/radarChart';
 import * as doghnuChartMetaData from './charts/doghnut';
 import * as lineChartMetaData from './charts/line';
-import {StorageService} from '../shared/storage.service';
+import {StorageService} from '../shared/services/storage.service';
 import {DashboardModel} from '../shared/models/dashboard-model';
 import {DoghnuChartMetaData} from './charts/doghnut';
 
@@ -18,24 +18,6 @@ import {DoghnuChartMetaData} from './charts/doghnut';
 export class Tab1Page implements OnInit {
     @ViewChild('slides', {static: false}) slides: IonSlides;
 
-    // dashboardData = {
-    //
-    //     lineChartData: [
-    //         {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    //     ],
-    //     doughnutChartData: [[65, 35]],
-    //     trains: [
-    //         {
-    //             date: '05.07.18',
-    //             day: 'Tuesday',
-    //             numberOfDrills: 6
-    //         },
-    //         {
-    //             date: '05.07.18',
-    //             day: 'Tuesday',
-    //             numberOfDrills: 6
-    //         }]
-    // };
 
     radarChartMetaData;
     doghnuChartMetaData: DoghnuChartMetaData;
@@ -89,11 +71,11 @@ export class Tab1Page implements OnInit {
     }
 
     onPrevSlide() {
-        console.log('Prev');
         this.slides.slidePrev(1000);
     }
 
     onActivityClicked(train) {
+        this.storageService.passhistoricalTrainingsDate(train.date);
         this.router.navigate(['/home/tabs/tab1/activity-history'], {queryParams: {activity: JSON.stringify(train)}});
     }
 
@@ -103,31 +85,7 @@ export class Tab1Page implements OnInit {
 
     private handleOfflineScenario() {
         this.data = this.storageService.getItem('homeData');
-        if (!this.data) {
-            const temp = new DashboardModel();
-            temp.hitRatioChart.data = [[65, 35]];
-            temp.rateOfFireChart.chartData.push({data: [65, 76, 88, 45]});
-            temp.rateOfFireChart.chartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-            temp.trainingHistorySummary = [
-                {
-                    date: new Date(),
-                    day: 'Tuesday',
-                    numOfDrills: 6
-                },
-                {
-                    date: new Date(),
-                    day: 'Tuesday',
-                    numOfDrills: 6
-                }];
-            temp.bestScores = {
-                longestShot: 1250,
-                avgSplit: 2.5,
-                avgDistance: 3,
-                lastShooting: new Date()
-            };
-            this.data = temp;
-        }
-    }
+     }
 }
 
 

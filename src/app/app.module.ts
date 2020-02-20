@@ -11,7 +11,8 @@ import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {IonicStorageModule} from '@ionic/storage';
-import {SharedModule} from './shared/shared.module';
+import {SharedModule} from './shared/services/shared.module';
+import {DateFnsModule} from 'ngx-date-fns';
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,7 +24,9 @@ import {SharedModule} from './shared/shared.module';
         BrowserAnimationsModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+        DateFnsModule.forRoot()
+
     ],
     providers: [
         StatusBar,
@@ -32,7 +35,7 @@ import {SharedModule} from './shared/shared.module';
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent],
-    exports: []
+    exports: [DateFnsModule]
 })
 export class AppModule {
 }

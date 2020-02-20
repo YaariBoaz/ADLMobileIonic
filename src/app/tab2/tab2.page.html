@@ -14,18 +14,17 @@
         <p>CHOOSE TARGET TYPE:
         <p>
     </div>
-    <ion-slides class="sliders" pager="true">
-
-        <ion-slide>
-            <div class="imgWrapper">
-                <img src="../../assets/icons/Zero.png" alt="No image">
-                <p>Zero</p>
-            </div>
-        </ion-slide>
+    <ion-slides #slides effect=“slide”  class="sliders" pager="true" (ionSlideDidChange)="slideDidChange($event)">
         <ion-slide>
             <div class="imgWrapper">
                 <img src="../../assets/icons/bullseye_red.png" alt="No image">
                 <p>Bullseye</p>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <div class="imgWrapper">
+                <img src="../../assets/icons/Zero.png" alt="No image">
+                <p>Zero</p>
             </div>
         </ion-slide>
         <ion-slide>
@@ -64,13 +63,15 @@
                 <img src="../../assets/icons/rifle.png" alt="gun-shooting-targer" class="border">
                 <p>WEAPON:</p>
             </div>
-            <div class="inputs">
+           <div class="inputs" *ngIf="myGuns">
                 <select [(ngModel)]="drill.weapon">
-                    <option value="AR-15">AR-15</option>
-                    <option value="M4">M4</option>
-                    <option value="MP5">MP5</option>
-                    <option value="DOUBLE BARREL SHOTGUN">DOUBLE BARREL SHOTGUN</option>
-                    <option value="P40">P40</option>
+                    <option *ngFor="let gun of myGuns" [value]="gun">{{gun}}</option>
+                </select>
+            </div>
+            <div class="inputs" *ngIf="!myGuns">
+                <select [(ngModel)]="drill.weapon">
+                    <option value="-1">Please select a weapon</option>
+                    <option *ngFor="let gun of DEFAULT_WEAPONS" [value]="gun">{{gun}}</option>
                 </select>
             </div>
         </div>
@@ -79,11 +80,20 @@
                 <img src="../../assets/icons/gun-shooting-target.png" alt="gun-shooting-targer" class="border">
                 <p>SIGHT:</p>
             </div>
-            <div class="inputs">
+
+            <div class="inputs" *ngIf="mySights">
                 <select [(ngModel)]="drill.sight">
-                    <option value="Trijicon">Trijicon</option>
+                    <option value="-1">Please select a weapon</option>
+                    <option *ngFor="let sight of mySights" [value]="sight">{{sight}}</option>
                 </select>
             </div>
+            <div class="inputs" *ngIf="!mySights">
+            <select [(ngModel)]="drill.sight"  [value]='null'>
+                <option [value]="null">Please Select</option>
+                <option *ngFor="let sight of DEFAULT_SIGHTS" [ngValue]="sight">{{sight}}</option>
+            </select>
+        </div>
+
         </div>
         <div class="container">
             <div class="title-and-icon">

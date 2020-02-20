@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {StorageService} from '../shared/storage.service';
+import {StorageService} from '../shared/services/storage.service';
 
 
 @Component({
@@ -23,8 +23,7 @@ export class Tab3Page implements OnInit {
     constructor(private storageService: StorageService) {
     }
 
-
-    ngOnInit(): void {
+    ionViewDidEnter() {
         this.profile = this.storageService.getItem('profileData');
         this.myGuns = this.storageService.getItem('gunList');
         this.mySights = this.storageService.getItem('sightList');
@@ -32,6 +31,10 @@ export class Tab3Page implements OnInit {
         if (!this.profile) {
             this.profile = {};
         }
+    }
+
+    ngOnInit(): void {
+
     }
 
 
@@ -84,6 +87,7 @@ export class Tab3Page implements OnInit {
     onSelectWeapons() {
         this.isGunList = true;
     }
+
     onHidetWeapons() {
         this.isGunList = false;
         this.myGuns = this.storageService.getItem('gunList');
@@ -92,9 +96,11 @@ export class Tab3Page implements OnInit {
     onSelectSights() {
         this.isSightList = true;
     }
+
     onHideSights() {
         this.isSightList = false;
         this.mySights = this.storageService.getItem('sightList');
+
     }
 
 

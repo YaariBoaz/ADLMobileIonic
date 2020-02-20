@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {StorageService} from '../../shared/storage.service';
+import {StorageService} from '../../shared/services/storage.service';
 
 @Component({
     selector: 'app-sightlist',

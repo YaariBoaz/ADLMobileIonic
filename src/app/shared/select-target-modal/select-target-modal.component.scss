@@ -1,30 +1,5 @@
 @import "../../../assets/colors";
 
-.target-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  width: 50%;
-  border: 1px solid #0000003d;
-  padding: 0.5em;
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  margin-bottom: 40px;
-
-  img {
-    width: 70%;
-  }
-}
-
-.target-list {
-  padding: 0.5em;
-  overflow-y: auto;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 75%;
-  border-bottom: 1px solid #ffffff61;
-}
 
 .startSessionBtn {
   background-color: #3b3838;
@@ -43,7 +18,6 @@ section.target-selection {
   flex-direction: column;
   background-color: $white_three;
 
-
   header {
     display: flex;
     align-items: center;
@@ -58,74 +32,117 @@ section.target-selection {
       font-size: 6vw;
     }
 
+    .menuBtn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background-color: transparent;
 
-    div.personal-widget {
-      background-color: white;
-      border-radius: 25px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: relative;
-
-      width: 50%;
-      height: 11vw;
-
-      div.avatar {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 100%;
-        background-color: $profile-bg;
-
-        width: 15vw;
-        height: 15vw;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-
-        h1 {
-          color: white;
-          text-align: center;
-          margin: 0;
-          font-size: 6vw;
-        }
-      }
-
-      div.points,
-      div.place {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        box-sizing: border-box;
-        padding: 0.2em;
-        width: 30%;
+      span {
+        font-size: 40px;
+        font-weight: bold;
         color: $profile-bg;
-
-        span.amount {
-          color: $profile-bg;
-          font-weight: 700;
-          font-size: 4vw;
-        }
-
-        p {
-          margin: 0;
-          font-size: 3vw;
-        }
       }
     }
   }
 
+  .target-list-wrapper {
 
-  div.gray {
-    background-color: rgba(231, 231, 231, 0.8);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+
+    .top-bar {
+
+      display: flex;
+      flex-direction: column;
+
+      .target-image-wifi-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .target-and-image {
+          display: flex;
+          align-items: center;
+          margin-left: 10px;
+
+          img {
+            height: 10vw;
+            margin-right: 10px;
+          }
+
+
+        }
+        .connect-to-wifi {
+          background: black;
+          color: white;
+          padding: 0.5em;
+          margin-right: 10px;
+        }
+      }
+
+      .target-rectangle {
+        background: #036396;
+        box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+        padding: 0.5em;
+        width: 95%;
+        color: white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+      }
+
+
+      span {
+        margin: 0;
+        color: #8cb7cd;
+        margin-left: 10px;
+        font-size: 15px;
+      }
+    }
+
+
+    .target-list {
+      display: flex;
+      flex-direction: column;
+
+      hr {
+        height: 0.3vw;
+        background: #80808094;
+        width: 95%;
+        margin-top: 15px;
+      }
+
+    }
+  }
+
+  .target-rectangle {
+    background: #036396;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+    padding: 0.5em;
+    width: 95%;
     color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: 15vw;
+    align-items: center;
+  }
+
+  .regular {
+    background-color: white;
+    color: black;
+    margin-bottom: 20px;
+  }
+
+  .startSession {
+    position: absolute;
+    bottom: 20px;
+    background: black;
+    color: white;
+    height: 13vw;
+    width: 60vw;
+    left: calc((100% - 60vw) / 2);
   }
 
 }
@@ -137,25 +154,6 @@ section.target-selection {
   justify-content: center;
 }
 
-.menuBtn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: transparent;
-
-  span {
-    font-size: 40px;
-    font-weight: bold;
-    color: $profile-bg;
-  }
-}
-
-ion-icon{
-  color: $profile-bg;;
-  position: absolute;
-  top: 15px;
-  left: 5px;
-}
 
 .noConnection {
   height: 100%;
@@ -163,7 +161,24 @@ ion-icon{
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  p{
+
+  p {
     text-align: center;
   }
+}
+
+
+.startSession {
+  position: absolute;
+  bottom: 20px;
+  background: black;
+  color: white;
+  height: 13vw;
+  width: 60vw;
+  left: calc((100% - 60vw) / 2);
+}
+
+ion-icon{
+  position: absolute;
+  left: 6px;
 }

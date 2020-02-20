@@ -139,7 +139,7 @@
       .hits {
         display: flex;
         flex-direction: column;
-
+        align-items: center;
         div {
           display: flex;
           align-items: center;
@@ -155,6 +155,7 @@
       }
 
       .range {
+        text-align: center;
         h1 {
           margin: 0
         }
@@ -241,4 +242,17 @@
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
+
+.menuBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  span{
+    font-size: 40px;
+    font-weight: bold;
+    color: $profile-bg;
+  }
+}
+
 

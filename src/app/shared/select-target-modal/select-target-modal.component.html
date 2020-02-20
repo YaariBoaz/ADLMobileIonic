@@ -1,5 +1,4 @@
 <section class="target-selection">
-
     <header>
         <ion-icon size="large" (click)="onBackPressed()" ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
         <p>Select Target</p>
@@ -11,15 +10,24 @@
             <button mat-menu-item>Item 2</button>
         </mat-menu>
     </header>
-    <div class="target-list" *ngIf="shootingService.targets; else noTargets">
-        <div (click)="onTargetChosen(target)" routerLink="/home/tabs/tab2/select2" class="target-wrapper"
-             *ngFor="let target of shootingService.targets">
-            <img src="../../assets/icons/bullseye_red.png">
-            <p style="color:black;font-size: 18px;font-weight: bold"> {{target}}</p>
+    <div class="target-list-wrapper" *ngIf="!shootingService.targets; else noTargets">
+        <div class="top-bar">
+            <div class="target-image-wifi-wrapper">
+                <div class="target-and-image">
+                    <img src="../../../assets/images/brown_icon_target.png">
+                    <p>Target</p>
+                </div>
+                <div class="connect-to-wifi"> Connect Wi-fi</div>
+            </div>
+            <span>Personal Target </span>
+            <div class="target-rectangle"> eTarget 64</div>
         </div>
-        <div>
-            <button class="startSessionBtn"> Start Session!</button>
+
+        <div class="target-list">
+            <hr/>
+            <div *ngFor="let target of targetList" class="target-rectangle regular"  (click)="onTargetChosen(target)">{{target}}</div>
         </div>
+        <button class="startSession" (click)="startTraining()"> START SESSION</button>
     </div>
     <ng-template #noTargets>
         <div class="noConnection">
@@ -27,8 +35,6 @@
             <img src="../../../assets/images/bg/broken-weapon.svg">
         </div>
     </ng-template>
-
-
 </section>
 
 

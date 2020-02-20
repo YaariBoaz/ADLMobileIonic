@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <span *ngIf="!mySights"> Select Default Sight</span>
+            <span (click)="onSelectSights()" *ngIf="!mySights"> Select Default Sight</span>
         </div>
         <hr>
         <!--        <div>-->

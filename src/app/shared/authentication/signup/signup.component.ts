@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {StorageService} from '../../storage.service';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
     selector: 'app-signup',

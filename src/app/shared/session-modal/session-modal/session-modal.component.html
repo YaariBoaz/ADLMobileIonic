@@ -1,108 +1,91 @@
-<section class="wrapper-qll">
-    <div [class.isHistoryBG]="isHistory===true" class="gray">
-        <ion-grid>
-            <ion-row *ngIf="!isHistory">
-                <ion-col>
-                    <header>
-                        <ion-icon (click)="onBackPressed()" routerLink="/home/tabs/tab2" class="back-btn"
-                                  name="arrow-back"></ion-icon>
-                        <h1>Shooting Session</h1>
-                        <button style="height: 45px;
-    width: 45px;
-    background: transparent;
-    color: white;
-    font-size: 40px;" mat-button [matMenuTriggerFor]="menu">⋮
-                        </button>
-                        <mat-menu #menu="matMenu">
-                            <button (click)="restartSession()" class="menu-item-wrapper" [style.width.px]="200"
-                                    mat-menu-item>
-                                Restart Session
-                            </button>
-                            <button (click)="stopAndShare()" class="menu-item-wrapper" [style.width.px]="200"
-                                    mat-menu-item>
-                                Stop And Share
-                            </button>
-                        </mat-menu>
-                    </header>
-                </ion-col>
-            </ion-row>
-            <ion-row *ngIf="!isHistory">
-                <ion-col>
-                    <div class="results">
-                        <p>Bullseye Drill</p>
-                        <div class="info">
-                            <p><b>{{drill?.numOfBullets}}</b>Bullets</p>
-                            <p><b>{{drill?.range}}</b>{{drill?.rangeUOM}}</p>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div [class.isHistory]="isHistory===true" class="main-image" #screen>
-                        <img style="width:100%;" #container src="../../../assets/images/bullseye_red.png" alt="bullsEye"
-                             *ngIf="!drillFinished">
-                        <img style="width:100%;"
-                             #container src="../../../assets/images/bullseye_black.png" alt="bullsEye"
-                             *ngIf="drillFinished">
-                        <div *ngFor="let shot of shots" style="position: absolute;height:100%;width:100%">
-                            <img src="../../../assets/images/bullethit.png"
-                                 style="position: absolute;height:35px;width:35px"
-                                 [style.top.px]=shot.y
-                                 [style.right.px]=shot.x
-                            >
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div class="details">
-                        <div class="box">
-                            <p class="title">Hits</p>
-                            <p>{{counter}}/{{shootingService.numberOfBullersPerDrill}}</p>
-                        </div>
+<section class="wrapper-qll" *ngIf="drill">
+    <div [class.isHistoryBG]="isHistory===true">
+        <header>
+            <p class="drill-type">Bullseye</p>
+            <p>Trigicon</p>
+            <p class="align-right">25M</p>
+            <button class="menuBtn" mat-button [matMenuTriggerFor]="menu" style="">
+                <span>⋮</span>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item>Item 1</button>
+                <button mat-menu-item>Item 2</button>
+            </mat-menu>
+        </header>
+        <hr/>
+        <div class="target-details">
+            <div class="icons">
+                <div class="wifi-status">
+                    <img src="../../../../assets/icons/connected_icon_2709.svg">
+                    <p>Connected</p>
+                </div>
+                <div class="wifi-status">
+                    <img src="../../../../assets/icons/full_battery_icon_2.svg">
+                    <p>86%</p>
+                </div>
+            </div>
+            <div class="clear-target">
+                CLEAR TARGET AND SHOOT
+            </div>
+        </div>
+        <div [class.isHistory]="isHistory===true" class="main-image" #screen [ngSwitch]="drill.drillType">
+            <img *ngSwitchCase="'Bullseye'" style="width:100%;" #container src="../../../assets/images/bullseye_red.png"
+                 alt="bullsEye"
+            >
+            <img style="width:100%;"
+                 #container src="../../../../assets/icons/Hostage.png" alt="Hostage"
+                 *ngSwitchCase="'Hostage'">
+            <div *ngFor="let shot of shots" style="position: absolute;height:100%;width:100%">
+                <img src="../../../assets/images/bullethit.png"
+                     style="position: absolute;height:35px;width:35px"
+                     [style.top.px]=shot.y
+                     [style.right.px]=shot.x
+                >
+            </div>
+        </div>
 
-                        <div class="box">
-                            <p class="title">AVG-DIS</p>
-                            <p>{{distanceFromCenter | number : '1.2-2'}}</p>
-                        </div>
+        <div class="details">
+            <div class="box">
+                <p class="title">Bullets</p>
+                <p>{{counter}}/{{shootingService.numberOfBullersPerDrill}}</p>
+            </div>
 
-                        <div class="box">
-                            <p class="title">Tot. Time</p>
-                            <p>
-                                <countup-timer [countUpTimerConfig]="testConfig"></countup-timer>
-                            </p>
-                        </div>
+            <div class="box">
+                <p class="title">AVG-DIS</p>
+                <p>{{distanceFromCenter | number : '1.2-2'}}</p>
+            </div>
 
-                        <div class="box">
-                            <p class="title">AVG. Split</p>
-                            <p>{{splitTime}}</p>
-                        </div>
+            <div class="box">
+                <p class="title">Time</p>
+                <p>
+                    <countup-timer [countUpTimerConfig]="testConfig"></countup-timer>
+                </p>
+            </div>
 
-                        <div class="box">
-                            <p class="title">Points</p>
-                            <p>{{points | number : '1.2-2'}}</p>
-                        </div>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col>
-                    <div *ngIf="drillFinished" class="shareContainer" (click)="share()">
-                        <svg xmlns="http://www.w3.org/2000/svg" style="
+            <div class="box">
+                <p class="title">Split</p>
+                <p>{{splitTime}}</p>
+            </div>
+
+            <div class="box">
+                <p class="title">Points</p>
+                <p>{{points | number : '1.2-2'}}</p>
+            </div>
+        </div>
+
+
+        <div *ngIf="drillFinished" class="shareContainer" (click)="share()">
+            <svg xmlns="http://www.w3.org/2000/svg" style="
     height: 40px;
     width: 40px;
     fill: white;
         margin-right: 10px;
 " height="453pt" viewBox="0 -28 453.99791 453" width="453pt">
-                            <path d="m345.375 3.410156c-2.863281-2.847656-7.160156-3.695312-10.890625-2.144531s-6.164063 5.195313-6.164063 9.234375v53.359375c-54.011718 2.148437-81.058593 24.539063-85.191406 28.261719-27.25 22.363281-45.855468 53.527344-52.613281 88.121094-3.378906 16.714843-3.984375 33.871093-1.785156 50.78125l.007812.058593c.019531.148438.042969.300781.066407.449219l2.125 12.214844c.714843 4.113281 3.914062 7.351562 8.019531 8.117187 4.109375.765625 8.257812-1.105469 10.40625-4.6875l6.367187-10.613281c19.5625-32.527344 43.941406-54.089844 72.46875-64.085938 12.867188-4.550781 26.5-6.546874 40.128906-5.882812v55.265625c0 4.046875 2.441407 7.699219 6.183594 9.242187 3.746094 1.546876 8.050782.679688 10.90625-2.191406l105.675782-106.210937c3.894531-3.914063 3.878906-10.246094-.035157-14.140625zm2.949219 194.214844v-40.027344c0-4.90625-3.5625-9.089844-8.410157-9.871094-8.554687-1.378906-31.371093-3.570312-58.335937 5.878907-28.765625 10.078125-53.652344 29.910156-74.148437 59.050781-.058594-9.574219.847656-19.132812 2.707031-28.527344 6.078125-30.730468 21.515625-56.542968 45.878906-76.710937.214844-.175781.417969-.359375.617187-.554688.699219-.648437 26.097657-23.578125 81.609376-23.164062h.074218c5.523438 0 10.003906-4.480469 10.007813-10.003907v-39.136718l81.535156 81.125zm0 0"/>
-                            <path d="m417.351562 294.953125c-5.519531 0-10 4.476563-10 10v42.261719c-.015624 16.5625-13.4375 29.980468-30 30h-327.351562c-16.5625-.019532-29.980469-13.4375-30-30v-238.242188c.019531-16.5625 13.4375-29.980468 30-30h69.160156c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-69.160156c-27.601562.03125-49.96875 22.398438-50 50v238.242188c.03125 27.601562 22.398438 49.96875 50 50h327.351562c27.601563-.03125 49.96875-22.398438 50-50v-42.261719c0-5.523437-4.476562-10-10-10zm0 0"/>
-                        </svg>
-                        <span>Share</span>
-                    </div>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
+                <path d="m345.375 3.410156c-2.863281-2.847656-7.160156-3.695312-10.890625-2.144531s-6.164063 5.195313-6.164063 9.234375v53.359375c-54.011718 2.148437-81.058593 24.539063-85.191406 28.261719-27.25 22.363281-45.855468 53.527344-52.613281 88.121094-3.378906 16.714843-3.984375 33.871093-1.785156 50.78125l.007812.058593c.019531.148438.042969.300781.066407.449219l2.125 12.214844c.714843 4.113281 3.914062 7.351562 8.019531 8.117187 4.109375.765625 8.257812-1.105469 10.40625-4.6875l6.367187-10.613281c19.5625-32.527344 43.941406-54.089844 72.46875-64.085938 12.867188-4.550781 26.5-6.546874 40.128906-5.882812v55.265625c0 4.046875 2.441407 7.699219 6.183594 9.242187 3.746094 1.546876 8.050782.679688 10.90625-2.191406l105.675782-106.210937c3.894531-3.914063 3.878906-10.246094-.035157-14.140625zm2.949219 194.214844v-40.027344c0-4.90625-3.5625-9.089844-8.410157-9.871094-8.554687-1.378906-31.371093-3.570312-58.335937 5.878907-28.765625 10.078125-53.652344 29.910156-74.148437 59.050781-.058594-9.574219.847656-19.132812 2.707031-28.527344 6.078125-30.730468 21.515625-56.542968 45.878906-76.710937.214844-.175781.417969-.359375.617187-.554688.699219-.648437 26.097657-23.578125 81.609376-23.164062h.074218c5.523438 0 10.003906-4.480469 10.007813-10.003907v-39.136718l81.535156 81.125zm0 0"/>
+                <path d="m417.351562 294.953125c-5.519531 0-10 4.476563-10 10v42.261719c-.015624 16.5625-13.4375 29.980468-30 30h-327.351562c-16.5625-.019532-29.980469-13.4375-30-30v-238.242188c.019531-16.5625 13.4375-29.980468 30-30h69.160156c5.523438 0 10-4.476562 10-10 0-5.523437-4.476562-10-10-10h-69.160156c-27.601562.03125-49.96875 22.398438-50 50v238.242188c.03125 27.601562 22.398438 49.96875 50 50h327.351562c27.601563-.03125 49.96875-22.398438 50-50v-42.261719c0-5.523437-4.476562-10-10-10zm0 0"/>
+            </svg>
+            <span>Share</span>
+        </div>
+
     </div>
 </section>

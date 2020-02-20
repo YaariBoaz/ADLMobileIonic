@@ -5,9 +5,9 @@ import {trigger, transition, useAnimation} from '@angular/animations';
 import {zoomIn, bounceInRight, bounceInLeft, bounceInUp, bounceInDown} from 'ngx-animate';
 import {HttpClient} from '@angular/common/http';
 import {ModalController} from '@ionic/angular';
-import {NetworkService} from '../../network.service';
-import {UserService} from '../../user.service';
-import {StorageService} from '../../storage.service';
+import {NetworkService} from '../../services/network.service';
+import {UserService} from '../../services/user.service';
+import {StorageService} from '../../services/storage.service';
 import {AlertController} from '@ionic/angular';
 
 

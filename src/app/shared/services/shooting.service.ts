@@ -32,4 +32,12 @@ export class ShootingService {
     getBaseUrl() {
         return this.BaseUrl;
     }
+
+    generateFakeShots(numOfShots): Array<{ x: number, y: number }> {
+        const arr = new Array<{ x: number, y: number }>();
+        for (let i = 0; i < numOfShots; i++) {
+            arr.push({x: Math.floor(Math.random() * 16) + 0, y: Math.floor(Math.random() * 16) + 0});
+        }
+        return arr;
+    }
 }

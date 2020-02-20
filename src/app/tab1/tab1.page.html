@@ -230,7 +230,7 @@
 
                 <div class="text-container">
                     <p class="titleSummary">Last Shooting Session</p>
-                    <p class="valueSummary">{{data.bestScores.lastShooting}}</p>
+                    <p class="valueSummary">{{data.bestScores.lastShooting | date:'fullDate'}}</p>
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@
                 <p class="training-log-header"> Training Log</p>
             </div>
             <div class="history-container" *ngIf="data">
-                <div class="train-line" *ngFor="let train of data.trainingHistorySummary"
+                <div class="train-line" *ngFor="let train of data.trainingHistory"
                      (click)="onActivityClicked(train)">
                     <div class="right-side-and-train-info-container">
                         <div class="right-side">
@@ -250,8 +250,8 @@
                             <hr>
                         </div>
                         <div class="train-info">
-                            <p><span class="date">{{train.date}}</span>, <span class="day">{{train.date}}</span></p>
-                            <p class="light-text"> {{train.numOfDrills}} Drills</p>
+                            <p><span class="date">{{train.date}}</span>, <span class="day">{{train.day}}</span></p>
+                            <p class="light-text"> {{train.numberOfDrills}} Drills</p>
                         </div>
                     </div>
                     <div class="arrow-right">
