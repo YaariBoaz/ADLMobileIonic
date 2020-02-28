@@ -14,6 +14,9 @@ import {SharedModule} from '../shared/services/shared.module';
 import {GunlistComponent} from './gunlist/gunlist.component';
 import {SightlistComponent} from './sightlist/sightlist.component';
 import {MatMenuModule} from '@angular/material/menu';
+import {Camera} from '@ionic-native/Camera/ngx';
+import {File} from '@ionic-native/file/ngx';
+import {Crop} from '@ionic-native/crop/ngx';
 
 // @ts-ignore
 @NgModule({
@@ -26,7 +29,7 @@ import {MatMenuModule} from '@angular/material/menu';
         IonicStorageModule.forRoot(),
         RouterModule.forChild([{path: '', component: Tab3Page}])
     ],
-    providers: [PhotoLibrary, EmailComposer, SocialSharing, Base64, CDVPhotoLibraryPipe],
+    providers: [PhotoLibrary, EmailComposer, SocialSharing, Base64, CDVPhotoLibraryPipe, Camera, File, Crop],
     declarations: [Tab3Page, CDVPhotoLibraryPipe, GunlistComponent, SightlistComponent],
     entryComponents: []
 })

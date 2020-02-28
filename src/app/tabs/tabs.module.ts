@@ -9,6 +9,7 @@ import {TabsPage} from './tabs.page';
 import {MatMenuModule} from '@angular/material';
 import {NgxTimerModule} from 'ngx-timer';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
+import {TabsService} from './tabs.service';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import {Screenshot} from '@ionic-native/screenshot/ngx';
         MatMenuModule,
         NgxTimerModule,
     ],
-    providers: [Screenshot],
+    providers: [Screenshot, TabsService],
     declarations: [TabsPage],
     exports: []
 })

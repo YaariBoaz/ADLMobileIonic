@@ -3,12 +3,10 @@ import {IonSlides, Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {UserService} from '../shared/services/user.service';
 import {NetworkService} from '../shared/services/network.service';
-import * as radarChartMetaData from './charts/radarChart';
-import * as doghnuChartMetaData from './charts/doghnut';
-import * as lineChartMetaData from './charts/line';
+import {LineChartMetaData, lineChartMetaData} from './charts/line';
 import {StorageService} from '../shared/services/storage.service';
 import {DashboardModel} from '../shared/models/dashboard-model';
-import {DoghnuChartMetaData} from './charts/doghnut';
+import {DoghnuChartMetaData, doghnuChartMetaData} from './charts/doghnut';
 
 @Component({
     selector: 'app-tab1',
@@ -21,7 +19,7 @@ export class Tab1Page implements OnInit {
 
     radarChartMetaData;
     doghnuChartMetaData: DoghnuChartMetaData;
-    lineChartMetaData;
+    lineChartMetaData: LineChartMetaData;
 
 
     slideIndex = 0;
@@ -39,9 +37,8 @@ export class Tab1Page implements OnInit {
                 private router: Router,
                 private userService: UserService,
                 private storageService: StorageService) {
-        this.radarChartMetaData = radarChartMetaData.radarChartMetaData;
-        this.doghnuChartMetaData = doghnuChartMetaData.doghnuChartMetaData;
-        this.lineChartMetaData = lineChartMetaData.lineChartMetaData;
+        this.doghnuChartMetaData = doghnuChartMetaData;
+        this.lineChartMetaData = lineChartMetaData;
         this.platform.ready().then((readySource) => {
             this.profile = this.userService.getUser();
             this.networkService.hasConnectionSubject$.subscribe(hasConnection => {
@@ -85,7 +82,7 @@ export class Tab1Page implements OnInit {
 
     private handleOfflineScenario() {
         this.data = this.storageService.getItem('homeData');
-     }
+    }
 }
 
 

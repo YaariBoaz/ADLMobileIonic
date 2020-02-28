@@ -20,8 +20,8 @@ export class SignupComponent implements OnInit {
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
@@ -41,6 +41,8 @@ export class SignupComponent implements OnInit {
         this.storageService.setItem('isLogedIn', true);
         this.router.navigateByUrl('home/tabs/tab3');
     }
+
+
 
 
     onBackPressed() {

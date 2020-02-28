@@ -12,7 +12,9 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {IonicStorageModule} from '@ionic/storage';
 import {SharedModule} from './shared/services/shared.module';
-import {DateFnsModule} from 'ngx-date-fns';
+import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
+
+const config: SocketIoConfig = {url: 'ws://192.168.0.118/ws', options: {}};
 
 @NgModule({
     declarations: [AppComponent],
@@ -25,7 +27,7 @@ import {DateFnsModule} from 'ngx-date-fns';
         IonicModule.forRoot(),
         AppRoutingModule,
         SharedModule,
-        DateFnsModule.forRoot()
+        SocketIoModule.forRoot(config)
 
     ],
     providers: [
@@ -35,7 +37,7 @@ import {DateFnsModule} from 'ngx-date-fns';
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent],
-    exports: [DateFnsModule]
+    exports: []
 })
 export class AppModule {
 }

@@ -1,5 +1,5 @@
-export const lineChartMetaData = {
-     lineChartOptions: {
+export const lineChartMetaData: LineChartMetaData = {
+    lineChartOptions: {
         annotation: undefined,
         responsive: true
     },
@@ -10,4 +10,9 @@ export const lineChartMetaData = {
         },
     ],
 };
+
+export interface LineChartMetaData {
+    lineChartOptions: any;
+    lineChartColors: any;
+}
 

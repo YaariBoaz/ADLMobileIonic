@@ -1,7 +1,7 @@
-<ion-tabs>
+<ion-tabs (ionTabsWillChange)="ionTabsWillChange($event)">
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="tab1" (click)="onTabOneClick()">
-            <div class="icon" [ngClass]="{'active': isDashboard}">
+        <ion-tab-button tab="tab1" [routerLink]="'/home/tabs/tab1'">
+            <div class="icon" [ngClass]="{'active': isRout() === 'tab1'}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.595 24.578">
                     <defs>
                         <style>
@@ -19,8 +19,8 @@
             </div>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab2" (click)="onTabTwoClick()">
-            <div class="icon" [ngClass]="{'active': isWeapon}">
+        <ion-tab-button tab="tab2" [routerLink]="'/home/tabs/tab2'">
+            <div class="icon" [ngClass]="{'active': isRout() === 'tab2'}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.71 32.76">
                     <defs>
                         <style>
@@ -76,8 +76,8 @@
             </div>
         </ion-tab-button>
 
-        <ion-tab-button tab="tab3" (click)="onTabThreeClick()">
-            <div class="icon" [ngClass]="{'active': isSettings}">
+        <ion-tab-button tab="tab3" [routerLink]="'/home/tabs/tab3'">
+            <div class="icon" [ngClass]="{'active': isRout() === 'tab3'}">
                 <!--                <svg xmlns="http://www.w3.org/2000/svg" id="conv_plan_icon" viewBox="0 0 24.404 20.491">-->
                 <!--                    <defs>-->
                 <!--                        <style>-->
@@ -138,7 +138,8 @@
                     </defs>
                     <g>
                         <g>
-                            <path   class="cls-2" data-name="Path 1217" transform="translate(-1.34 -1.849)" d="M920,237.5h-68.5V134.7L710,132.5l0.7,105H285.6l2.9-105L150,134.7v105l-70-2.2c-38.6,0-70,31.4-70,70v490c0,38.6,31.4,70,70,70h840c38.6,0,70-31.4,70-70v-490C990,268.9,958.6,237.5,920,237.5z M745,167.5h70v140h-70V167.5z M290,405.9c42.3,0,76.6,45,76.6,100.6S332.3,607.2,290,607.2s-76.6-45-76.6-100.6S247.7,405.9,290,405.9z M185,167.5h70v140h-70V167.5z M138.3,725.7c0,0,8.3-66.6,27.2-79.1c18.8-12.6,73.1-20.9,73.1-20.9s35.2,37.6,50.2,37.6c14.9,0,50.2-37.6,50.2-37.6s54.3,8.3,73.2,20.9c22.2,14.8,27.7,79.1,27.7,79.1H138.3z M850,692.5H535v-35h315V692.5z M850,622.5H535v-35h315V622.5z M850,552.5H535v-35h315V552.5z M850,482.5H535v-35h315V482.5z"/>
+                            <path class="cls-2" data-name="Path 1217" transform="translate(-1.34 -1.849)"
+                                  d="M920,237.5h-68.5V134.7L710,132.5l0.7,105H285.6l2.9-105L150,134.7v105l-70-2.2c-38.6,0-70,31.4-70,70v490c0,38.6,31.4,70,70,70h840c38.6,0,70-31.4,70-70v-490C990,268.9,958.6,237.5,920,237.5z M745,167.5h70v140h-70V167.5z M290,405.9c42.3,0,76.6,45,76.6,100.6S332.3,607.2,290,607.2s-76.6-45-76.6-100.6S247.7,405.9,290,405.9z M185,167.5h70v140h-70V167.5z M138.3,725.7c0,0,8.3-66.6,27.2-79.1c18.8-12.6,73.1-20.9,73.1-20.9s35.2,37.6,50.2,37.6c14.9,0,50.2-37.6,50.2-37.6s54.3,8.3,73.2,20.9c22.2,14.8,27.7,79.1,27.7,79.1H138.3z M850,692.5H535v-35h315V692.5z M850,622.5H535v-35h315V622.5z M850,552.5H535v-35h315V552.5z M850,482.5H535v-35h315V482.5z"/>
                         </g>
                     </g>
                 </svg>
@@ -147,3 +148,4 @@
         </ion-tab-button>
     </ion-tab-bar>
 </ion-tabs>
+

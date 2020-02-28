@@ -11,7 +11,6 @@ import {ActivityHistoryPageComponent} from './activity-history-page/activity-his
 import {SharedModule} from '../shared/services/shared.module';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material';
-import {DateFnsModule} from 'ngx-date-fns';
 
 
 @NgModule({
@@ -24,7 +23,6 @@ import {DateFnsModule} from 'ngx-date-fns';
         MatIconModule,
         MatMenuModule,
         ChartsModule,
-        DateFnsModule,
         RouterModule.forChild([
             {path: '', component: Tab1Page},
             {path: 'activity-history', component: ActivityHistoryPageComponent},

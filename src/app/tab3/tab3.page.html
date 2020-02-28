@@ -11,46 +11,79 @@
     </header>
     <div class="user-img-name">
         <div class="edit-container">
-            <ion-icon ios="ios-create" md="md-create" size="large"></ion-icon>
+            <ion-icon (click)="isEditMode = !isEditMode" ios="ios-create" md="md-create" size="large"></ion-icon>
         </div>
         <div class="image-and-name">
             <div *ngIf="profile.picture" class="round-border">
-                <img src="../../assets/evi.png">
+                <img [src]="domSanitizer.bypassSecurityTrustUrl(profile.picture)">
+                <ion-icon  (click)="selectImage()" *ngIf="isEditMode" ios="ios-create" md="md-create" size="large"></ion-icon>
             </div>
-            <div *ngIf="!profile.picture" class="round-border">
+            <div *ngIf="profile.picture === undefined" class="round-border" (click)="selectImage()">
                 <img class="camera" src="../../assets/icons/camera.png"/>
+                {{profile.picture}}
             </div>
-            <h5>{{profile.firstName}} {{profile.lastName}}</h5>
+            <h5>{{profile.first_name}} {{profile.last_name}}</h5>
         </div>
     </div>
     <hr>
     <div class="user-details">
-        <div class="read-mode">
+        <div class="read-mode" *ngIf="!isEditMode">
             <div>
                 <h3> Age</h3>
-                <h3> Gender</h3>
-                <h3> Country</h3>
-                <h3> State</h3>
-                <h3> Email</h3>
+                <h3 class="value"> {{profile.age}}</h3>
             </div>
             <div>
-                <h3 class="value"> {{profile.age}}</h3>
+                <h3> Gender</h3>
                 <h3 class="value"> {{profile.gender}}</h3>
+            </div>
+            <div>
+                <h3> Country</h3>
                 <h3 class="value"> {{profile.conutry}}</h3>
+            </div>
+            <div>
+                <h3> State</h3>
                 <h3 class="value"> {{profile.state}}</h3>
+            </div>
+            <div>
+                <h3> Email</h3>
                 <h3 class="value"> {{profile.email}}</h3>
+            </div>
+        </div>
+        <div class="edit-mode" *ngIf="isEditMode">
+            <div class="edit-input-wrapper">
+                <h3> Age</h3>
+                <input type="number" [(ngModel)]="profile.age">
+            </div>
+            <div class="edit-input-wrapper">
+                <h3> Gender</h3>
+                <input [(ngModel)]="profile.gender">
+            </div>
+            <div class="edit-input-wrapper">
+                <h3> Country</h3>
+                <input [(ngModel)]="profile.conutry">
+            </div>
+            <div class="edit-input-wrapper">
+                <h3> State</h3>
+                <input [(ngModel)]="profile.state">
+            </div>
+            <div class="edit-input-wrapper" >
+                <h3> Email</h3>
+                <input [(ngModel)]="profile.email">
+            </div>
+            <div style="width: 100%;">
+                <button (click)="onSaveProfile()" class="edit-btn"> Save Profile</button>
             </div>
         </div>
     </div>
     <hr>
-    <div class="default-drill">
+    <div [class.isDisabled]="isEditMode" class="default-drill">
         <div>
             <img src="../../assets/icons/rifle.png">
             <h5> GUN </h5>
             <!--            <ion-select multiple="true" cancelText="Nah" okText="Okay!">-->
             <!--                <ion-select-option *ngFor="let gun of gunList" value="{{gun}}">{{gun}}</ion-select-option>-->
             <!--            </ion-select>-->
-            <div  *ngIf="myGuns" class="gunsWrapper" (click)="onSelectWeapons()">
+            <div *ngIf="myGuns" class="gunsWrapper" (click)="onSelectWeapons()">
                 <div>
                     <div *ngFor="let gun of myGuns;let i = index">
                         {{gun}}
@@ -65,7 +98,7 @@
             <img src="../../assets/icons/gun-shooting-target.png">
             <h5> SIGHT </h5>
             <div *ngIf="mySights" class="gunsWrapper" (click)="onSelectSights()">
-                <div >
+                <div>
                     <div *ngFor="let sight of mySights;let i = index">
                         {{sight}}
                         <span class="coma" *ngIf="i < mySights.length-1">,</span>

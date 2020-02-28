@@ -44,6 +44,6 @@ export const doghnuChartMetaData: DoghnuChartMetaData = {
 
 export interface DoghnuChartMetaData {
     doughnutChartPlugins: any;
-    donutColors: any
+    donutColors: any;
     doughnutChartLabels: any;
 }

@@ -8,14 +8,19 @@ export class UserService {
     private user: any;
 
     constructor(private storageService: StorageService) {
-        this.user = this.storageService.getItem('profileData');
+
     }
 
     setUser(user: any) {
         this.user = user;
     }
 
-        getUser() {
+    getUser() {
+        if (!this.user) {
+            this.user = this.storageService.getItem('profileData');
+        }
         return this.user;
     }
 }
+
+

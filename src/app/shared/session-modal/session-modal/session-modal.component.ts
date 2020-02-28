@@ -1,20 +1,16 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ShootingService} from '../../services/shooting.service';
 import {countUpTimerConfigModel, timerTexts} from 'ngx-timer';
-import {Screenshot} from '@ionic-native/screenshot/ngx';
-import {ModalController, Platform} from '@ionic/angular';
-import {Storage} from '@ionic/storage';
-import {HttpClient} from '@angular/common/http';
-import {INetworkAdapter} from '../INetworkAdapter';
 import {CountupTimerService} from 'ngx-timer';
 import {DrillObject} from '../../../tab2/tab2.page';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
     selector: 'app-session-modal',
     templateUrl: './session-modal.component.html',
     styleUrls: ['./session-modal.component.scss'],
 })
-export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() isHistory = false;
     @Input() historyDrill: DrillObject;
@@ -25,55 +21,56 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
     shots = [];
     drill: DrillObject;
     testConfig: any;
-    sharedData;
 
-    BASE_URL = '192.168.0.86';
+    BASE_URL = '192.168.0.121';
     socket: WebSocket;
 
     drillFinished = false;
-    state: any;
-    numberOfBullersPerDrill: number;
-    distanceFromCenter: number;
-    splitTime: string;
-    rateOfFire: number;
-    counter;
-    netWorkAdaptor: INetworkAdapter;
-    points: number;
-    lastShotTime = null;
-    totalTime: any;
+
+    pageData = {
+        distanceFromCenter: 0,
+        splitTime: '',
+        rateOfFire: 0,
+        counter: 0,
+        points: 0,
+        lastShotTime: null,
+        totalTime: {} as any
+    };
+
+
     height: number;
     width: number;
     private chosenTarget: any;
 
 
-    constructor(private shootingService: ShootingService,
-                private screenshot: Screenshot,
-                private storage: Storage,
-                public modalController: ModalController,
-                private http: HttpClient,
-                public countupTimerService: CountupTimerService
-    ) {
+    constructor(
+        private storageService: StorageService,
+        private shootingService: ShootingService,
+        public countupTimerService: CountupTimerService) {
         this.drill = this.shootingService.selectedDrill;
-        this.countupTimerService.stopTimer();
-        this.countupTimerService.setTimervalue(0);
-        this.testConfig = new countUpTimerConfigModel();
-
-        // custom class
-        this.testConfig.timerClass = 'test_Timer_class';
-
-        // timer text values
-        this.testConfig.timerTexts = new timerTexts();
-        this.testConfig.timerTexts.hourText = ':'; // default - hh
-        this.testConfig.timerTexts.minuteText = ':'; // default - mm
-        this.testConfig.timerTexts.secondsText = ' '; // default - ss
+        this.setTimeElapse();
         if (this.shootingService.BaseUrl) {
             this.BASE_URL = this.shootingService.getBaseUrl();
         }
     }
 
-
     ngOnInit() {
         this.initConnection(this.shootingService.chosenTarget);
+
+    }
+
+    // It will start running only on the first shot.
+    setTimeElapse() {
+        this.countupTimerService.stopTimer();
+        this.countupTimerService.setTimervalue(0);
+
+        this.testConfig = new countUpTimerConfigModel();
+        this.testConfig.timerClass = 'test_Timer_class';
+        // timer text values
+        this.testConfig.timerTexts = new timerTexts();
+        this.testConfig.timerTexts.hourText = ':'; // default - hh
+        this.testConfig.timerTexts.minuteText = ':'; // default - mm
+        this.testConfig.timerTexts.secondsText = ' '; // default - ss
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -86,82 +83,20 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
     }
 
 
-    onShotArrived(data) {
-        if (data) {
-            if (data[0] === 'S') {
-                if (!this.height || !this.width) {
-                    this.width = this.container.nativeElement.offsetWidth;
-                    this.height = this.container.nativeElement.offsetHeight;
-                }
-                const x = data.split(',')[1];
-                const y = data.split(',')[2];
-                const result = this.handelShoot(this.height, this.width, {x, y});
-                this.shots.push(result);
-            } else if (data[0] === 'B') {
-
-            } else {
-            }
-        }
-    }
-
-    ngAfterViewInit(): void {
-    }
-
-    async share() {
-
-    }
-
-    private onError(error) {
-        console.log(error);
-    }
-
-    private onSuccess(success) {
-        console.log(success);
-    }
-
-    uuidv4() {
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-            // tslint:disable-next-line:triple-equals no-bitwise
-            const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        });
-    }
-
-    ngOnDestroy() {
-        this.socket.close();
-        console.log('[OnDestroy] Session Component');
-    }
-
-    onStopSession() {
-        this.socket.close();
-    }
-
-    restartSession() {
-        this.socket.close();
-        this.shots = [];
-        this.initConnection(this.chosenTarget);
-        this.initStats();
-    }
-
-    private takeScreenShot(imageId) {
-        this.screenshot.save('jpg', 80, imageId).then((data) => {
-            const d = JSON.stringify(data);
-        });
-    }
-
     initConnection(chosenTarget) {
         this.chosenTarget = chosenTarget;
         if (this.shootingService.BaseUrl) {
             this.BASE_URL = this.shootingService.getBaseUrl();
         }
-        this.socket = new WebSocket('ws://' + this.BASE_URL + ':8089');
+        this.socket = new WebSocket('ws://' + this.BASE_URL + '/ws');
         this.socket.onopen = (e) => {
             console.log('[open] Connection established');
-            this.socket.send(this.shootingService.chosenTarget);
+            this.socket.send('b');
+            this.socket.send('t');
         };
         this.socket.onmessage = (event) => {
             console.log(`[message] ${event.data}`);
-            this.onShotArrived(event.data);
+            this.processData(event.data);
         };
         this.socket.onclose = (event) => {
             if (event.wasClean) {
@@ -175,13 +110,12 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
         };
     }
 
-
-    handelShoot(parentImageHeight, parentImageWidth, data): { x: any, y: any } {
-        if (this.counter === 0) {
+    handelShoot(parentImageHeight, parentImageWidth, data) {
+        if (this.pageData.counter === 0) {
             this.countupTimerService.startTimer();
         }
-        const x = data.x;
-        const y = data.y;
+        const x = data.xCoord;
+        const y = data.yCoord;
 
         const width = parentImageWidth;
         const height = parentImageHeight;
@@ -204,47 +138,44 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
 
 
         // tslint:disable-next-line:radix
-        if (this.counter === this.shootingService.numberOfBullersPerDrill) {
+        if (this.pageData.counter === this.shootingService.numberOfBullersPerDrill) {
             this.drillFinished = true;
             this.countupTimerService.stopTimer();
             this.socket.close();
             console.log('FINISH!!!!!!!!!!!!!!!!!');
         }
 
-        return {x: px - (px * 0.2), y: py + 5};
-    }
-
-    notifyGatewayOnTargetId(chosenTargetId) {
-        this.netWorkAdaptor.initConnection(chosenTargetId);
+        this.shots.push({x: px - (px * 0.2), y: py + 5});
     }
 
     initStats() {
         console.log('This is in the init stats of the session');
         this.drillFinished = false;
-        this.counter = 0;
-        this.distanceFromCenter = 0;
-        this.splitTime = '0:00';
-        this.rateOfFire = 0;
-        this.points = 0;
-        this.totalTime = '0:00';
+        this.pageData.counter = 0;
+        this.pageData.distanceFromCenter = 0;
+        this.pageData.splitTime = '0:00';
+        this.pageData.rateOfFire = 0;
+        this.pageData.points = 0;
+        this.pageData.totalTime = '0:00';
         this.countupTimerService.stopTimer();
         this.countupTimerService.setTimervalue(0);
         this.shots = [];
     }
 
     updateStats(x, y) {
-        this.counter++;
-        console.log('counter:', this.counter);
+        this.pageData.counter++;
+        console.log('counter:', this.pageData.counter);
         const currentdist: number = parseFloat(this.calculateBulletDistanceFromCenter(x, y).toFixed(2));
-        this.points += this.calcScore(currentdist);
-        this.distanceFromCenter = parseFloat(((this.distanceFromCenter + currentdist) / this.counter).toFixed(2));
-        if (!this.lastShotTime) {
-            this.lastShotTime = new Date();
+        this.pageData.points += this.calcScore(currentdist);
+        // tslint:disable-next-line:max-line-length
+        this.pageData.distanceFromCenter = parseFloat(((this.pageData.distanceFromCenter + currentdist) / this.pageData.counter).toFixed(2));
+        if (!this.pageData.lastShotTime) {
+            this.pageData.lastShotTime = new Date();
         }
-        this.totalTime = (this.totalTime + ((new Date().getTime() - this.lastShotTime.getTime()) / 1000));
-        this.lastShotTime = new Date();
+        this.pageData.totalTime = (this.pageData.totalTime + ((new Date().getTime() - this.pageData.lastShotTime.getTime()) / 1000));
+        this.pageData.lastShotTime = new Date();
 
-        this.splitTime = (this.countupTimerService.totalSeconds / this.counter).toFixed(2);
+        this.pageData.splitTime = (this.countupTimerService.totalSeconds / this.pageData.counter).toFixed(2);
     }
 
     calculateBulletDistanceFromCenter(xT, yT): number {
@@ -345,10 +276,7 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
         this.initStats();
     }
 
-    ionViewDidLoad() {
-        console.log('In ionViewDidLoad()');
-    }
-
+    // If we returned to this screen from another tab
     ionViewWillEnter() {
         this.drill = this.shootingService.selectedDrill;
         this.countupTimerService.stopTimer();
@@ -356,16 +284,106 @@ export class SessionModalComponent implements OnInit, OnChanges, AfterViewInit, 
         this.initStats();
     }
 
+
+    // Close socket before leaving.
     ionViewDidLeave() {
         this.socket.close();
         console.log('[OnDestroy] Session Component');
     }
 
-    ionViewWillUnload() {
-        console.log('In ionViewWillUnload()');
+    ngOnDestroy() {
+        this.socket.close();
+        console.log('[OnDestroy] Session Component');
     }
 
-    stopAndShare() {
-        this.drillFinished = true;
+    // Decide what kind of message arrived and transfer it to the right function
+    processData(input) {
+        const dataArray = input.replace('<,', '').replace(',>', '').split(',');
+        const dataLength = dataArray.length;
+        if (dataLength === 4) {
+            const primB = dataArray[1];
+            switch (primB) {
+                case ('S'):
+                    this.handleShot_MSG(dataArray);
+                    break;
+                case ('T'):
+                    this.hanldeBateryTime_MSG(dataArray);
+                    break;
+                case ('B'):
+                    this.handleBatteryPrecentage_MSG(dataArray);
+                    break;
+                case ('I'):
+                    this.handleImpact_MSG(dataArray);
+                    break;
+                default:
+                    break;
+
+            }
+        } else {
+            console.error('ProcessData Invalid: {0}, Not 4 Length', input);
+        }
     }
+
+    // Parses X/Y to normal state
+    handleShot_MSG(dataArray) {
+        const x = dataArray[2];
+        let xCoord = 0;
+        if (x && x !== '') {
+            xCoord = parseFloat(x);
+        }
+        const y = dataArray[3];
+        let yCoord = 0;
+        if (y && y !== '') {
+            yCoord = parseFloat(dataArray[3]);
+        }
+        if (!this.width && !this.height) {
+            this.height = this.container.nativeElement.offsetHeight;
+            this.width = this.container.nativeElement.offsetWidth;
+        }
+        this.handelShoot(this.height, this.width, {xCoord, yCoord});
+    }
+
+    hanldeBateryTime_MSG(dataArray) {
+        const t = dataArray[2];
+        let bTime = 0;
+        if (t && t !== '') {
+            // tslint:disable-next-line:radix
+            bTime = parseInt(t);
+        }
+    }
+
+    handleBatteryPrecentage_MSG(dataArray) {
+        const b = dataArray[2];
+        let heartRate = 0;
+        if (b && b !== '') {
+            heartRate = parseFloat(b);
+        }
+        let bCharge = heartRate - 6;
+        bCharge = (bCharge / 2.4) * 100;
+        if (bCharge > 100) {
+            bCharge = 100;
+        } else if (bCharge < 0) {
+            bCharge = 1;
+        }
+        console.log('[Battery Precent]: ' + bCharge);
+    }
+
+    handleImpact_MSG(dataArray) {
+        const i1 = dataArray[2];
+        let byte1 = 0;
+        {
+            // tslint:disable-next-line:radix
+            byte1 = parseInt(i1);
+        }
+        const i2 = dataArray[3];
+        let byte2 = 0;
+        if (i2 && i2 !== '') {
+            // tslint:disable-next-line:radix
+            byte2 = parseInt(i2);
+        }
+        const deviceImpacts = byte1 * 56 + byte2;
+        this.storageService.setItem('target-impacts', deviceImpacts);
+    }
+
+
 }

@@ -1,16 +1,17 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {AlertController} from '@ionic/angular';
 import {ShootingService} from '../shared/services/shooting.service';
 import {StorageService} from '../shared/services/storage.service';
+import {TabsService} from '../tabs/tabs.service';
 
 @Component({
     selector: 'app-tab2',
     templateUrl: 'tab2.page.html',
     styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
     @ViewChild('slides', {static: false}) slides;
 
@@ -27,37 +28,28 @@ export class Tab2Page {
         drillType: 'Bullseye',
         shots: new Array<{ x, y }>()
     };
-    DEFAULT_WEAPONS = [
-        'AR-15',
-        'M4',
-        'MP5',
-        'DOUBLE BARREL SHOTGUN',
-        'P40'
-    ];
-    DEFAULT_SIGHTS = [
-        'Trij',
-        'SLT',
-        'XXX',
-        'DP',
-        'P40'
-    ];
 
     constructor(public modalController: ModalController,
+                private tabService: TabsService,
                 public alertController: AlertController,
                 private  shootingService: ShootingService,
                 private screenshot: Screenshot,
                 private storageService: StorageService) {
+        this.initComponents();
+    }
+
+    ngOnInit(): void {
+        this.tabService.$notifyTab2.subscribe(() => {
+            this.initComponents();
+        });
+    }
+
+    initComponents() {
         this.mySights = this.storageService.getItem('sightList');
         this.myGuns = this.storageService.getItem('gunList');
-        this.drill.weapon = this.myGuns[0];
-        this.drill.sight = this.mySights[0];
-        if (!this.myGuns) {
-
-        }
-        if (!this.mySights) {
-
-        }
+        this.setSightsAndWeapons();
     }
+
 
     slideDidChange(event) {
         this.slides.getActiveIndex().then(index => {
@@ -82,11 +74,6 @@ export class Tab2Page {
         this.shootingService.numberOfBullersPerDrill = this.drill.numOfBullets;
     }
 
-    compareFn() {
-
-
-    }
-
     async showLongRangeAlert() {
         const alert = await this.alertController.create({
             header: 'Wifi Error',
@@ -97,6 +84,25 @@ export class Tab2Page {
 
         await alert.present();
     }
+
+
+    private setSightsAndWeapons() {
+        if (this.myGuns) {
+            this.drill.weapon = this.myGuns[0];
+        } else {
+            this.myGuns = this.storageService.DEFAULT_WEAPONS;
+            this.drill.weapon = this.myGuns[0];
+        }
+
+        if (this.mySights) {
+            this.drill.sight = this.mySights[0];
+        } else {
+            this.mySights = this.storageService.DEFAULT_SIGHTS;
+            this.drill.sight = this.mySights[0];
+        }
+    }
+
+
 }
 
 export interface DrillObject {

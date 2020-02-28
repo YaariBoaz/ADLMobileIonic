@@ -80,13 +80,13 @@
                 </button>
                 <div class="panel" hide="drill.isActive">
                     <div class="main-image" #screen [ngSwitch]="drill.drillType">
-                        <img *ngSwitchCase="'Bullseye'" style="width:100%;" #container src="../../../assets/images/bullseye_red.png"
+                        <img *ngSwitchCase="'Bullseye'"  #container src="../../../assets/images/bullseye_red.png"
                              alt="bullsEye"
                         >
-                        <img style="width:100%;"
+                        <img
                              #container src="../../../../assets/icons/Hostage.png" alt="Hostage"
                              *ngSwitchCase="'Hostage'">
-                        <img style="width:100%;"
+                        <img
                              #container src="../../../assets/images/bullseye_red.png"
                              *ngSwitchCase="'Zero'">
                         <div *ngFor="let shot of drill.shots" style="position: absolute;height:100%;width:100%">

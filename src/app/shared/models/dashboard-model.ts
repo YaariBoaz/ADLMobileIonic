@@ -29,13 +29,13 @@ export class HitRatioChart extends BaseChart {
 
 export class RateOfFireChart extends BaseChart {
     bestRate: number;
-    chartData: ChartDataSets[];
+    chartData: ChartDataSets;
     chartLabels: Array<string>;
 
     constructor(props) {
         super(props);
         this.bestRate = 0;
-        this.chartData = [];
+        this.chartData = null;
         this.chartLabels = new Array<string>();
     }
 

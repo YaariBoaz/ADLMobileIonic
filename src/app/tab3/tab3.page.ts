@@ -1,5 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgZone, ChangeDetectorRef} from '@angular/core';
 import {StorageService} from '../shared/services/storage.service';
+import {Camera, CameraOptions} from '@ionic-native/Camera/ngx';
+import {File} from '@ionic-native/file/ngx';
+import {ActionSheetController} from '@ionic/angular';
+import {Crop} from '@ionic-native/crop/ngx';
+import {Base64} from '@ionic-native/base64/ngx';
+import {DomSanitizer} from '@angular/platform-browser';
 
 
 @Component({
@@ -8,7 +14,7 @@ import {StorageService} from '../shared/services/storage.service';
     styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit {
-
+    croppedImagepath;
     profile;
     images;
     index = 0;
@@ -19,8 +25,18 @@ export class Tab3Page implements OnInit {
     myGuns = null;
     mySights = null;
     myTargets = null;
+    isEditMode = false;
 
-    constructor(private storageService: StorageService) {
+
+    constructor(
+        private storageService: StorageService,
+        private camera: Camera,
+        public actionSheetController: ActionSheetController,
+        private file: File,
+        private crop: Crop,
+        public domSanitizer: DomSanitizer,
+        private base64: Base64,
+        private ref: ChangeDetectorRef) {
     }
 
     ionViewDidEnter() {
@@ -37,6 +53,49 @@ export class Tab3Page implements OnInit {
 
     }
 
+    pickImage(sourceType) {
+        const options: CameraOptions = {
+            quality: 100,
+            sourceType,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        };
+        this.camera.getPicture(options).then((imageData) => {
+            // imageData is either a base64 encoded string or a file URI
+            // If it's base64 (DATA_URL):
+            let base64Image = 'data:image/jpeg;base64,' + imageData;
+            this.showCroppedImage(base64Image);
+
+        }, (err) => {
+            // Handle error
+        });
+    }
+
+
+    async selectImage() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Select Image source',
+            buttons: [{
+                text: 'Load from Library',
+                handler: () => {
+                    this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
+                }
+            },
+                {
+                    text: 'Use Camera',
+                    handler: () => {
+                        this.pickImage(this.camera.PictureSourceType.CAMERA);
+                    }
+                },
+                {
+                    text: 'Cancel',
+                    role: 'cancel'
+                }
+            ]
+        });
+        await actionSheet.present();
+    }
 
     // shareEmail(item) {
     //     const body = ' Dear ' + item.data.fullName + '.' + '\r\n' +
@@ -104,5 +163,28 @@ export class Tab3Page implements OnInit {
     }
 
 
+    cropImage(fileUrl) {
+        this.crop.crop(fileUrl, {quality: 100})
+            .then(
+                newPath => {
+                    this.showCroppedImage(newPath.split('?')[0]);
+                },
+                error => {
+                    alert('Error cropping image' + error);
+                }
+            );
+    }
+
+    showCroppedImage(ImagePath) {
+        this.profile.picture = ImagePath;
+        this.storageService.setItem('profile', this.profile);
+        this.ref.detectChanges();
+    }
+
+
+    onSaveProfile() {
+        this.isEditMode = false;
+        this.storageService.setItem('prfile', this.profile);
+    }
 }
 

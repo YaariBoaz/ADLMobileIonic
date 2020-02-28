@@ -43,6 +43,7 @@ export class SinginComponent implements OnInit {
     isSignIn = true;
     userName;
     password;
+    socket;
 
     constructor(
         private fb: Facebook,
@@ -53,6 +54,7 @@ export class SinginComponent implements OnInit {
         public alertController: AlertController,
         private  network: NetworkService,
         private userService: UserService) {
+
 
     }
 

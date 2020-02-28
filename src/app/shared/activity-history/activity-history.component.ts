@@ -2,7 +2,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NetworkService} from '../services/network.service';
 import {StorageService} from '../services/storage.service';
-import {parse} from 'date-fns';
 import {Router} from '@angular/router';
 
 // @ts-ignore

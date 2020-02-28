@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {StorageService} from '../../shared/services/storage.service';
+import {AlertController} from '@ionic/angular';
 
 @Component({
     selector: 'app-gunlist',
@@ -18,10 +19,10 @@ export class GunlistComponent implements OnInit {
     public goalList: any[];
     public loadedGoalList: {};
     models = null;
-        myGuns = null;
+    myGuns = null;
     private selectedGunType = '';
 
-    constructor(private storage: Storage, private storageService: StorageService) {
+    constructor(private storage: Storage, private storageService: StorageService, public alertController: AlertController) {
     }
 
     ngOnInit() {
@@ -55,11 +56,24 @@ export class GunlistComponent implements OnInit {
         this.models = this.DEFUALT_GUNS[item.key];
     }
 
+    async gunWasSelected(item) {
+        const alert = await this.alertController.create({
+            header: 'Duplicate Error',
+            message: item.model + ' is already selected',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
+
     onModelClicked(item: any) {
         if (!this.myGuns) {
             this.myGuns = [];
         }
-        this.myGuns.push(item.model);
+        if (this.myGuns.filter(o => o === item.model).length === 0) {
+            this.myGuns.push(item.model);
+        } else {
+            this.gunWasSelected(item);
+        }
         this.DEFUALT_GUNS[this.selectedGunType].forEach(model => {
             if (model.model === item.model) {
                 model.isSelected = !model.isSelected;
@@ -71,5 +85,9 @@ export class GunlistComponent implements OnInit {
     onSaveWeapons() {
         this.storageService.setItem('gunList', this.myGuns);
         this.close.emit();
+    }
+
+    removeMyGun(item: any) {
+        this.myGuns.splice(this.myGuns.indexOf(item), 1);
     }
 }

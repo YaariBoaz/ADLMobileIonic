@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {TabsService} from './tabs.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -8,17 +10,10 @@ import {Component} from '@angular/core';
 
 })
 export class TabsPage {
-    isDashboard = true;
-    isWeapon = false;
-    isSettings = false;
-
-    fakeProgrssBarValue = 13;
     splash = true;
-    secondPage = TabsPage;
     tabBarElement: any;
-    isLoading = false;
 
-    constructor() {
+    constructor(private tabService: TabsService, private router: Router) {
         this.tabBarElement = document.querySelector('.tabbar');
     }
 
@@ -30,21 +25,28 @@ export class TabsPage {
         }, 4000);
     }
 
-    onTabOneClick() {
-        this.isDashboard = true;
-        this.isSettings = false;
-        this.isWeapon = false;
+
+    ionTabsWillChange($event) {
+        switch ($event.tab) {
+            case 'tab1':
+                this.tabService.notifyTab1();
+                break;
+            case 'tab2':
+                this.tabService.notifyTab2();
+                break;
+            case 'tab3':
+                this.tabService.notifyTab3();
+        }
     }
 
-    onTabTwoClick() {
-        this.isDashboard = false;
-        this.isSettings = false;
-        this.isWeapon = true;
-    }
-
-    onTabThreeClick() {
-        this.isDashboard = false;
-        this.isSettings = true;
-        this.isWeapon = false;
+    isRout() {
+        const url = this.router.url;
+        if (url.indexOf('tab1') > -1) {
+            return 'tab1';
+        } else if (url.indexOf('tab2') > -1) {
+            return 'tab2';
+        } else {
+            return 'tab3';
+        }
     }
 }
