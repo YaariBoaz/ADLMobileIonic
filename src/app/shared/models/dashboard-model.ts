@@ -16,24 +16,22 @@ export class BaseChart {
     }
 }
 
-export class HitRatioChart extends BaseChart {
+export class HitRatioChart {
     data: Array<Array<number>>;
     percentage: number;
 
     constructor(props) {
-        super(props);
         this.percentage = 0;
     }
 
 }
 
-export class RateOfFireChart extends BaseChart {
+export class RateOfFireChart {
     bestRate: number;
-    chartData: ChartDataSets;
+    chartData: any;
     chartLabels: Array<string>;
 
     constructor(props) {
-        super(props);
         this.bestRate = 0;
         this.chartData = null;
         this.chartLabels = new Array<string>();

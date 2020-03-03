@@ -16,12 +16,8 @@ import {DoghnuChartMetaData, doghnuChartMetaData} from './charts/doghnut';
 export class Tab1Page implements OnInit {
     @ViewChild('slides', {static: false}) slides: IonSlides;
 
-
-    radarChartMetaData;
     doghnuChartMetaData: DoghnuChartMetaData;
     lineChartMetaData: LineChartMetaData;
-
-
     slideIndex = 0;
     profile;
     options = {
@@ -31,6 +27,7 @@ export class Tab1Page implements OnInit {
     };
     private hasConnection: boolean;
     private data: DashboardModel;
+    historicTrainings = {};
 
     constructor(private platform: Platform,
                 private networkService: NetworkService,
@@ -72,8 +69,8 @@ export class Tab1Page implements OnInit {
     }
 
     onActivityClicked(train) {
-        this.storageService.passhistoricalTrainingsDate(train.date);
-        this.router.navigate(['/home/tabs/tab1/activity-history'], {queryParams: {activity: JSON.stringify(train)}});
+        this.storageService.passhistoricalTrainingsDate(train);
+        this.router.navigate(['/home/tabs/tab1/activity-history']);
     }
 
     private handleOnlineScenario() {
@@ -82,10 +79,30 @@ export class Tab1Page implements OnInit {
 
     private handleOfflineScenario() {
         this.data = this.storageService.getItem('homeData');
+        this.data.trainingHistory.forEach(train => {
+            const monthName = new Date(train.date).toLocaleString('default', {month: 'long'});
+            if (!(this.historicTrainings[monthName])) {
+                this.historicTrainings[monthName] = {};
+            }
+            const tempDate = new Date(train.date);
+            const key = tempDate.getDay() + '.' + tempDate.getMonth() + '.' + tempDate.getFullYear();
+            const day = new Date(tempDate).toLocaleString('default', {weekday: 'long'});
+            if ((!this.historicTrainings[monthName][key])) {
+                this.historicTrainings[monthName][key] = {
+                    data: [],
+                    day
+                };
+            }
+            this.historicTrainings[monthName][key].data.push(train);
+        });
+    }
+
+    datesAreOnSameDay(first, second) {
+        return first.getFullYear() === second.getFullYear() &&
+            first.getMonth() === second.getMonth() &&
+            first.getDate() === second.getDate();
     }
 }
-
-
 
 
 

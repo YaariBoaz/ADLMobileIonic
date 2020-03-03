@@ -173,7 +173,7 @@ div.details {
       font-size: 20px;
 
       &.title {
-         color: #6f6f6f;
+        color: #6f6f6f;
         font-weight: 500;
         font-size: 16px;
         text-decoration: underline;
@@ -262,3 +262,8 @@ div.details {
   height: 45px;
 }
 
+.header-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  font-weight: 600;
+}

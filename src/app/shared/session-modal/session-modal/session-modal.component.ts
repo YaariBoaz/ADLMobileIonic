@@ -4,6 +4,7 @@ import {countUpTimerConfigModel, timerTexts} from 'ngx-timer';
 import {CountupTimerService} from 'ngx-timer';
 import {DrillObject} from '../../../tab2/tab2.page';
 import {StorageService} from '../../services/storage.service';
+import {Subscription, timer} from 'rxjs';
 
 @Component({
     selector: 'app-session-modal',
@@ -22,7 +23,8 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     drill: DrillObject;
     testConfig: any;
 
-    BASE_URL = '192.168.0.121';
+    BASE_URL = '192.168.0.147';
+
     socket: WebSocket;
 
     drillFinished = false;
@@ -41,6 +43,9 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     height: number;
     width: number;
     private chosenTarget: any;
+    private interval;
+    private subscription: Subscription;
+    stats = [];
 
 
     constructor(
@@ -111,6 +116,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     handelShoot(parentImageHeight, parentImageWidth, data) {
+        let updatedData = {} as any;
         if (this.pageData.counter === 0) {
             this.countupTimerService.startTimer();
         }
@@ -143,8 +149,25 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
             this.countupTimerService.stopTimer();
             this.socket.close();
             console.log('FINISH!!!!!!!!!!!!!!!!!');
+            updatedData = this.storageService.getItem('homeData');
+            if (!updatedData.trainingHistory) {
+                updatedData.trainingHistory = [];
+            }
+            const recommendation = this.shootingService.getRecommondation(this.shots, {X: parentImageWidth / 2, Y: parentImageHeight / 2});
+            updatedData.trainingHistory.push({
+                date: new Date().toString(),
+                day: new Date().toLocaleString('en-us', {weekday: 'long'}),
+                drillType: this.drill.drillType,
+                hits: 10,
+                totalShots: this.drill.numOfBullets,
+                range: this.drill.range,
+                timeLimit: null,
+                points: this.pageData.points,
+                shots: this.shots,
+                recommendation
+            });
+            this.storageService.setItem('homeData', updatedData);
         }
-
         this.shots.push({x: px - (px * 0.2), y: py + 5});
     }
 
@@ -162,6 +185,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         this.shots = [];
     }
 
+
     updateStats(x, y) {
         this.pageData.counter++;
         console.log('counter:', this.pageData.counter);
@@ -176,6 +200,12 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         this.pageData.lastShotTime = new Date();
 
         this.pageData.splitTime = (this.countupTimerService.totalSeconds / this.pageData.counter).toFixed(2);
+        this.countupTimerService.getTimerValue().subscribe((time) => {
+            this.stats.push({
+                pageData: Object.assign({}, this.pageData),
+                interval: time.hours + ':' + time.mins + ':' + time.seconds
+            });
+        });
     }
 
     calculateBulletDistanceFromCenter(xT, yT): number {
@@ -293,6 +323,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
 
     ngOnDestroy() {
         this.socket.close();
+        this.socket = null;
         console.log('[OnDestroy] Session Component');
     }
 
@@ -384,6 +415,5 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         const deviceImpacts = byte1 * 56 + byte2;
         this.storageService.setItem('target-impacts', deviceImpacts);
     }
-
 
 }

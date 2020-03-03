@@ -13,6 +13,7 @@ import {AppComponent} from './app.component';
 import {IonicStorageModule} from '@ionic/storage';
 import {SharedModule} from './shared/services/shared.module';
 import {SocketIoModule, SocketIoConfig} from 'ngx-socket-io';
+import {MatExpansionModule} from '@angular/material';
 
 const config: SocketIoConfig = {url: 'ws://192.168.0.118/ws', options: {}};
 

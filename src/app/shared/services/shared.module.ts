@@ -5,7 +5,7 @@ import {SinginModule} from '../authentication/singin/singin.module';
 import {SelectTargetModalComponent} from '../select-target-modal/select-target-modal.component';
 import {SessionModalComponent} from '../session-modal/session-modal/session-modal.component';
 import {IonicModule} from '@ionic/angular';
-import {MatMenuModule} from '@angular/material';
+import {MatExpansionModule, MatMenuModule} from '@angular/material';
 import {NgxTimerModule} from 'ngx-timer';
 import {FormsModule} from '@angular/forms';
 import {Network} from '@ionic-native/network/ngx';
@@ -23,6 +23,7 @@ import {UserService} from './user.service';
         SinginModule,
         MatMenuModule,
         NgxTimerModule,
+        MatExpansionModule,
         IonicModule.forRoot(),
         FormsModule
     ],

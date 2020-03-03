@@ -10,7 +10,7 @@ import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {ActivityHistoryPageComponent} from './activity-history-page/activity-history-page.component';
 import {SharedModule} from '../shared/services/shared.module';
 import {MatIconModule} from '@angular/material/icon';
-import {MatMenuModule} from '@angular/material';
+import {MatAccordion, MatExpansionModule, MatMenuModule} from '@angular/material';
 
 
 @NgModule({

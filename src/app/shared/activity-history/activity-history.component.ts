@@ -18,6 +18,9 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     };
     drills: TrainingHistory[];
     hasConnection;
+    currentDay;
+    numOfTrainings;
+    beutifiedDate;
 
     constructor(private  router: Router, private  networkService: NetworkService, private stoargeService: StorageService) {
         this.networkService.hasConnectionSubject$.subscribe(hasConnection => {
@@ -35,7 +38,7 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-     }
+    }
 
     toggleAccordian(event, index) {
         const element = event.target;
@@ -60,17 +63,12 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     handleOfflineScenario() {
         this.stoargeService.historicalTrainingsDate$.subscribe((date) => {
             if (date) {
-                this.drills = [];
-                const tempDrills = this.stoargeService.getItem('homeData').trainingHistory;
-                const [day, month, year] = date.split('.');
-                const dateObject = new Date(year, month - 1, day);
-                tempDrills.forEach((drill) => {
-                    const [day1, month1, year1] = date.split('.');
-                    const dateObject1 = new Date(year1, month1 - 1, day1);
-                    if (dateObject1.getMonth() === dateObject.getMonth()) {
-                        this.drills.push(drill);
-                    }
-                });
+            debugger;
+                this.beutifiedDate = Object.keys(date.value)[0];
+                this.currentDay =  date.value[this.beutifiedDate]['day'];
+                const arrayOfTrainings = date.value[this.beutifiedDate]['data'];
+                this.numOfTrainings = arrayOfTrainings.length;
+                this.drills = arrayOfTrainings;
             }
 
         });

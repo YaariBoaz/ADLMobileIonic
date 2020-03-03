@@ -35,8 +35,8 @@
                 <hr>
             </div>
             <div class="train-info">
-                <p><span class="date">{{train.date}}</span>, <span class="day">{{train.day}}</span></p>
-                <p class="light-text"> {{train.numberOfDrills}} Drills</p>
+                <p><span class="date">{{beutifiedDate}}</span>, <span class="day">{{currentDay}}</span></p>
+                <p class="light-text"> {{numOfTrainings}} Drills</p>
             </div>
         </div>
     </div>
@@ -75,29 +75,40 @@
                     <span>{{drill.recommendation}}</span>
                 </div>
                 <hr style="height: 1px;width: 40%;background: #cdcdcd;">
-                <button class="accordion" (click)="toggleAccordian($event,i)">
-                    SEE TARGET
-                </button>
-                <div class="panel" hide="drill.isActive">
-                    <div class="main-image" #screen [ngSwitch]="drill.drillType">
-                        <img *ngSwitchCase="'Bullseye'"  #container src="../../../assets/images/bullseye_red.png"
-                             alt="bullsEye"
-                        >
-                        <img
-                             #container src="../../../../assets/icons/Hostage.png" alt="Hostage"
-                             *ngSwitchCase="'Hostage'">
-                        <img
-                             #container src="../../../assets/images/bullseye_red.png"
-                             *ngSwitchCase="'Zero'">
-                        <div *ngFor="let shot of drill.shots" style="position: absolute;height:100%;width:100%">
-                            <img src="../../../assets/images/bullethit.png"
-                                 style="position: absolute;height:35px;width:35px"
-                                 [style.top.px]=shot.y
-                                 [style.right.px]=shot.x
-                            >
+
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                Personal data
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                Type your name and age
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div class="panel">
+                            <div class="main-image" #screen [ngSwitch]="drill.drillType">
+                                <img *ngSwitchCase="'Bullseye'" #container src="../../../assets/images/bullseye_red.png"
+                                     alt="bullsEye"
+                                >
+                                <img
+                                    #container src="../../../../assets/icons/Hostage.png" alt="Hostage"
+                                    *ngSwitchCase="'Hostage'">
+                                <img
+                                    #container src="../../../assets/images/bullseye_red.png"
+                                    *ngSwitchCase="'Zero'">
+                                <div *ngFor="let shot of drill.shots" style="position: absolute;height:100%;width:100%">
+                                    <img src="../../../assets/images/bullethit.png"
+                                         style="position: absolute;height:35px;width:35px"
+                                         [style.top.px]=shot.y
+                                         [style.right.px]=shot.x
+                                    >
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
             </div>
         </div>
     </div>
