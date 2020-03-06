@@ -16,7 +16,8 @@
         <div class="image-and-name">
             <div *ngIf="profile.picture" class="round-border">
                 <img [src]="domSanitizer.bypassSecurityTrustUrl(profile.picture)">
-                <ion-icon  (click)="selectImage()" *ngIf="isEditMode" ios="ios-create" md="md-create" size="large"></ion-icon>
+                <ion-icon (click)="selectImage()" *ngIf="isEditMode" ios="ios-create" md="md-create"
+                          size="large"></ion-icon>
             </div>
             <div *ngIf="profile.picture === undefined" class="round-border" (click)="selectImage()">
                 <img class="camera" src="../../assets/icons/camera.png"/>
@@ -66,7 +67,7 @@
                 <h3> State</h3>
                 <input [(ngModel)]="profile.state">
             </div>
-            <div class="edit-input-wrapper" >
+            <div class="edit-input-wrapper">
                 <h3> Email</h3>
                 <input [(ngModel)]="profile.email">
             </div>
@@ -108,11 +109,19 @@
             <span (click)="onSelectSights()" *ngIf="!mySights"> Select Default Sight</span>
         </div>
         <hr>
-        <!--        <div>-->
-        <!--            <img src="../../assets/icons/bullseye_red.png   ">-->
-        <!--            <h5> TARGET </h5>-->
-        <!--            <span>eTarget 64</span>-->
-        <!--        </div>-->
+        <div>
+            <img src="../../assets/icons/bullseye_red.png">
+            <h5> TARGET </h5>
+            <div *ngIf="myTargets" class="gunsWrapper" (click)="onSelectTarget()">
+                <div>
+                    <div *ngFor="let target of myTargets;let i = index">
+                        {{target}}
+                        <span class="coma" *ngIf="i < myTargets.length-1">,</span>
+                    </div>
+                </div>
+            </div>
+            <span (click)="onSelectTarget()" *ngIf="!myTargets"> Select Default Target</span>
+        </div>
     </div>
 </section>
 <app-gunlist (close)="onHidetWeapons()" class="gunlist" *ngIf="isGunList"></app-gunlist>

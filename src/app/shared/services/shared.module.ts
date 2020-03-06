@@ -3,10 +3,13 @@ import {CommonModule} from '@angular/common';
 import {ActivityHistoryComponent} from '../activity-history/activity-history.component';
 import {SinginModule} from '../authentication/singin/singin.module';
 import {SelectTargetModalComponent} from '../select-target-modal/select-target-modal.component';
-import {SessionModalComponent} from '../session-modal/session-modal/session-modal.component';
+import {ShootingComponent} from '../shooting-component/shooting.component';
 import {IonicModule} from '@ionic/angular';
 import {MatExpansionModule, MatMenuModule} from '@angular/material';
 import {NgxTimerModule} from 'ngx-timer';
+
+
+
 import {FormsModule} from '@angular/forms';
 import {Network} from '@ionic-native/network/ngx';
 import {ShootingService} from './shooting.service';
@@ -15,9 +18,9 @@ import {ApiService} from './api.service';
 import {UserService} from './user.service';
 
 @NgModule({
-    declarations: [ActivityHistoryComponent, SelectTargetModalComponent, SessionModalComponent],
-    entryComponents: [ActivityHistoryComponent, SelectTargetModalComponent, SessionModalComponent],
-    exports: [ActivityHistoryComponent, SelectTargetModalComponent, SessionModalComponent],
+    declarations: [ActivityHistoryComponent, SelectTargetModalComponent, ShootingComponent],
+    entryComponents: [ActivityHistoryComponent, SelectTargetModalComponent, ShootingComponent],
+    exports: [ActivityHistoryComponent, SelectTargetModalComponent, ShootingComponent],
     imports: [
         CommonModule,
         SinginModule,

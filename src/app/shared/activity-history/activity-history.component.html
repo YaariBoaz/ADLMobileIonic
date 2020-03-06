@@ -52,7 +52,7 @@
                         <img *ngSwitchCase="'Hostage'" src="../../assets/images/conv_a_bullseye_head.png">
                     </div>
                     <div>
-                        <p>Drill #1</p>
+                        <p>Drill {{i}}</p>
                         <span>{{drill.points}} Points</span>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                 </div>
                 <hr style="height: 1px;width: 40%;background: #cdcdcd;">
 
-                <mat-accordion>
+                <mat-accordion *ngIf="drill &&  drill.drillType">
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -86,6 +86,7 @@
                                 Type your name and age
                             </mat-panel-description>
                         </mat-expansion-panel-header>
+
                         <div class="panel">
                             <div class="main-image" #screen [ngSwitch]="drill.drillType">
                                 <img *ngSwitchCase="'Bullseye'" #container src="../../../assets/images/bullseye_red.png"
@@ -104,6 +105,62 @@
                                          [style.right.px]=shot.x
                                     >
                                 </div>
+                            </div>
+                        </div>
+                        <div class="header-wrapper">
+                            <p class="title">Bullets</p>
+                            <p class="title">AVG-DIS</p>
+                            <p class="title">Time</p>
+                            <p class="title">Split</p>
+                            <p class="title">Points</p>
+                        </div>
+                        <div class="details" *ngFor="let stat of stats">
+                            <div class="box">
+                                <p>{{stat.pageData.counter}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{stat.pageData.distanceFromCenter | number : '1.2-2'}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>
+                                    {{stat.interval}}
+                                </p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{stat.pageData.splitTime}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{stat.pageData.points | number : '1.2-2'}}</p>
+                            </div>
+                        </div>
+                        <div class="divider">
+                            <hr>
+                        </div>
+                        <div class="summmaryRow" *ngIf="summaryObject">
+                            <div class="box">
+                                <p>{{summaryObject.counter}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{summaryObject.distanceFromCenter | number : '1.2-2'}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>
+                                    {{summaryObject.totalTime}}
+                                </p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{summaryObject.split}}</p>
+                            </div>
+
+                            <div class="box">
+                                <p>{{summaryObject.points | number : '1.2-2'}}</p>
                             </div>
                         </div>
                     </mat-expansion-panel>

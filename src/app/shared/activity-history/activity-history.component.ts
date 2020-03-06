@@ -21,6 +21,8 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     currentDay;
     numOfTrainings;
     beutifiedDate;
+    stats = [];
+    summaryObject;
 
     constructor(private  router: Router, private  networkService: NetworkService, private stoargeService: StorageService) {
         this.networkService.hasConnectionSubject$.subscribe(hasConnection => {
@@ -63,12 +65,13 @@ export class ActivityHistoryComponent implements OnInit, OnChanges {
     handleOfflineScenario() {
         this.stoargeService.historicalTrainingsDate$.subscribe((date) => {
             if (date) {
-            debugger;
                 this.beutifiedDate = Object.keys(date.value)[0];
                 this.currentDay =  date.value[this.beutifiedDate]['day'];
                 const arrayOfTrainings = date.value[this.beutifiedDate]['data'];
                 this.numOfTrainings = arrayOfTrainings.length;
                 this.drills = arrayOfTrainings;
+                this.stats = date.stata;
+                this.summaryObject = date.summaryObject;
             }
 
         });

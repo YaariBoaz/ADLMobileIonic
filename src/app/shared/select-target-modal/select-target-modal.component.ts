@@ -16,17 +16,14 @@ export class SelectTargetModalComponent implements OnInit {
     BASE_URL_HTTP = '192.168.0.86:8087';
     socket;
     GET_TARGETS_API;
-    targetList = [
-        'eTarget 64',
-        'eTarget 16',
-    ];
+
     myTargets = [];
 
     constructor(private http: HttpClient,
                 private storageService: StorageService,
                 private shootingService: ShootingService,
                 private router: Router) {
-        this.myTargets = this.storageService.getItem('myTargets');
+        this.myTargets = this.storageService.getItem('targetList');
 
         // if (!this.shootingService.getBaseUrl()) {
         //     this.storage.get('ip').then((data) => {
@@ -62,6 +59,7 @@ export class SelectTargetModalComponent implements OnInit {
 
     onTargetChosen(target) {
         this.shootingService.chosenTarget = target;
+        this.router.navigateByUrl('/home/tabs/tab2/select2');
     }
 
     startTraining() {

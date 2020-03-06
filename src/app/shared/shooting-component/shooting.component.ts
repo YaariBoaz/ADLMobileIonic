@@ -1,17 +1,17 @@
 import {Component, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ShootingService} from '../../services/shooting.service';
+import {ShootingService} from '../services/shooting.service';
 import {countUpTimerConfigModel, timerTexts} from 'ngx-timer';
 import {CountupTimerService} from 'ngx-timer';
-import {DrillObject} from '../../../tab2/tab2.page';
-import {StorageService} from '../../services/storage.service';
+import {DrillObject} from '../../tab2/tab2.page';
+import {StorageService} from '../services/storage.service';
 import {Subscription, timer} from 'rxjs';
 
 @Component({
     selector: 'app-session-modal',
-    templateUrl: './session-modal.component.html',
-    styleUrls: ['./session-modal.component.scss'],
+    templateUrl: './shooting.component.html',
+    styleUrls: ['./shooting.component.scss'],
 })
-export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
+export class ShootingComponent implements OnInit, OnChanges, OnDestroy {
 
     @Input() isHistory = false;
     @Input() historyDrill: DrillObject;
@@ -23,12 +23,21 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     drill: DrillObject;
     testConfig: any;
 
-    BASE_URL = '192.168.0.147';
+    BASE_URL = '192.168.0.';
 
     socket: WebSocket;
 
     drillFinished = false;
 
+    DEFUALT_PAGE_DATE = {
+        distanceFromCenter: 0,
+        splitTime: '',
+        rateOfFire: 0,
+        counter: 0,
+        points: 0,
+        lastShotTime: null,
+        totalTime: {} as any
+    };
     pageData = {
         distanceFromCenter: 0,
         splitTime: '',
@@ -38,7 +47,20 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         lastShotTime: null,
         totalTime: {} as any
     };
-
+    DEFAULT_SUMMARY_OBJECT = {
+        points: 0,
+        distanceFromCenter: 0,
+        split: 0,
+        totalTime: 0,
+        counter: 0
+    };
+    summaryObject = {
+        points: 0,
+        distanceFromCenter: 0,
+        split: 0,
+        totalTime: 0,
+        counter: 0
+    };
 
     height: number;
     width: number;
@@ -46,6 +68,9 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     private interval;
     private subscription: Subscription;
     stats = [];
+    batteryPrecent;
+    isConnected = false;
+    drillFinishedBefore = false;
 
 
     constructor(
@@ -54,6 +79,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         public countupTimerService: CountupTimerService) {
         this.drill = this.shootingService.selectedDrill;
         this.setTimeElapse();
+        this.BASE_URL += this.shootingService.chosenTarget;
         if (this.shootingService.BaseUrl) {
             this.BASE_URL = this.shootingService.getBaseUrl();
         }
@@ -95,6 +121,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         }
         this.socket = new WebSocket('ws://' + this.BASE_URL + '/ws');
         this.socket.onopen = (e) => {
+            this.isConnected = true;
             console.log('[open] Connection established');
             this.socket.send('b');
             this.socket.send('t');
@@ -116,7 +143,6 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     handelShoot(parentImageHeight, parentImageWidth, data) {
-        let updatedData = {} as any;
         if (this.pageData.counter === 0) {
             this.countupTimerService.startTimer();
         }
@@ -141,34 +167,12 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
 
 
         this.updateStats(x, y);
+        this.shots.push({x: px, y: py});
 
-
-        // tslint:disable-next-line:radix
         if (this.pageData.counter === this.shootingService.numberOfBullersPerDrill) {
-            this.drillFinished = true;
-            this.countupTimerService.stopTimer();
-            this.socket.close();
-            console.log('FINISH!!!!!!!!!!!!!!!!!');
-            updatedData = this.storageService.getItem('homeData');
-            if (!updatedData.trainingHistory) {
-                updatedData.trainingHistory = [];
-            }
-            const recommendation = this.shootingService.getRecommondation(this.shots, {X: parentImageWidth / 2, Y: parentImageHeight / 2});
-            updatedData.trainingHistory.push({
-                date: new Date().toString(),
-                day: new Date().toLocaleString('en-us', {weekday: 'long'}),
-                drillType: this.drill.drillType,
-                hits: 10,
-                totalShots: this.drill.numOfBullets,
-                range: this.drill.range,
-                timeLimit: null,
-                points: this.pageData.points,
-                shots: this.shots,
-                recommendation
-            });
-            this.storageService.setItem('homeData', updatedData);
+            this.finishDrill();
+            this.updateHistory(parentImageHeight, parentImageWidth);
         }
-        this.shots.push({x: px - (px * 0.2), y: py + 5});
     }
 
     initStats() {
@@ -205,7 +209,28 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
                 pageData: Object.assign({}, this.pageData),
                 interval: time.hours + ':' + time.mins + ':' + time.seconds
             });
+            let points = 0;
+            let distanceFromCenter = 0;
+            let split = 0;
+
+            this.stats.forEach(stat => {
+                points += stat.pageData.points;
+                distanceFromCenter += stat.pageData.distanceFromCenter;
+                const splitArr = stat.pageData.splitTime.split('.');
+                split += parseFloat(splitArr[0] + '.' + splitArr[1].substr(0, 2));
+            });
+
+            const statsLength = this.stats.length;
+            this.summaryObject = {
+                points: points / statsLength,
+                distanceFromCenter: distanceFromCenter / statsLength,
+                split: split / statsLength,
+                totalTime: this.stats[statsLength - 1].interval,
+                counter: this.stats[statsLength - 1].pageData.counter
+            };
         });
+
+
     }
 
     calculateBulletDistanceFromCenter(xT, yT): number {
@@ -396,6 +421,7 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         } else if (bCharge < 0) {
             bCharge = 1;
         }
+        this.batteryPrecent = bCharge;
         console.log('[Battery Precent]: ' + bCharge);
     }
 
@@ -416,4 +442,61 @@ export class SessionModalComponent implements OnInit, OnChanges, OnDestroy {
         this.storageService.setItem('target-impacts', deviceImpacts);
     }
 
+    private finishDrill() {
+        this.drillFinishedBefore = true;
+        this.drillFinished = true;
+        this.countupTimerService.stopTimer();
+        this.socket.close();
+        console.log('FINISH!!!!!!!!!!!!!!!!!');
+        this.updateHistory(this.height, this.width);
+    }
+
+    private updateHistory(parentImageHeight, parentImageWidth) {
+        let updatedData = {} as any;
+        updatedData = this.storageService.getItem('homeData');
+
+        if (!updatedData.trainingHistory) {
+            updatedData.trainingHistory = [];
+        }
+        const recommendation = this.shootingService.getRecommendation(this.shots, {X: parentImageWidth / 2, Y: parentImageHeight / 2});
+
+        updatedData.trainingHistory.push({
+            date: new Date().toString(),
+            day: new Date().toLocaleString('en-us', {weekday: 'long'}),
+            drillType: this.drill.drillType,
+            totalShots: this.drill.numOfBullets,
+            range: this.drill.range,
+            timeLimit: null,
+            points: this.pageData.points,
+            shots: this.shots,
+            stata: this.stats,
+            recommendation
+        });
+
+        updatedData.hitRatioChart.data[0] += this.shots.length;
+        updatedData.hitRatioChart.data[1] += this.drill.numOfBullets - this.shots.length;
+        updatedData = this.updateBestResults(updatedData);
+
+        this.storageService.setItem('homeData', updatedData);
+    }
+
+    private updateBestResults(updatedData) {
+        if (this.pageData.distanceFromCenter > updatedData.bestScores.avgDistance) {
+            updatedData.bestScores.avgDistance = this.pageData.distanceFromCenter;
+        }
+        if (this.drill.range > updatedData.bestScores.longestShot) {
+            updatedData.bestScores.longestShot = this.drill.range;
+        }
+        if (this.pageData.splitTime < updatedData.bestScores.avgSplit) {
+            updatedData.bestScores.avgSplit = this.pageData.splitTime;
+        }
+        return updatedData;
+    }
+
+    restartShooting() {
+        this.shots = [];
+        this.pageData = this.DEFUALT_PAGE_DATE;
+        this.summaryObject = this.DEFAULT_SUMMARY_OBJECT;
+
+    }
 }

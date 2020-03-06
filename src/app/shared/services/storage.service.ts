@@ -110,9 +110,9 @@ export class StorageService {
 
             if (storageData.homeData) {
                 storageData.homeData = {
-                    hitRatmioChart: {data: [[65, 35]]},
+                    hitRatioChart: {data: [[65, 35]]},
                     rateOfFireChart: {
-                        chartData: [{data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'}],
+                        chartData: [{data: [65, 59, 80, 81, 56, 55, 40]}],
                         chartLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
                     },
                     trainingHistory: this.TEMP_TRAINING_HISTORY,

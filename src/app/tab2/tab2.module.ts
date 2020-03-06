@@ -10,7 +10,7 @@ import {NgxTimerModule} from 'ngx-timer';
 import {Screenshot} from '@ionic-native/screenshot/ngx';
 import {IonicStorageModule} from '@ionic/storage';
 import {SelectTargetModalComponent} from '../shared/select-target-modal/select-target-modal.component';
-import {SessionModalComponent} from '../shared/session-modal/session-modal/session-modal.component';
+import {ShootingComponent} from '../shared/shooting-component/shooting.component';
 import {SharedModule} from '../shared/services/shared.module';
 
 // @ts-ignore
@@ -29,7 +29,7 @@ import {SharedModule} from '../shared/services/shared.module';
         RouterModule.forChild([
             {path: '', component: Tab2Page},
             {path: 'select', component: SelectTargetModalComponent},
-            {path: 'select2', component: SessionModalComponent}])
+            {path: 'select2', component: ShootingComponent}])
     ],
     providers: [Screenshot],
     declarations: [Tab2Page],

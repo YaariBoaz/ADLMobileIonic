@@ -19,13 +19,12 @@
                 </div>
                 <div class="connect-to-wifi"> Connect Wi-fi</div>
             </div>
-            <span>Personal Target </span>
-            <div class="target-rectangle"> eTarget 64</div>
         </div>
 
         <div class="target-list">
             <hr/>
-            <div *ngFor="let target of targetList" class="target-rectangle regular"  (click)="onTargetChosen(target)">{{target}}</div>
+            <div *ngFor="let target of myTargets" class="target-rectangle regular"
+                 (click)="onTargetChosen(target)">{{target}}</div>
         </div>
         <button class="startSession" (click)="startTraining()"> START SESSION</button>
     </div>

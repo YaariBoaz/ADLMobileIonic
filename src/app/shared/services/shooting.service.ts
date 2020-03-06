@@ -33,15 +33,7 @@ export class ShootingService {
         return this.BaseUrl;
     }
 
-    generateFakeShots(numOfShots): Array<{ x: number, y: number }> {
-        const arr = new Array<{ x: number, y: number }>();
-        for (let i = 0; i < numOfShots; i++) {
-            arr.push({x: Math.floor(Math.random() * 16) + 0, y: Math.floor(Math.random() * 16) + 0});
-        }
-        return arr;
-    }
-
-    getRecommondation(shots, centerCord) {
+    getRecommendation(shots, centerCord) {
         let p = 0;
         const width = centerCord.X * 2;
         const heigth = centerCord.Y * 2;
@@ -131,6 +123,7 @@ export class ShootingService {
 
         let count = -1;
         let s;
+        // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < squers.length; i++) {
             const sq: Square = squers[i];
             const c = this.isInSquare(sq, shots);

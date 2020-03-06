@@ -171,7 +171,7 @@
       background-color: white;
       p {
         color: #acacac;
-        font-size: 6vw;
+        font-size: 4vw;
         margin: 0;
         font-weight: 100;
       }
@@ -237,10 +237,7 @@
 }
 
 .panel {
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+
 }
 
 .menuBtn {
@@ -259,6 +256,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   img{
     width: 70vw;
   }

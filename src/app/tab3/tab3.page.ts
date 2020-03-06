@@ -2,7 +2,7 @@ import {Component, OnInit, NgZone, ChangeDetectorRef} from '@angular/core';
 import {StorageService} from '../shared/services/storage.service';
 import {Camera, CameraOptions} from '@ionic-native/Camera/ngx';
 import {File} from '@ionic-native/file/ngx';
-import {ActionSheetController} from '@ionic/angular';
+import {ActionSheetController, AlertController} from '@ionic/angular';
 import {Crop} from '@ionic-native/crop/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import {DomSanitizer} from '@angular/platform-browser';
@@ -34,6 +34,7 @@ export class Tab3Page implements OnInit {
         public actionSheetController: ActionSheetController,
         private file: File,
         private crop: Crop,
+        private alertCtrl: AlertController,
         public domSanitizer: DomSanitizer,
         private base64: Base64,
         private ref: ChangeDetectorRef) {
@@ -185,6 +186,34 @@ export class Tab3Page implements OnInit {
     onSaveProfile() {
         this.isEditMode = false;
         this.storageService.setItem('prfile', this.profile);
+    }
+
+    async onSelectTarget() {
+        const alert = await this.alertCtrl.create({
+            header: 'Set Target IP',
+            inputs: [
+                {
+                    name: 'Number',
+                    placeholder: 'Last 3 digits of IP'
+                },
+            ],
+            buttons: [
+                {
+                    text: 'Save',
+                    handler: data => {
+                        let targetList = this.storageService.getItem('targetList');
+                        if (!targetList) {
+                            targetList = [];
+                        }
+                        targetList.push(data.Number);
+                        this.myTargets = targetList;
+                        this.storageService.setItem('targetList', targetList);
+                        this.ref.detectChanges();
+                    }
+                }
+            ]
+        });
+        alert.present();
     }
 }
 
