@@ -68,7 +68,7 @@
     "es6-promise-plugin": "^4.1.0",
     "html2canvas": "^1.0.0-rc.5",
     "ionic-context-menu": "^1.0.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "json2csv": "^4.5.4",
     "ng2-charts": "^2.3.0",
     "ngx-animate": "^1.0.1",
