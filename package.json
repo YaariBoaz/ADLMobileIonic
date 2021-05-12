@@ -42,7 +42,7 @@
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
     "@swimlane/ngx-charts": "^13.0.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "com-badrit-base64": "^0.2.0",
     "com.darktalker.cordova.screenshot": "^0.1.6",
     "cordova-android": "^8.1.0",
